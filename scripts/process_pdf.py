@@ -47,50 +47,70 @@ def show_cache_info():
                 print(f"   ✅ {item}")
 
 def extract_pdf(pdf_path):
-    """Extract transactions from PDF"""
+    """Extract transactions from PDF using table detection"""
     transactions = []
     
     # Keywords to skip (header/summary rows)
-    skip_keywords = ['Transaction statement period', 'Sent', 'Received', 'Date & time', 'Transaction details', 'Amount']
+    skip_keywords = ['transaction', 'statement', 'period', 'sent', 'received', 'date', 'time', 'details', 'amount']
     
     with pdfplumber.open(pdf_path) as pdf:
-        for page in pdf.pages:
-            text = page.extract_text()
-            current_description = []
+        for page_num, page in enumerate(pdf.pages):
+            # Try to extract tables first (more reliable for structured data)
+            tables = page.extract_tables()
             
-            for line in text.split('\n'):
-                line = line.strip()
-                
-                # Skip header/summary rows
-                if any(keyword.lower() in line.lower() for keyword in skip_keywords):
-                    continue
-                
-                # Skip empty lines
-                if not line or len(line) < 5:
-                    continue
-                
-                amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
-                
-                if amount:
-                    # This line contains an amount - it's likely the amount line of a transaction
-                    # Look for description in previous lines
-                    description = ' '.join(current_description) if current_description else line
-                    
-                    # Clean up the description - remove UPI/Transaction IDs
-                    description = re.sub(r'UPI Transaction ID:.*', '', description).strip()
-                    
-                    if description and amount.group(1):
-                        transactions.append({
-                            'description': description,
-                            'amount': amount.group(1),
-                            'raw_line': line
-                        })
-                    
-                    current_description = []
-                else:
-                    # This might be part of transaction description
-                    if line and not re.search(r'^\d{2}:\d{2}', line):  # Not a time
-                        current_description.append(line)
+            if tables:
+                for table in tables:
+                    for row in table:
+                        if row and len(row) >= 2:
+                            # Convert row to strings and clean
+                            row_text = [str(cell).strip() if cell else "" for cell in row]
+                            row_str = " ".join(row_text)
+                            
+                            # Skip header rows
+                            if any(keyword.lower() in row_str.lower() for keyword in skip_keywords):
+                                continue
+                            
+                            # Look for amount (₹ symbol)
+                            amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_str)
+                            if amount and amount.group(1):
+                                # Remove amount from description to clean it up
+                                description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_str).strip()
+                                # Remove UPI/Transaction IDs
+                                description = re.sub(r'(UPI\s*Transaction\s*ID|Transaction\s*ID)[:\s]*[\w\d]+', '', description).strip()
+                                description = re.sub(r'[\d]+\s*[AP]M', '', description).strip()  # Remove times
+                                
+                                if description and len(description) > 3:
+                                    transactions.append({
+                                        'description': description,
+                                        'amount': amount.group(1),
+                                        'raw_line': row_str
+                                    })
+            else:
+                # Fallback: Extract text if no tables found
+                text = page.extract_text()
+                if text:
+                    lines = text.split('\n')
+                    for i, line in enumerate(lines):
+                        line = line.strip()
+                        
+                        # Skip short lines or headers
+                        if not line or len(line) < 5:
+                            continue
+                        if any(keyword.lower() in line.lower() for keyword in skip_keywords):
+                            continue
+                        
+                        # Look for amount
+                        amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
+                        if amount and amount.group(1):
+                            description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
+                            description = re.sub(r'(UPI\s*Transaction\s*ID|Transaction\s*ID)[:\s]*[\w\d]+', '', description).strip()
+                            
+                            if description and len(description) > 3:
+                                transactions.append({
+                                    'description': description,
+                                    'amount': amount.group(1),
+                                    'raw_line': line
+                                })
     
     return transactions
 
