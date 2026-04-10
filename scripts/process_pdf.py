@@ -189,12 +189,12 @@ def extract_with_fitz(pdf_path: str) -> list:
             description = clean_description(description)
 
            # Keep transactions if they have an amount and at least some description
-if amount_match and description:
-    transactions.append({
-        'description': description,
-        'amount': amount_match.group(1),
-        'raw_line': row_text
-    })
+            if amount_match and description:
+                transactions.append({
+                    'description': description,
+                    'amount': amount_match.group(1),
+                    'raw_line': row_text
+                })
 
     doc.close()
     return transactions
