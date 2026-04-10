@@ -128,7 +128,11 @@ def clean_description(text):
 
 SKIP_KEYWORDS = [
     'transaction', 'statement', 'period', 'date', 'time',
-    'details', 'amount', 'balance', 'opening', 'closing', 'total'
+    'details', 'amount', 'balance', 'opening', 'closing', 'total',
+    # ✅ Added: GPay summary header words
+    'sent', 'received', 'summary', 'march', 'january', 'february',
+    'april', 'may', 'june', 'july', 'august', 'september',
+    'october', 'november', 'december'
 ]
 
 
