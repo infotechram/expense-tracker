@@ -4,8 +4,8 @@ const RAW_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/main`;
 let results = null;
 let edits = {};
 let uploadedFileName = null;
+let chartInstance = null;
 
-// Generate UUID for unique file identification
 function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         const r = Math.random() * 16 | 0;
@@ -14,25 +14,26 @@ function generateUUID() {
     });
 }
 
+// ─── Upload ────────────────────────────────────────────────────────────────────
+
 async function upload() {
     const file = document.getElementById('fileInput').files[0];
     const token = document.getElementById('tokenInput').value;
-    
+
     if (!file || !token) {
         alert('Please select file and enter token');
         return;
     }
 
-    // Generate unique ID for this upload (UUID + timestamp to ensure uniqueness)
     const uniqueId = `${Date.now()}-${generateUUID()}`;
     uploadedFileName = uniqueId;
 
     const name = `uploads/${uniqueId}.pdf`;
     const reader = new FileReader();
-    
+
     reader.onload = async (e) => {
         const base64 = e.target.result.split(',')[1];
-        
+
         const res = await fetch(
             `https://api.github.com/repos/${GITHUB_REPO}/contents/${name}`,
             {
@@ -56,103 +57,192 @@ async function upload() {
             alert('Upload failed');
         }
     };
-    
+
     reader.readAsDataURL(file);
 }
+// ─── Polling ───────────────────────────────────────────────────────────────────
 
 async function pollResults() {
     const expectedFileName = `${uploadedFileName}_expenses.json`;
-    
+
     for (let i = 0; i < 120; i++) {
         const res = await fetch(`${RAW_URL}/results/${expectedFileName}?t=${Date.now()}`);
-        
+
         if (res.ok) {
             results = await res.json();
             showResults();
             return;
         }
-        
+
         await new Promise(r => setTimeout(r, 3000));
     }
-    
     alert('Timeout: Could not find processed file or processing took too long');
 }
+
+// ─── Results ───────────────────────────────────────────────────────────────────
 
 function showResults() {
     document.getElementById('processingSection').style.display = 'none';
     document.getElementById('resultsSection').style.display = 'block';
-    
+
     const summary = results.summary;
     document.getElementById('totalSpent').textContent = summary.total_spent.toFixed(2);
     document.getElementById('totalTrans').textContent = summary.transaction_count;
     document.getElementById('totalCats').textContent = Object.keys(summary.by_category).length;
-    const groupBy = document.getElementById('groupBy').value;
+
+    // Default chart — category view
     drawChart(summary.by_category);
+
+    // Show all transactions on initial load
     fillTable(results.transactions);
 }
+
+// ─── Chart ─────────────────────────────────────────────────────────────────────
+
 function refreshChart() {
     const groupBy = document.getElementById('groupBy').value;
+
+    // Reset day filter state when switching views
+    document.getElementById('dayBreakdown').style.display = 'none';
+    document.getElementById('viewAllBtn').style.display = 'none';
+
     if (groupBy === 'day_of_week') {
         drawChart(results.summary.by_day_of_week);
+        // Show all transactions by default when switching to day view
+        fillTable(results.transactions);
     } else {
         drawChart(results.summary.by_category);
+        // Restore all transactions when switching back to category view
+        fillTable(results.transactions);
     }
 }
-// Add this at the top with your other variables
-let chartInstance = null;
+
 function drawChart(data) {
     const ctx = document.getElementById('chart').getContext('2d');
-    // ✅ Destroy old chart first before creating new one
+
     if (chartInstance) {
         chartInstance.destroy();
     }
+
     chartInstance = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: Object.keys(data),
             datasets: [{
                 data: Object.values(data),
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+                backgroundColor: [
+                    '#FF6384', '#36A2EB', '#FFCE56',
+                    '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF'
+                ]
             }]
+        },
+        options: {
+            onClick: (event, elements) => {
+                if (elements.length === 0) return;
+
+                const groupBy = document.getElementById('groupBy').value;
+                const index = elements[0].index;
+                const label = Object.keys(data)[index];
+
+                if (groupBy === 'day_of_week') {
+                    showDayTransactions(label);
+                } else {
+                    showCategoryTransactions(label);
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (context) => {
+                            const label = context.label || '';
+                            const value = context.parsed || 0;
+                            return ` ${label}: ₹${value.toFixed(2)}`;
+                        }
+                    }
+                }
+            }
         }
     });
 }
 
+// ─── Day filter ────────────────────────────────────────────────────────────────
+
+function showDayTransactions(day) {
+    const filtered = results.transactions.filter(t => t.day_of_week === day);
+
+    const breakdown = document.getElementById('dayBreakdown');
+    breakdown.textContent = `Showing ${filtered.length} transactions for ${day}`;
+    breakdown.style.display = 'inline';
+    document.getElementById('viewAllBtn').style.display = 'inline-block';
+
+    fillTable(filtered);
+}
+
+function showCategoryTransactions(category) {
+    const filtered = results.transactions.filter(t => t.category === category);
+
+    const breakdown = document.getElementById('dayBreakdown');
+    breakdown.textContent = `Showing ${filtered.length} transactions for ${category}`;
+    breakdown.style.display = 'inline';
+    document.getElementById('viewAllBtn').style.display = 'inline-block';
+
+    fillTable(filtered);
+}
+
+function viewAll() {
+    document.getElementById('dayBreakdown').style.display = 'none';
+    document.getElementById('viewAllBtn').style.display = 'none';
+    fillTable(results.transactions);
+}
+
+// ─── Table ─────────────────────────────────────────────────────────────────────
+
 function fillTable(transactions) {
     const table = document.getElementById('table');
-    
+
+    // Clear existing rows except header
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
     transactions.forEach((t, i) => {
         const row = table.insertRow();
         row.innerHTML = `
             <td>${i + 1}</td>
             <td>${t.description}</td>
             <td>₹${t.amount}</td>
-            <td><input type="text" value="${t.category}" 
-                onchange="edits[${i}]=this.value" style="width:100px;"></td>
+            <td>
+                <input type="text" value="${t.category}"
+                    onchange="edits[${i}]=this.value" style="width:100px;">
+            </td>
+            <td>${t.date || '-'}</td>
+            <td>${t.day_of_week || '-'}</td>
         `;
     });
 }
+
+// ─── Save & Download ───────────────────────────────────────────────────────────
 
 function save() {
     Object.keys(edits).forEach(i => {
         results.transactions[i].category = edits[i];
     });
-    
+
     const summary = {};
     let total = 0;
     results.transactions.forEach(t => {
-        const amt = parseFloat(t.amount);
+        const amt = parseFloat(t.amount.replace(',', ''));
         summary[t.category] = (summary[t.category] || 0) + amt;
         total += amt;
     });
-    
+
     results.summary = {
         total_spent: total,
         by_category: summary,
         transaction_count: results.transactions.length
     };
-    
-    alert('✅ Changes saved locally');
+
+    alert('Changes saved locally');
     location.reload();
 }
 
