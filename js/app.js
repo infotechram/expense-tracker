@@ -5,6 +5,15 @@ let results = null;
 let edits = {};
 let uploadedFileName = null;
 
+// Generate UUID for unique file identification
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 async function upload() {
     const file = document.getElementById('fileInput').files[0];
     const token = document.getElementById('tokenInput').value;
@@ -14,11 +23,11 @@ async function upload() {
         return;
     }
 
-    // Generate a timestamp-based filename (same as what we'll upload)
-    const timestamp = Date.now();
-    uploadedFileName = String(timestamp);
+    // Generate unique ID for this upload (UUID + timestamp to ensure uniqueness)
+    const uniqueId = `${Date.now()}-${generateUUID()}`;
+    uploadedFileName = uniqueId;
 
-    const name = `uploads/${timestamp}.pdf`;
+    const name = `uploads/${uniqueId}.pdf`;
     const reader = new FileReader();
     
     reader.onload = async (e) => {
