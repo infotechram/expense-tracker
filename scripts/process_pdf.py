@@ -63,7 +63,21 @@ def show_cache_info():
             item_path = os.path.join(cache_dir, item)
             if os.path.isdir(item_path):
                 print(f"   ✅ {item}")
+                
+# ─── Date Regex ───────────────────────────────────────────────────────────────
+DATE_REGEX = r'\b(\d{1,2}\s*[A-Za-z]{3,9}\s*\d{4})\b'
 
+def get_day_of_week(date_str: str) -> str:
+    """Convert date string to weekday name."""
+    if not date_str:
+        return None
+    for fmt in ["%d %b %Y", "%d %B %Y"]:
+        try:
+            dt = datetime.strptime(date_str.strip(), fmt)
+            return dt.strftime("%A")
+        except Exception:
+            continue
+    return None
 
 # ─── Text Cleaning ─────────────────────────────────────────────────────────────
 
@@ -203,6 +217,7 @@ def extract_with_fitz(pdf_path: str) -> list:
                 continue
 
             amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
+            date_match = re.search(DATE_REGEX, line, re.IGNORECASE)
             if not amount_match:
                 continue
 
@@ -211,10 +226,14 @@ def extract_with_fitz(pdf_path: str) -> list:
 
            # Keep transactions if they have an amount and at least some description
             if amount_match and description:
+                date_str = date_match.group(1) if date_match else None
+                day_of_week = get_day_of_week(date_str) if date_str else None
                 transactions.append({
                     'description': description,
                     'amount': amount_match.group(1),
-                    'raw_line': row_text
+                    'raw_line': row_text,
+                    'date': date_str,
+                    'day_of_week': day_of_week
                 })
 
     doc.close()
@@ -242,6 +261,7 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                             continue
 
                         amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
+                        date_match = re.search(DATE_REGEX, line, re.IGNORECASE)
                         if not amount_match:
                             continue
 
@@ -249,10 +269,14 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                         description = clean_description(description)
 
                         if description and len(description) > 3:
+                            date_str = date_match.group(1) if date_match else None
+                            day_of_week = get_day_of_week(date_str) if date_str else None
                             transactions.append({
                                 'description': description,
                                 'amount': amount_match.group(1),
-                                'raw_line': row_text
+                                'raw_line': row_text,
+                                'date': date_str,
+                                'day_of_week': day_of_week
                             })
             else:
                 # No tables found — fall back to raw text
