@@ -72,7 +72,7 @@ def clean_description(text):
     Clean extracted transaction description.
 
     Fixes:
-    - Removes 'Paid to' / 'Paitdo' artifacts
+    - Normalizes 'Paid to' → 'To <name>' instead of stripping
     - Removes timestamps (12:30 PM, 08AM)
     - Removes dates (03Mar,2026 | 03 Mar 2026 | 03Mar2026)
     - Removes UPI / transaction IDs
@@ -84,9 +84,9 @@ def clean_description(text):
     if not text:
         return ""
 
-    # Remove "Paid to" / "Paitdo" prefix artifacts from GPay PDFs
-    text = re.sub(r'^Pait?do?\s*', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'^Paid\s+to\s*', '', text, flags=re.IGNORECASE)
+    # Normalize "Paid to" prefix instead of removing
+    text = re.sub(r'^Pait?do?\s*', 'To ', text, flags=re.IGNORECASE)
+    text = re.sub(r'^Paid\s+to\s*', 'To ', text, flags=re.IGNORECASE)
 
     # Remove timestamps: 12:30 PM, 08:00AM, 8AM
     text = re.sub(r'\b\d{1,2}:\d{2}\s*[AP]M\b', '', text, flags=re.IGNORECASE)
@@ -129,47 +129,50 @@ def clean_description(text):
 SKIP_KEYWORDS = [
     'transaction', 'statement', 'period', 'date', 'time',
     'details', 'amount', 'balance', 'opening', 'closing', 'total',
-    # ✅ Added: GPay summary header words
-    'sent', 'received', 'summary', 'march', 'january', 'february',
+    'summary', 'march', 'january', 'february',
     'april', 'may', 'june', 'july', 'august', 'september',
     'october', 'november', 'december'
 ]
 
 
+def is_summary_row(text: str) -> bool:
+    """
+    Detects summary/header rows like 'Sent ₹...' or 'Received ₹...'
+    but allows peer-to-peer transfers with 'to'/'from'.
+    """
+    return (
+        re.search(r'\b(sent|received)\b', text, re.IGNORECASE)
+        and not re.search(r'\bto\b|\bfrom\b', text, re.IGNORECASE)
+        and len(text.split()) <= 3
+    )
+
 def _is_header_row(text: str) -> bool:
     text_lower = text.lower()
-    return any(kw in text_lower for kw in SKIP_KEYWORDS)
+    return any(kw in text_lower for kw in SKIP_KEYWORDS) or is_summary_row(text)
 
 
 def extract_with_fitz(pdf_path: str) -> list:
     """
     Layout-aware extraction using PyMuPDF dict mode.
-
-    GPay PDFs are multi-column. get_text("dict") gives us x,y
-    coordinates so we can group text by row (y-position) instead
-    of reading linearly — which was the root cause of scrambled text.
     """
     transactions = []
     doc = fitz.open(pdf_path)
 
     for page in doc:
-        # ✅ "dict" mode preserves coordinates per span
         blocks = page.get_text("dict")["blocks"]
 
-        # Group spans by their y-position (= visual row on page)
         rows: dict[float, list[str]] = {}
         for block in blocks:
-            if block.get("type") != 0:   # skip image blocks
+            if block.get("type") != 0:
                 continue
             for line in block.get("lines", []):
-                # Round y to nearest 2px to merge nearby spans in same row
-                y = round(line["bbox"][1] / 2) * 2
+                # Use tolerance bucket (±5px) for better row grouping
+                y = round(line["bbox"][1] / 5) * 5
                 for span in line.get("spans", []):
                     span_text = span["text"].strip()
                     if span_text:
                         rows.setdefault(y, []).append(span_text)
 
-        # Process each visual row top-to-bottom
         for y_pos in sorted(rows.keys()):
             row_text = " ".join(rows[y_pos]).strip()
 
@@ -194,6 +197,7 @@ def extract_with_fitz(pdf_path: str) -> list:
 
     doc.close()
     return transactions
+
 
 
 def extract_with_pdfplumber(pdf_path: str) -> list:
