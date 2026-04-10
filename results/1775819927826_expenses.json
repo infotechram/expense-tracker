@@ -1,0 +1,1205 @@
+{
+  "meta": {
+    "process_id": "08224017",
+    "processed_at": "2026-04-10T11:20:22.914399",
+    "pdf_file": "1775819927826.pdf",
+    "source_path": "uploads/1775819927826.pdf"
+  },
+  "status": "success",
+  "timestamp": "2026-04-10T11:20:22.914399",
+  "cache_location": "/home/runner/.cache/huggingface/hub/",
+  "transactions": [
+    {
+      "description": "03Mar2,026 PaitdoARISTOPTLLAETO",
+      "amount": "613",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoThalapVaetnhkiat",
+      "amount": "650",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoSSVLAWASSOCIATES",
+      "amount": "6,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoVELIDAINSDHRRAESTAURANT",
+      "amount": "205",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoSmartQ",
+      "amount": "45",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoSmartQ",
+      "amount": "55",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoPrakaRsahji",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoMYJIO",
+      "amount": "1,178.82",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoTHAMARAISSERLIVDIHAR",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "85",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSmartQ",
+      "amount": "76",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSUPESRARAVASNTAORETSEXCHROMPET",
+      "amount": "224",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoAALADIPATTJIPNYaAgNar",
+      "amount": "180",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoPrakaRsahji",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "140",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoPIZZHAUT",
+      "amount": "65",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoSPRAMMASAKTHI",
+      "amount": "30",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoAmazoPnayonDelivery",
+      "amount": "913",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoDILLIKBAI",
+      "amount": "920",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoAMARAVATSHWYEESTTALL",
+      "amount": "378",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoSPRAMMASAKTHI",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoMANOJ",
+      "amount": "350",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoRAJESHWVAARRIATHARAJ",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoMITHRSAUNPESRTORES",
+      "amount": "143",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoPasupa1t0hi",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoKotaFkASTag",
+      "amount": "600",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "1,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoBharAtiirLtiemlited",
+      "amount": "649",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoHOTEJLAYALAKSHMI",
+      "amount": "720",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoMITHRSAUNPESRTORES",
+      "amount": "668",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoAdhinaraKyoanndaanl",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 Paitdodr.gaykaitrhurbia",
+      "amount": "400",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoGANDHMIEDICALS",
+      "amount": "615",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoSRRIAMDEFVANCGYIFATNDSTATIONER",
+      "amount": "130",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoSRRIAMDEFVANCGYIFATNDSTATIONER",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoG.elumMaallaaii",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoSukumSaurkumar",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoAmazoPnayonDelivery",
+      "amount": "287",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoSURESMHURUGESAN",
+      "amount": "408",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoAnthoniammal",
+      "amount": "55",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoSrSienthMuurrugAagnenc",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoSPRAMMASAKTHI",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoTHOMSOTNYRES",
+      "amount": "10",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoJothiprakash",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 Paitdokarthhdifc",
+      "amount": "2,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoTacBoelElmbasSspylendid",
+      "amount": "124",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoCUTCOFFEE",
+      "amount": "40",
+      "category": "Food & Dining",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoPrakaRsahji",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoSujiStuhjith",
+      "amount": "1,306",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoSHRBIALAAJBEHEAVAN",
+      "amount": "260",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoJanaJkaigan",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoPrakaRsahji",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 ReceifvreodFmrieFnudnFsorever",
+      "amount": "800",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoGajendRiarmaandoss",
+      "amount": "15",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoMuthulakSsahkmtihinathar",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoTacBoelElmbasSspylendid",
+      "amount": "214",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoCUTCOFFEE",
+      "amount": "20",
+      "category": "Food & Dining",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoSRPIADMVAILAHSOTEL",
+      "amount": "105",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoLAKSHMIPKAUTPHPIURAO",
+      "amount": "45",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoSembarSuhtihkiakai",
+      "amount": "840",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoPrakaRsahji",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoMITHRSAUNPESRTORES",
+      "amount": "84",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoSumitAhdrhainarayanan",
+      "amount": "30",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoBIRLCAOSMETIPCRSIVALTIEMITED",
+      "amount": "1,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoKannKarnishnan",
+      "amount": "200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoVIJAYAKUKMAR",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoVenkateVseanngamalai",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoMEDPLUGSUDUVANCHERI",
+      "amount": "17",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "375.01",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoSUDHAKSAR",
+      "amount": "3,500",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoVIJAYAKUKMAR",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoLAKSHMIPKAUTPHPIURAO",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoSRAIARYBAHAVAN",
+      "amount": "895",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoLAKSHMIPKAUTPHPIURAO",
+      "amount": "15",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoMOHANRAVJ",
+      "amount": "180",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoPrakaRsahji",
+      "amount": "250",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoSURESMHURUGESAN",
+      "amount": "201",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoAdhinaraKyoanndaanl",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoVALARMATHI",
+      "amount": "310",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoMOHANRAVJ",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoPIZZHAUT",
+      "amount": "689",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoPandiSatnores",
+      "amount": "433",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoSangeeVtehgRaestauPrearnutngalathur",
+      "amount": "105",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoSelvi",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoPASUMAANIGADI",
+      "amount": "12",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoSukumSaurkumar",
+      "amount": "14",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoKartGhik",
+      "amount": "200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoPrakaRsahji",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoAdhinaraKyoanndaanl",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoAMARAAVASTWHEIETASNDBAKERS",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoSuvarRnSa",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoPrakaRsahji",
+      "amount": "450",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "18Mar2,026 PaitdoBaal",
+      "amount": "250",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "18Mar2,026 PaitdoSREGEURUMEDICALS",
+      "amount": "365",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "18Mar2,026 PaitdoMOHAMESDADISQ",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoKARTKHDI",
+      "amount": "5,200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoRADHAKRISHVNAN",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoGIJPUVIJAYAN",
+      "amount": "43",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoTASTFIAARMASNDFOODPSRIVALTIEMITED",
+      "amount": "130",
+      "category": "Food & Dining",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoHOTESLABARI",
+      "amount": "10",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoPUNALUSRRSIARAVABNHAAVAN",
+      "amount": "267",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoPUNALUSRRSIARAVABNHAAVAN",
+      "amount": "4",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoSadhasiAvaraj",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoutchimaAhali",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "20Mar2,026 PaitdoAYYANAFRUELS",
+      "amount": "1,516.80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "20Mar2,026 PaitdoANNAPOORHNOATEL",
+      "amount": "815",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "21Mar2,026 PaitdoFlipkart",
+      "amount": "208",
+      "category": "Shopping",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoLOURDEESNTERPRISES",
+      "amount": "494",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoM/S.MADMRAACSHAN'S",
+      "amount": "2,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoMADHAGREESHMA",
+      "amount": "130",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoTacBoelMlariMnaall",
+      "amount": "131",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoMAMAEARTH",
+      "amount": "999",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoLifSetyIlneternaPtviLtotndal",
+      "amount": "3,484.56",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoSpaHrypermarkets",
+      "amount": "469.38",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoSivSaiva",
+      "amount": "500",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoOMNIWATREECHNOLOGPIREISVALTIEMITUEPDI",
+      "amount": "1,179",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoKUMARAVPEL",
+      "amount": "30",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoSWIGGY",
+      "amount": "359",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoShrirTahmangapandian",
+      "amount": "580",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoSuvarRnSa",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoSPRAMMASAKTHI",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoGRTHANGAMALJIEGWAEILLERS",
+      "amount": "27,430",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoROKESSH",
+      "amount": "69",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoDATPEALMSTEASKPECIAANLDBEVERJLUYICVEILLAGE",
+      "amount": "126",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoAMMANVEGITABLES",
+      "amount": "215",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoKUMARAVPEALNDIYKAANNAGARAJ",
+      "amount": "580",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoPrakaRsahji",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoHEMALATCHA",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoERODSEHREAEMMANME",
+      "amount": "335",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "25Mar2,026 PaitdoSangeeVtehgRaestauPrearnutngalathur",
+      "amount": "620",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "25Mar2,026 PaitdoSaravanan",
+      "amount": "400",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "26Mar2,026 PaitdoTacBoelElmbasSspylendid",
+      "amount": "242",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "26Mar2,026 PaitdoMRANDMRSFOODHOUSE",
+      "amount": "460",
+      "category": "Food & Dining",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoEterLniamlited",
+      "amount": "741.60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoNAVIENLECTRICAANLDHSARDWARES",
+      "amount": "140",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoVINAYAGSAM",
+      "amount": "3,600",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoBalasubraAmuatnDoiiaensCeelntre",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoAXIBSANKLIMITED",
+      "amount": "2,397.39",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoCAF5E",
+      "amount": "400",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoCAF6E",
+      "amount": "360",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoSSSUPESRHOP",
+      "amount": "620",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoMITHRSAUNPESRTORES",
+      "amount": "1,018",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoAKAGENCIES",
+      "amount": "540",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "90",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "29Mar2,026 PaitdoAmarnaMth",
+      "amount": "590",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "29Mar2,026 PaitdoIRCTWCebUPI",
+      "amount": "328.70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "29Mar2,026 PaitdoIRCTWCebUPI",
+      "amount": "851.80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoBharAtiirLtiemlited",
+      "amount": "649",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoSagupSaarthMick",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoAMARAAVASTWHEIETASNDBAKERS",
+      "amount": "319",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 ReceifvreodGmoogPlaeyrewards",
+      "amount": "5",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoMyntra",
+      "amount": "734",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoEdelweTiosksLiiofIensuraCnocmepaLniymited",
+      "amount": "551",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoTNCHNGuduvancHhSeKrFyC6778",
+      "amount": "592",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoTNCHNGuduvancHhSeKrFyC6778",
+      "amount": "104",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoAMMANVEGITABLES",
+      "amount": "412",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "31Mar2,026 PaitdoMITHRSAUNPESRTORES",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "31Mar2,026 PaitdoSSVLAWASSOCIATES",
+      "amount": "2,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "31Mar2,026 PaitdoPEARLTFROIODPSVTL",
+      "amount": "219",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    }
+  ],
+  "summary": {
+    "total_spent": 104596.06000000001,
+    "by_category": {
+      "Other": 103738.06000000001,
+      "Food & Dining": 650.0,
+      "Shopping": 208.0
+    },
+    "transaction_count": 169
+  }
+}
