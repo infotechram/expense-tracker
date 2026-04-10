@@ -7,6 +7,12 @@ import re
 import uuid
 
 try:
+    import fitz
+    FITZ_AVAILABLE = True
+except:
+    FITZ_AVAILABLE = False
+
+try:
     import transformers
     print(f"\n{'='*60}")
     print(f"🔍 Hugging Face Cache Location:")
@@ -81,12 +87,59 @@ def clean_description(text):
     return text
 
 def extract_pdf(pdf_path):
-    """Extract transactions from PDF using table detection"""
+    """Extract transactions from PDF using PyMuPDF (fitz) for better text extraction"""
     transactions = []
     
     # Keywords to skip (header/summary rows)
     skip_keywords = ['transaction', 'statement', 'period', 'sent', 'received', 'date', 'time', 'details', 'amount']
     
+    # Try PyMuPDF first for better text extraction
+    if FITZ_AVAILABLE:
+        try:
+            print("📄 Using PyMuPDF for text extraction...")
+            doc = fitz.open(pdf_path)
+            
+            for page_num, page in enumerate(doc):
+                # Extract text with layout preservation
+                text = page.get_text()
+                
+                if text:
+                    lines = text.split('\n')
+                    for line in lines:
+                        line = line.strip()
+                        
+                        # Skip empty or short lines
+                        if not line or len(line) < 5:
+                            continue
+                        
+                        # Skip header rows
+                        if any(keyword.lower() in line.lower() for keyword in skip_keywords):
+                            continue
+                        
+                        # Look for amount (₹ symbol)
+                        amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
+                        if amount and amount.group(1):
+                            # Remove amount from description
+                            description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
+                            
+                            # Clean the description
+                            description = clean_description(description)
+                            
+                            if description and len(description) > 3:
+                                transactions.append({
+                                    'description': description,
+                                    'amount': amount.group(1),
+                                    'raw_line': line
+                                })
+            
+            doc.close()
+            if transactions:
+                return transactions
+        except Exception as e:
+            print(f"⚠️  PyMuPDF extraction failed: {e}, falling back to pdfplumber...")
+    
+    # Fallback to pdfplumber
+    print("📄 Using pdfplumber for text extraction...")
     with pdfplumber.open(pdf_path) as pdf:
         for page_num, page in enumerate(pdf.pages):
             # Try to extract tables first (more reliable for structured data)
