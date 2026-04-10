@@ -3,6 +3,7 @@ const RAW_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/main`;
 
 let results = null;
 let edits = {};
+let uploadedFileName = null;
 
 async function upload() {
     const file = document.getElementById('fileInput').files[0];
@@ -12,6 +13,9 @@ async function upload() {
         alert('Please select file and enter token');
         return;
     }
+
+    // Store original filename without extension
+    uploadedFileName = file.name.replace(/\.[^/.]+$/, "");
 
     const name = `uploads/${Date.now()}.pdf`;
     const reader = new FileReader();
@@ -47,8 +51,10 @@ async function upload() {
 }
 
 async function pollResults() {
+    const expectedFileName = `${uploadedFileName}_expenses.json`;
+    
     for (let i = 0; i < 120; i++) {
-        const res = await fetch(`${RAW_URL}/results/expenses.json?t=${Date.now()}`);
+        const res = await fetch(`${RAW_URL}/results/${expectedFileName}?t=${Date.now()}`);
         
         if (res.ok) {
             results = await res.json();
@@ -59,7 +65,7 @@ async function pollResults() {
         await new Promise(r => setTimeout(r, 3000));
     }
     
-    alert('Timeout');
+    alert('Timeout: Could not find processed file or processing took too long');
 }
 
 function showResults() {
@@ -133,6 +139,6 @@ function download() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `expenses.json`;
+    a.download = `${uploadedFileName}_expenses.json`;
     a.click();
 }
