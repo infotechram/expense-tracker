@@ -134,6 +134,21 @@ SKIP_KEYWORDS = [
     'october', 'november', 'december'
 ]
 
+def extract_date_info(raw_line: str) -> dict:
+    """Extract date and day of week from raw transaction line."""
+    # Matches: 03Mar,2026 | 03 Mar 2026 | 03Mar2026 | 03 Mar,2026
+    match = re.search(r'(\d{1,2})\s*([A-Za-z]{3})\s*,?\s*(\d{4})', raw_line)
+    if match:
+        try:
+            date_str = f"{match.group(1)} {match.group(2)} {match.group(3)}"
+            dt = datetime.strptime(date_str, "%d %b %Y")
+            return {
+                "date": dt.strftime("%d-%b-%Y"),        # 03-Mar-2026
+                "day_of_week": dt.strftime("%A")        # Monday
+            }
+        except ValueError:
+            pass
+    return {"date": None, "day_of_week": None}
 
 def is_summary_row(text: str) -> bool:
     """
@@ -205,7 +220,7 @@ def extract_with_fitz(pdf_path: str) -> list:
             amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
             if not amount_match:
                 continue
-
+            date_info = extract_date_info(row_text)   # ← add this line
             description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
             description = clean_description(description)
 
@@ -214,6 +229,8 @@ def extract_with_fitz(pdf_path: str) -> list:
                 transactions.append({
                     'description': description,
                     'amount': amount_match.group(1),
+                    'date': date_info['date'],           # ← add
+                    'day_of_week': date_info['day_of_week'],  # ← add
                     'raw_line': row_text
                 })
 
@@ -244,7 +261,7 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                         amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
                         if not amount_match:
                             continue
-
+                        date_info = extract_date_info(row_text)   # ← add this line
                         description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
                         description = clean_description(description)
 
@@ -252,6 +269,8 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                             transactions.append({
                                 'description': description,
                                 'amount': amount_match.group(1),
+                                'date': date_info['date'],           # ← add
+                                'day_of_week': date_info['day_of_week'],  # ← add
                                 'raw_line': row_text
                             })
             else:
@@ -270,7 +289,7 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                     amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
                     if not amount_match:
                         continue
-
+                    date_info = extract_date_info(line)   # ← add this line
                     description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
                     description = clean_description(description)
 
@@ -278,6 +297,8 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                         transactions.append({
                             'description': description,
                             'amount': amount_match.group(1),
+                            'date': date_info['date'],           # ← add
+                            'day_of_week': date_info['day_of_week'],  # ← add
                             'raw_line': line
                         })
 
@@ -494,6 +515,8 @@ def categorize(transactions: list) -> list:
         categorized.append({
             'description': trans['description'],
             'amount': trans['amount'],
+            'date': trans.get('date'),              # ← add
+            'day_of_week': trans.get('day_of_week'),  # ← add
             'category': result['category'],
             'confidence': result['confidence'],
             'source': result['source'],
