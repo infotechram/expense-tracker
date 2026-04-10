@@ -197,10 +197,17 @@ function viewAll() {
 
 // ─── Table ─────────────────────────────────────────────────────────────────────
 
+function esc(str) {
+    return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
 function fillTable(transactions) {
     const table = document.getElementById('table');
 
-    // Clear existing rows except header
     while (table.rows.length > 1) {
         table.deleteRow(1);
     }
@@ -209,14 +216,14 @@ function fillTable(transactions) {
         const row = table.insertRow();
         row.innerHTML = `
             <td>${i + 1}</td>
-            <td>${t.description}</td>
-            <td>₹${t.amount}</td>
+            <td>${esc(t.description)}</td>
+            <td>₹${esc(t.amount)}</td>
             <td>
-                <input type="text" value="${t.category}"
+                <input type="text" value="${esc(t.category)}"
                     onchange="edits[${i}]=this.value" style="width:100px;">
             </td>
-            <td>${t.date || '-'}</td>
-            <td>${t.day_of_week || '-'}</td>
+            <td>${esc(t.date) || '-'}</td>
+            <td>${esc(t.day_of_week) || '-'}</td>
         `;
     });
 }
