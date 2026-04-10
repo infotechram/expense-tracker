@@ -223,7 +223,7 @@ def extract_pdf(pdf_path):
     return transactions
 
 def categorize(transactions):
-    """Categorize using zero-shot AI"""
+    """Categorize using zero-shot AI with fallback to fuzzy matching"""
     categorized = []
     
     # Define relevant expense categories
@@ -248,18 +248,25 @@ def categorize(transactions):
             show_cache_info()
             
             for trans in transactions:
-                result = classifier(trans['description'], 
-                                  categories, multi_class=False)
-                
-                categorized.append({
-                    'description': trans['description'],
-                    'amount': trans['amount'],
-                    'category': result['labels'][0],
-                    'confidence': f"{result['scores'][0]:.0%}",
-                    'user_editable': True
-                })
+                try:
+                    result = classifier(trans['description'], 
+                                      categories, multi_class=False)
+                    
+                    categorized.append({
+                        'description': trans['description'],
+                        'amount': trans['amount'],
+                        'category': result['labels'][0],
+                        'confidence': f"{result['scores'][0]:.0%}",
+                        'user_editable': True
+                    })
+                except Exception as e:
+                    print(f"⚠️ HF classification failed for '{trans['description'][:30]}': {e}")
+                    # Fall back to fuzzy for this item
+                    simple_result = simple_categorize([trans])
+                    if simple_result:
+                        categorized.append(simple_result[0])
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"⚠️ HF model load failed: {e}. Using fuzzy matching fallback.")
             return simple_categorize(transactions)
     else:
         return simple_categorize(transactions)
