@@ -292,6 +292,7 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                         continue
 
                     amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
+                    date_match = re.search(DATE_REGEX, line, re.IGNORECASE)
                     if not amount_match:
                         continue
 
@@ -299,10 +300,14 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                     description = clean_description(description)
 
                     if description and len(description) > 3:
+                        date_str = date_match.group(1) if date_match else None
+                        day_of_week = get_day_of_week(date_str) if date_str else None
                         transactions.append({
                             'description': description,
                             'amount': amount_match.group(1),
-                            'raw_line': line
+                            'raw_line': line,
+                            'date': date_str,
+                            'day_of_week': day_of_week
                         })
 
     return transactions
