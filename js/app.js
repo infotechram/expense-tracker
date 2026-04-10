@@ -87,16 +87,25 @@ function showResults() {
     document.getElementById('totalTrans').textContent = summary.transaction_count;
     document.getElementById('totalCats').textContent = Object.keys(summary.by_category).length;
     const groupBy = document.getElementById('groupBy').value;
-    if (groupBy === 'day_of_week') {
-        drawChart(summary.by_day_of_week);
-    } else {
-        drawChart(summary.by_category);
-    }
+    drawChart(summary.by_category);
     fillTable(results.transactions);
 }
-
+function refreshChart() {
+    const groupBy = document.getElementById('groupBy').value;
+    if (groupBy === 'day_of_week') {
+        drawChart(results.summary.by_day_of_week);
+    } else {
+        drawChart(results.summary.by_category);
+    }
+}
+// Add this at the top with your other variables
+let chartInstance = null;
 function drawChart(data) {
     const ctx = document.getElementById('chart').getContext('2d');
+    // ✅ Destroy old chart first before creating new one
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
     new Chart(ctx, {
         type: 'pie',
         data: {
