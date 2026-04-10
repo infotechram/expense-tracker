@@ -6,16 +6,19 @@ import pdfplumber
 import re
 import uuid
 
+# ─── Optional Dependencies ────────────────────────────────────────────────────
+
 try:
     import fitz
     FITZ_AVAILABLE = True
-except:
+except ImportError:
     FITZ_AVAILABLE = False
+    print("⚠️  PyMuPDF (fitz) not installed. Falling back to pdfplumber.")
 
 try:
     from rapidfuzz import process as rf_process, fuzz as rf_fuzz
     RAPIDF_AVAILABLE = True
-except:
+except ImportError:
     RAPIDF_AVAILABLE = False
 
 try:
@@ -24,354 +27,510 @@ try:
     print(f"🔍 Hugging Face Cache Location:")
     print(f"   {transformers.utils.TRANSFORMERS_CACHE}")
     print(f"{'='*60}\n")
-except:
+except Exception:
     pass
 
 try:
     from transformers import pipeline
     HF_AVAILABLE = True
-except:
+except ImportError:
     HF_AVAILABLE = False
 
+
+# ─── Cache Info ───────────────────────────────────────────────────────────────
+
 def show_cache_info():
-    """Display cache details"""
+    """Display Hugging Face cache details."""
     cache_dir = os.path.expanduser("~/.cache/huggingface/hub/")
-    
+
     if os.path.exists(cache_dir):
         print(f"\n📦 Cache Directory: {cache_dir}")
-        
+
         total_size = 0
         model_count = 0
-        for dirpath, dirnames, filenames in os.walk(cache_dir):
+        for dirpath, _, filenames in os.walk(cache_dir):
             for filename in filenames:
                 filepath = os.path.join(dirpath, filename)
                 total_size += os.path.getsize(filepath)
                 model_count += 1
-        
-        size_gb = total_size / (1024**3)
+
+        size_gb = total_size / (1024 ** 3)
         print(f"💾 Total Cache Size: {size_gb:.2f} GB")
         print(f"📊 Total Files: {model_count}")
-        
+
         print(f"\n📂 Cached Models:")
         for item in os.listdir(cache_dir):
             item_path = os.path.join(cache_dir, item)
             if os.path.isdir(item_path):
                 print(f"   ✅ {item}")
 
+
+# ─── Text Cleaning ─────────────────────────────────────────────────────────────
+
 def clean_description(text):
-    """Clean extracted text by adding spaces between concatenated words"""
+    """
+    Clean extracted transaction description.
+
+    Fixes:
+    - Removes 'Paid to' / 'Paitdo' artifacts
+    - Removes timestamps (12:30 PM, 08AM)
+    - Removes dates (03Mar,2026 | 03 Mar 2026 | 03Mar2026)
+    - Removes UPI / transaction IDs
+    - Removes long numeric IDs (10+ digits)
+    - Splits CamelCase words  (SwiggyFood → Swiggy Food)
+    - Splits letter+digit boundaries (Swiggy123 → Swiggy 123)
+    - Splits digit+letter boundaries (123Swiggy → 123 Swiggy)
+    """
     if not text:
         return ""
-    
-    # Remove "Paitdo" prefix (transaction type)
-    text = re.sub(r'^Paitdo\s*', '', text, flags=re.IGNORECASE)
-    
-    # Remove times (with various formats)
-    text = re.sub(r'[\d]{1,2}:\d{2}\s*[AP]M', '', text)
-    text = re.sub(r'[\d]{2}[AP]M', '', text)
-    
-    # Remove UPI/Transaction IDs
-    text = re.sub(r'UPI\s*Transaction\s*ID[:\s]*[\w\d]+', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'Transaction\s*ID[:\s]*[\w\d]+', '', text, flags=re.IGNORECASE)
-    
-    # Remove dates - be aggressive with multiple formats
-    # Matches: 03Mar,2026 | 03Mar 2026 | 03Mar2026 | 03 Mar 2026
-    text = re.sub(r'^\d{1,2}\s*[A-Za-z]{3}\s*,?\s*\d{4}', '', text).strip()
-    text = re.sub(r'^(\d{1,2})[,\s]*([A-Za-z]{3})[,\s]*(\d{4})', '', text).strip()
-    text = re.sub(r'^\d{8,}', '', text).strip()  # Remove timestamps
-    
-    # Remove leading numbers/dates more aggressively
-    text = re.sub(r'^[\d\s,]+', '', text).strip()
-    
-    # Add spaces before capital letters followed by lowercase (CamelCase)
+
+    # Remove "Paid to" / "Paitdo" prefix artifacts from GPay PDFs
+    text = re.sub(r'^Pait?do?\s*', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'^Paid\s+to\s*', '', text, flags=re.IGNORECASE)
+
+    # Remove timestamps: 12:30 PM, 08:00AM, 8AM
+    text = re.sub(r'\b\d{1,2}:\d{2}\s*[AP]M\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\b\d{2}[AP]M\b', '', text, flags=re.IGNORECASE)
+
+    # Remove dates: 03Mar,2026 | 03 Mar 2026 | 03Mar2026
+    text = re.sub(r'\b\d{1,2}\s*[A-Za-z]{3}\s*,?\s*\d{4}\b', '', text)
+
+    # Remove UPI transaction IDs
+    text = re.sub(r'UPI\s*Transaction\s*ID[:\s]*\w+', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Transaction\s*ID[:\s]*\w+', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Ref\s*No[:\s]*\w+', '', text, flags=re.IGNORECASE)
+
+    # Remove long numeric IDs (10+ digits)
+    text = re.sub(r'\b\d{10,}\b', '', text)
+
+    # ✅ CamelCase split: swiggyFood → swiggy Food
     text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
-    
-    # Insert spaces in capital sequences more intelligently
-    # Use simple approach: insert space before each capital that follows lowercase
-    text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
-    
-    # For all-caps words, try to split them at common boundaries
-    # Pattern: Capital letter sequence followed by another capital and lowercase
+
+    # ✅ ALL-CAPS prefix split: "SBIBank" → "SBI Bank"
     text = re.sub(r'([A-Z]{2,})([A-Z][a-z])', r'\1 \2', text)
-    
-    # Clean up multiple spaces
+
+    # ✅ Letter → digit boundary: "Swiggy123" → "Swiggy 123"
+    text = re.sub(r'([A-Za-z])(\d)', r'\1 \2', text)
+
+    # ✅ Digit → letter boundary: "123Swiggy" → "123 Swiggy"
+    text = re.sub(r'(\d)([A-Za-z])', r'\1 \2', text)
+
+    # Remove leftover leading numbers / punctuation
+    text = re.sub(r'^[\d\s,.\-/]+', '', text)
+
+    # Collapse multiple spaces
     text = re.sub(r'\s+', ' ', text).strip()
-    
-    # Remove trailing numbers (like IDs)
-    text = re.sub(r'\s+\d+$', '', text).strip()
-    
-    # Remove merchant codes (patterns like numbers after merchant names)
-    text = re.sub(r'\s\d{10,}$', '', text).strip()
-    
+
     return text
 
-def extract_pdf(pdf_path):
-    """Extract transactions from PDF using PyMuPDF (fitz) for better text extraction"""
+
+# ─── PDF Extraction ────────────────────────────────────────────────────────────
+
+SKIP_KEYWORDS = [
+    'transaction', 'statement', 'period', 'date', 'time',
+    'details', 'amount', 'balance', 'opening', 'closing', 'total'
+]
+
+
+def _is_header_row(text: str) -> bool:
+    text_lower = text.lower()
+    return any(kw in text_lower for kw in SKIP_KEYWORDS)
+
+
+def extract_with_fitz(pdf_path: str) -> list:
+    """
+    Layout-aware extraction using PyMuPDF dict mode.
+
+    GPay PDFs are multi-column. get_text("dict") gives us x,y
+    coordinates so we can group text by row (y-position) instead
+    of reading linearly — which was the root cause of scrambled text.
+    """
     transactions = []
-    
-    # Keywords to skip (header/summary rows)
-    skip_keywords = ['transaction', 'statement', 'period', 'sent', 'received', 'date', 'time', 'details', 'amount']
-    
-    # Try PyMuPDF first for better text extraction
-    if FITZ_AVAILABLE:
-        try:
-            print("📄 Using PyMuPDF for text extraction...")
-            doc = fitz.open(pdf_path)
-            
-            for page_num, page in enumerate(doc):
-                # Extract text with layout preservation
-                text = page.get_text()
-                
-                if text:
-                    lines = text.split('\n')
-                    for line in lines:
-                        line = line.strip()
-                        
-                        # Skip empty or short lines
-                        if not line or len(line) < 5:
-                            continue
-                        
-                        # Skip header rows
-                        if any(keyword.lower() in line.lower() for keyword in skip_keywords):
-                            continue
-                        
-                        # Look for amount (₹ symbol)
-                        amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
-                        if amount and amount.group(1):
-                            # Remove amount from description
-                            description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
-                            
-                            # Clean the description
-                            description = clean_description(description)
-                            
-                            if description and len(description) > 3:
-                                transactions.append({
-                                    'description': description,
-                                    'amount': amount.group(1),
-                                    'raw_line': line
-                                })
-            
-            doc.close()
-            if transactions:
-                return transactions
-        except Exception as e:
-            print(f"⚠️  PyMuPDF extraction failed: {e}, falling back to pdfplumber...")
-    
-    # Fallback to pdfplumber
-    print("📄 Using pdfplumber for text extraction...")
+    doc = fitz.open(pdf_path)
+
+    for page in doc:
+        # ✅ "dict" mode preserves coordinates per span
+        blocks = page.get_text("dict")["blocks"]
+
+        # Group spans by their y-position (= visual row on page)
+        rows: dict[float, list[str]] = {}
+        for block in blocks:
+            if block.get("type") != 0:   # skip image blocks
+                continue
+            for line in block.get("lines", []):
+                # Round y to nearest 2px to merge nearby spans in same row
+                y = round(line["bbox"][1] / 2) * 2
+                for span in line.get("spans", []):
+                    span_text = span["text"].strip()
+                    if span_text:
+                        rows.setdefault(y, []).append(span_text)
+
+        # Process each visual row top-to-bottom
+        for y_pos in sorted(rows.keys()):
+            row_text = " ".join(rows[y_pos]).strip()
+
+            if not row_text or len(row_text) < 5:
+                continue
+            if _is_header_row(row_text):
+                continue
+
+            amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
+            if not amount_match:
+                continue
+
+            description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
+            description = clean_description(description)
+
+            if description and len(description) > 3:
+                transactions.append({
+                    'description': description,
+                    'amount': amount_match.group(1),
+                    'raw_line': row_text
+                })
+
+    doc.close()
+    return transactions
+
+
+def extract_with_pdfplumber(pdf_path: str) -> list:
+    """Fallback extraction using pdfplumber (table-first, then text)."""
+    transactions = []
+
     with pdfplumber.open(pdf_path) as pdf:
-        for page_num, page in enumerate(pdf.pages):
-            # Try to extract tables first (more reliable for structured data)
+        for page in pdf.pages:
             tables = page.extract_tables()
-            
+
             if tables:
                 for table in tables:
                     for row in table:
-                        if row and len(row) >= 2:
-                            # Convert row to strings and clean
-                            row_text = [str(cell).strip() if cell else "" for cell in row]
-                            row_str = " ".join(row_text)
-                            
-                            # Skip header rows
-                            if any(keyword.lower() in row_str.lower() for keyword in skip_keywords):
-                                continue
-                            
-                            # Look for amount (₹ symbol)
-                            amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_str)
-                            if amount and amount.group(1):
-                                # Remove amount from description to clean it up
-                                description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_str).strip()
-                                
-                                # Clean the description
-                                description = clean_description(description)
-                                
-                                if description and len(description) > 3:
-                                    transactions.append({
-                                        'description': description,
-                                        'amount': amount.group(1),
-                                        'raw_line': row_str
-                                    })
+                        if not row or len(row) < 2:
+                            continue
+                        row_text = " ".join(
+                            str(cell).strip() for cell in row if cell
+                        )
+                        if _is_header_row(row_text):
+                            continue
+
+                        amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
+                        if not amount_match:
+                            continue
+
+                        description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
+                        description = clean_description(description)
+
+                        if description and len(description) > 3:
+                            transactions.append({
+                                'description': description,
+                                'amount': amount_match.group(1),
+                                'raw_line': row_text
+                            })
             else:
-                # Fallback: Extract text if no tables found
+                # No tables found — fall back to raw text
                 text = page.extract_text()
-                if text:
-                    lines = text.split('\n')
-                    for i, line in enumerate(lines):
-                        line = line.strip()
-                        
-                        # Skip short lines or headers
-                        if not line or len(line) < 5:
-                            continue
-                        if any(keyword.lower() in line.lower() for keyword in skip_keywords):
-                            continue
-                        
-                        # Look for amount
-                        amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
-                        if amount and amount.group(1):
-                            description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
-                            
-                            # Clean the description
-                            description = clean_description(description)
-                            
-                            if description and len(description) > 3:
-                                transactions.append({
-                                    'description': description,
-                                    'amount': amount.group(1),
-                                    'raw_line': line
-                                })
-    
+                if not text:
+                    continue
+
+                for line in text.split('\n'):
+                    line = line.strip()
+                    if not line or len(line) < 5:
+                        continue
+                    if _is_header_row(line):
+                        continue
+
+                    amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
+                    if not amount_match:
+                        continue
+
+                    description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
+                    description = clean_description(description)
+
+                    if description and len(description) > 3:
+                        transactions.append({
+                            'description': description,
+                            'amount': amount_match.group(1),
+                            'raw_line': line
+                        })
+
     return transactions
 
-def categorize(transactions):
-    """Categorize using zero-shot AI with fallback to fuzzy matching"""
-    categorized = []
-    
-    # Define relevant expense categories
-    categories = [
-        "Food & Dining",
-        "Transportation",
-        "Shopping",
-        "Bills & Utilities",
-        "Entertainment",
-        "Healthcare",
-        "Transfer",
-        "Other"
-    ]
-    
-    if HF_AVAILABLE:
-        try:
-            print("📥 Loading model from cache...")
-            classifier = pipeline("zero-shot-classification", 
-                                model="facebook/bart-large-mnli", device=-1)
-            
-            print("✅ Model loaded successfully!")
-            show_cache_info()
-            
-            for trans in transactions:
-                try:
-                    result = classifier(trans['description'], 
-                                      categories, multi_class=False)
-                    
-                    categorized.append({
-                        'description': trans['description'],
-                        'amount': trans['amount'],
-                        'category': result['labels'][0],
-                        'confidence': f"{result['scores'][0]:.0%}",
-                        'user_editable': True
-                    })
-                except Exception as e:
-                    print(f"⚠️ HF classification failed for '{trans['description'][:30]}': {e}")
-                    # Fall back to fuzzy for this item
-                    simple_result = simple_categorize([trans])
-                    if simple_result:
-                        categorized.append(simple_result[0])
-        except Exception as e:
-            print(f"⚠️ HF model load failed: {e}. Using fuzzy matching fallback.")
-            return simple_categorize(transactions)
-    else:
-        return simple_categorize(transactions)
-    
-    return categorized
 
-def simple_categorize(transactions):
-    """Simple fallback with keyword matching"""
-    # Flatten keywords into a mapping for fuzzy matching
-    keywords = {
-        "Food & Dining": [
-            "restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner", "hotel", "tavern",
-            "bistro", "diner", "bar", "bakery", "bakehouse", "estaurant", "velida", "thalap",
-            "vaetnhkiat", "rsahji", "prak", "sweet", "biryani", "dhaba", "eatery", "snack",
-            "aristop", "restaurant"
-        ],
-        "Groceries": ["supermarket", "grocery", "market", "super", "mart", "store", "shop", "wallmark", "costco", "fresh", "organic"],
-        "Transportation": ["uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol", "fuel", "parking", "metro", "ola", "cab"],
-        "Shopping": ["amazon", "mall", "flipkart", "retail", "clothing", "apparel", "purchase", "buy", "mart", "bazaar", "associates"],
-        "Bills & Utilities": ["bill", "electric", "water", "gas", "internet", "phone", "mobile", "airtel", "jio", "vodafone", "bsnl", "broadband", "dth"],
-        "Healthcare": ["doctor", "hospital", "medicine", "pharmacy", "health", "clinic", "medical"],
-        "Entertainment": ["movie", "cinema", "spotify", "netflix", "game", "ticket", "theatre", "show"],
-        "Transfer": ["received", "transfer", "sent", "paid", "deposit", "withdraw"],
+def extract_pdf(pdf_path: str) -> list:
+    """Try PyMuPDF first (layout-aware), fall back to pdfplumber."""
+    if FITZ_AVAILABLE:
+        try:
+            print("📄 Extracting with PyMuPDF (layout-aware dict mode)...")
+            transactions = extract_with_fitz(pdf_path)
+            if transactions:
+                print(f"   ✅ Found {len(transactions)} transactions via PyMuPDF")
+                return transactions
+            print("   ⚠️  No transactions found via PyMuPDF, trying pdfplumber...")
+        except Exception as e:
+            print(f"   ⚠️  PyMuPDF failed: {e}")
+
+    print("📄 Extracting with pdfplumber...")
+    transactions = extract_with_pdfplumber(pdf_path)
+    print(f"   ✅ Found {len(transactions)} transactions via pdfplumber")
+    return transactions
+
+
+# ─── Categorization ────────────────────────────────────────────────────────────
+
+CATEGORIES = [
+    "Food & Dining",
+    "Groceries",
+    "Transportation",
+    "Shopping",
+    "Bills & Utilities",
+    "Entertainment",
+    "Healthcare",
+    "Transfer",
+    "Other"
+]
+
+# Contact-to-category memory (persisted across runs)
+CONTACT_MAP_FILE = "results/contact_map.json"
+
+
+def load_contact_map() -> dict:
+    if os.path.exists(CONTACT_MAP_FILE):
+        with open(CONTACT_MAP_FILE) as f:
+            return json.load(f)
+    return {}
+
+
+def save_contact_map(contact_map: dict):
+    os.makedirs("results", exist_ok=True)
+    with open(CONTACT_MAP_FILE, "w") as f:
+        json.dump(contact_map, f, indent=2)
+
+
+def extract_contact_name(description: str):
+    """Try to extract a person's name from a 'paid to <name>' description."""
+    match = re.search(
+        r'(?:to|paid)\s+([A-Za-z][A-Za-z\s]{2,30}?)(?:\s+via|\s+on|\s+ref|$)',
+        description, re.IGNORECASE
+    )
+    if match:
+        name = match.group(1).strip().lower()
+        # Filter out merchant-like names (contain digits or are too long)
+        if not re.search(r'\d', name) and len(name.split()) <= 4:
+            return name
+    return None
+
+
+def is_personal_transfer(description: str) -> bool:
+    """Detect if the transaction looks like a peer-to-peer payment."""
+    personal_patterns = [
+        r'\bsent\s+to\b', r'\bpaid\s+to\b', r'\btransfer(red)?\s+to\b',
+        r'\bvia\s+(gpay|google\s*pay|upi|phonepe|paytm)\b'
+    ]
+    desc_lower = description.lower()
+    return any(re.search(p, desc_lower) for p in personal_patterns)
+
+
+def categorize_hf(classifier, description: str) -> dict:
+    """Zero-shot classification via Hugging Face."""
+    result = classifier(description, CATEGORIES, multi_class=False)
+    return {
+        'category': result['labels'][0],
+        'confidence': f"{result['scores'][0]:.0%}",
+        'source': 'zero-shot-AI'
     }
 
-    # Build a flat keyword -> category map for fuzzy lookup
-    flat = []
+
+def simple_categorize_one(description: str) -> dict:
+    """Keyword + optional fuzzy matching fallback."""
+    keywords = {
+        "Food & Dining": [
+            "restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner",
+            "hotel", "tavern", "bistro", "diner", "bakery", "sweet", "biryani",
+            "dhaba", "eatery", "snack", "swiggy", "zomato", "burger", "barbeque"
+        ],
+        "Groceries": [
+            "supermarket", "grocery", "market", "mart", "store", "fresh",
+            "organic", "reliance smart", "dmart", "big bazaar", "more"
+        ],
+        "Transportation": [
+            "uber", "taxi", "auto", "travel", "bus", "train", "petrol",
+            "fuel", "parking", "metro", "ola", "cab", "rapido", "irctc", "flight"
+        ],
+        "Shopping": [
+            "amazon", "flipkart", "retail", "clothing", "apparel", "bazaar",
+            "myntra", "ajio", "mall", "nykaa", "meesho"
+        ],
+        "Bills & Utilities": [
+            "bill", "electric", "electricity", "water", "gas", "internet",
+            "phone", "mobile", "airtel", "jio", "vodafone", "bsnl",
+            "broadband", "dth", "bescom", "tneb", "postpaid", "recharge"
+        ],
+        "Healthcare": [
+            "doctor", "hospital", "medicine", "pharmacy", "health",
+            "clinic", "medical", "apollo", "diagnostic", "lab", "dental"
+        ],
+        "Entertainment": [
+            "movie", "cinema", "spotify", "netflix", "game", "ticket",
+            "theatre", "show", "pvr", "inox", "bookmyshow", "hotstar", "prime"
+        ],
+        "Transfer": [
+            "received", "transfer", "sent", "deposit", "withdraw", "wallet"
+        ],
+    }
+
+    desc_lower = description.lower()
+
+    # Exact substring match
     for cat, kw_list in keywords.items():
-        for kw in kw_list:
-            flat.append((kw, cat))
+        if any(kw in desc_lower for kw in kw_list):
+            return {'category': cat, 'confidence': 'keyword-match', 'source': 'keyword'}
 
-    categorized = []
-    for trans in transactions:
-        desc = trans['description'] or ''
-        desc_lower = desc.lower()
-        category = 'Other'
-        confidence = 'Manual (Keyword)'
-
-        # First try exact substring match
-        for cat, kw_list in keywords.items():
-            if any(kw in desc_lower for kw in kw_list):
-                category = cat
-                confidence = 'Manual (Substring)'
-                break
-
-        # If still Other and rapidfuzz available, do fuzzy matching
-        if category == 'Other' and RAPIDF_AVAILABLE:
-            # prepare choices and labels
-            choices = [k for k, c in flat]
-            try:
-                res = rf_process.extractOne(desc_lower, choices, scorer=rf_fuzz.token_sort_ratio, score_cutoff=60)
-            except Exception:
-                res = None
-
+    # Fuzzy match via rapidfuzz
+    if RAPIDF_AVAILABLE:
+        flat = [(kw, cat) for cat, kw_list in keywords.items() for kw in kw_list]
+        choices = [k for k, _ in flat]
+        try:
+            res = rf_process.extractOne(
+                desc_lower, choices,
+                scorer=rf_fuzz.token_sort_ratio,
+                score_cutoff=60
+            )
             if res:
-                # res can be (match, score, idx) or (match, score)
-                if len(res) == 3:
-                    match, score, idx = res
-                else:
-                    match, score = res
-                    try:
-                        idx = choices.index(match)
-                    except ValueError:
-                        idx = None
+                match_text, score, idx = res[0], res[1], res[2] if len(res) > 2 else choices.index(res[0])
+                _, matched_cat = flat[idx]
+                return {
+                    'category': matched_cat,
+                    'confidence': f'fuzzy-{int(score)}%',
+                    'source': 'fuzzy'
+                }
+        except Exception:
+            pass
 
-                if idx is not None and 0 <= idx < len(flat):
-                    _, matched_cat = flat[idx]
-                    category = matched_cat
-                    confidence = f'Fuzzy {int(score)}%'
+    return {'category': 'Other', 'confidence': 'no-match', 'source': 'fallback'}
+
+
+def categorize(transactions: list) -> list:
+    """
+    Full categorization pipeline:
+    1. Check contact map (learned from past runs / user input)
+    2. Detect personal transfer → ask user if unknown contact
+    3. Zero-shot AI (Hugging Face) if available
+    4. Keyword / fuzzy fallback
+    """
+    contact_map = load_contact_map()
+    categorized = []
+
+    # Load HF classifier once if available
+    hf_classifier = None
+    if HF_AVAILABLE:
+        try:
+            print("📥 Loading Hugging Face model from cache...")
+            hf_classifier = pipeline(
+                "zero-shot-classification",
+                model="facebook/bart-large-mnli",
+                device=-1
+            )
+            print("✅ Model loaded!")
+            show_cache_info()
+        except Exception as e:
+            print(f"⚠️  HF model load failed: {e}. Using fallback.")
+
+    for trans in transactions:
+        desc = trans['description']
+        result = None
+
+        # ── Step 1: Contact map lookup ────────────────────────────────────
+        contact = extract_contact_name(desc)
+        if contact and contact in contact_map:
+            result = {
+                'category': contact_map[contact],
+                'confidence': '100% (learned)',
+                'source': 'contact-map'
+            }
+
+        # ── Step 2: Personal transfer → prompt user ───────────────────────
+        elif contact and is_personal_transfer(desc):
+            print(f"\n❓ Personal payment detected: \"{desc}\"")
+            print(f"   Contact: {contact}")
+            print("   Select category:")
+            for i, cat in enumerate(CATEGORIES, 1):
+                print(f"   {i}. {cat}")
+
+            try:
+                choice = int(input("   Enter number (or 0 to skip): ").strip())
+                if 1 <= choice <= len(CATEGORIES):
+                    chosen = CATEGORIES[choice - 1]
+                    contact_map[contact] = chosen   # learn for next time
+                    save_contact_map(contact_map)
+                    print(f"   ✅ Saved '{contact}' → '{chosen}'")
+                    result = {
+                        'category': chosen,
+                        'confidence': '100% (user-input)',
+                        'source': 'user-input'
+                    }
+            except (ValueError, EOFError):
+                pass  # fallthrough to AI
+
+        # ── Step 3: Zero-shot AI ──────────────────────────────────────────
+        if result is None and hf_classifier:
+            try:
+                result = categorize_hf(hf_classifier, desc)
+            except Exception as e:
+                print(f"⚠️  AI classification failed for '{desc[:40]}': {e}")
+
+        # ── Step 4: Keyword / fuzzy fallback ─────────────────────────────
+        if result is None:
+            result = simple_categorize_one(desc)
 
         categorized.append({
-            'description': trans['description'],
+            'description': desc,
             'amount': trans['amount'],
-            'category': category,
-            'confidence': confidence,
+            'category': result['category'],
+            'confidence': result['confidence'],
+            'source': result['source'],
+            'raw_line': trans.get('raw_line', ''),
             'user_editable': True
         })
 
     return categorized
 
-def main(pdf_path):
-    print(f"Processing: {pdf_path}")
-    
-    # Generate unique process ID and timestamp
+
+# ─── Main ──────────────────────────────────────────────────────────────────────
+
+def main(pdf_path: str):
+    if not os.path.exists(pdf_path):
+        print(f"❌ File not found: {pdf_path}")
+        sys.exit(1)
+
+    print(f"\n🚀 Processing: {pdf_path}")
+
     process_id = str(uuid.uuid4())[:8]
     process_timestamp = datetime.now().isoformat()
-    
-    # Extract PDF filename without extension
+
     pdf_filename = os.path.splitext(os.path.basename(pdf_path))[0]
     output_filename = f"{pdf_filename}_expenses.json"
     output_path = os.path.join('results', output_filename)
-    
+    os.makedirs('results', exist_ok=True)
+
+    # ── Extract ───────────────────────────────────────────────────────────
     transactions = extract_pdf(pdf_path)
-    print(f"Found {len(transactions)} transactions")
-    
+    if not transactions:
+        print("❌ No transactions found in PDF. Check if the PDF has selectable text.")
+        sys.exit(1)
+
+    print(f"\n📊 Found {len(transactions)} transactions")
+
+    # ── Categorize ────────────────────────────────────────────────────────
     categorized = categorize(transactions)
-    
-    summary = {}
-    total = 0
+
+    # ── Summary ───────────────────────────────────────────────────────────
+    summary: dict[str, float] = {}
+    total = 0.0
     for t in categorized:
         amount = float(t['amount'].replace(',', ''))
         cat = t['category']
-        summary[cat] = summary.get(cat, 0) + amount
+        summary[cat] = summary.get(cat, 0.0) + amount
         total += amount
-    
+
+    # ── Save results ──────────────────────────────────────────────────────
     results = {
         "meta": {
             "process_id": process_id,
@@ -380,45 +539,54 @@ def main(pdf_path):
             "source_path": pdf_path
         },
         "status": "success",
-        "timestamp": process_timestamp,
-        "cache_location": os.path.expanduser("~/.cache/huggingface/hub/"),
         "transactions": categorized,
         "summary": {
-            "total_spent": total,
-            "by_category": summary,
+            "total_spent": round(total, 2),
+            "by_category": {k: round(v, 2) for k, v in summary.items()},
             "transaction_count": len(categorized)
         }
     }
-    
-    os.makedirs('results', exist_ok=True)
-    with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
-    
-    # Add to processing log for multi-user tracking
+
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+
+    # ── Processing log ────────────────────────────────────────────────────
+    log_file = 'results/processing_log.json'
     log_entry = {
         "process_id": process_id,
         "processed_at": process_timestamp,
         "pdf_file": os.path.basename(pdf_path),
         "output_file": output_filename,
         "transaction_count": len(categorized),
-        "total_amount": total
+        "total_amount": round(total, 2)
     }
-    
-    log_file = 'results/processing_log.json'
+
     if os.path.exists(log_file):
-        with open(log_file, 'r') as f:
+        with open(log_file) as f:
             log = json.load(f)
     else:
         log = {"processing_history": []}
-    
+
     log["processing_history"].append(log_entry)
-    
     with open(log_file, 'w') as f:
         json.dump(log, f, indent=2)
-    
-    print(f"✅ Saved to {output_path}")
-    print(f"📋 Process ID: {process_id}")
-    print(f"📝 Tracking added to {log_file}")
+
+    # ── Print summary ─────────────────────────────────────────────────────
+    print(f"\n{'='*55}")
+    print(f"  💰 EXPENSE SUMMARY")
+    print(f"{'='*55}")
+    for cat, amt in sorted(summary.items(), key=lambda x: -x[1]):
+        print(f"  {cat:<25} ₹{amt:>10,.2f}")
+    print(f"{'─'*55}")
+    print(f"  {'TOTAL':<25} ₹{total:>10,.2f}")
+    print(f"{'='*55}")
+    print(f"\n✅ Saved  → {output_path}")
+    print(f"📋 ID     → {process_id}")
+    print(f"📝 Log    → {log_file}\n")
+
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python gpay_expense_categorizer.py <path_to_pdf>")
+        sys.exit(1)
     main(sys.argv[1])
