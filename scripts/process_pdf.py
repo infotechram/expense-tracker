@@ -559,7 +559,7 @@ def main(pdf_path: str):
     # ── Summary ───────────────────────────────────────────────────────────
     summary: dict[str, float] = {}
     by_day: dict[str, float] = {}          # ← this line is missing in your code
-    DAY_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+    DAY_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     total = 0.0
     for t in categorized:
         amount = float(t['amount'].replace(',', ''))
