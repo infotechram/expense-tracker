@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 import pdfplumber
 import re
+import uuid
 
 try:
     import transformers
@@ -49,22 +50,65 @@ def extract_pdf(pdf_path):
     """Extract transactions from PDF"""
     transactions = []
     
+    # Keywords to skip (header/summary rows)
+    skip_keywords = ['Transaction statement period', 'Sent', 'Received', 'Date & time', 'Transaction details', 'Amount']
+    
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
             text = page.extract_text()
+            current_description = []
+            
             for line in text.split('\n'):
+                line = line.strip()
+                
+                # Skip header/summary rows
+                if any(keyword.lower() in line.lower() for keyword in skip_keywords):
+                    continue
+                
+                # Skip empty lines
+                if not line or len(line) < 5:
+                    continue
+                
                 amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
-                if amount and len(line.strip()) > 5:
-                    transactions.append({
-                        'description': line.strip(),
-                        'amount': amount.group(1)
-                    })
+                
+                if amount:
+                    # This line contains an amount - it's likely the amount line of a transaction
+                    # Look for description in previous lines
+                    description = ' '.join(current_description) if current_description else line
+                    
+                    # Clean up the description - remove UPI/Transaction IDs
+                    description = re.sub(r'UPI Transaction ID:.*', '', description).strip()
+                    
+                    if description and amount.group(1):
+                        transactions.append({
+                            'description': description,
+                            'amount': amount.group(1),
+                            'raw_line': line
+                        })
+                    
+                    current_description = []
+                else:
+                    # This might be part of transaction description
+                    if line and not re.search(r'^\d{2}:\d{2}', line):  # Not a time
+                        current_description.append(line)
     
     return transactions
 
 def categorize(transactions):
     """Categorize using zero-shot AI"""
     categorized = []
+    
+    # Define relevant expense categories
+    categories = [
+        "Food & Dining",
+        "Transportation",
+        "Shopping",
+        "Bills & Utilities",
+        "Entertainment",
+        "Healthcare",
+        "Transfer",
+        "Other"
+    ]
     
     if HF_AVAILABLE:
         try:
@@ -77,12 +121,12 @@ def categorize(transactions):
             
             for trans in transactions:
                 result = classifier(trans['description'], 
-                                  ["expense"], multi_class=False)
+                                  categories, multi_class=False)
                 
                 categorized.append({
                     'description': trans['description'],
                     'amount': trans['amount'],
-                    'category': 'Expense',
+                    'category': result['labels'][0],
                     'confidence': f"{result['scores'][0]:.0%}",
                     'user_editable': True
                 })
@@ -95,20 +139,49 @@ def categorize(transactions):
     return categorized
 
 def simple_categorize(transactions):
-    """Simple fallback"""
-    return [
-        {
-            'description': t['description'],
-            'amount': t['amount'],
-            'category': 'Uncategorized',
-            'confidence': 'Manual',
+    """Simple fallback with keyword matching"""
+    keywords = {
+        "Food & Dining": ["restaurant", "food", "cafe", "pizza", "lunch", "dinner", "coffee"],
+        "Transportation": ["uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol"],
+        "Shopping": ["amazon", "store", "shop", "buy", "purchase", "mall", "flipkart"],
+        "Bills & Utilities": ["bill", "electric", "water", "gas", "internet", "phone", "mobile"],
+        "Healthcare": ["doctor", "hospital", "medicine", "pharmacy", "health", "clinic"],
+        "Entertainment": ["movie", "cinema", "spotify", "netflix", "game", "ticket"],
+        "Transfer": ["received", "transfer", "sent"],
+    }
+    
+    categorized = []
+    for trans in transactions:
+        desc_lower = trans['description'].lower()
+        category = "Other"
+        
+        # Match against keywords
+        for cat, keywords_list in keywords.items():
+            if any(keyword in desc_lower for keyword in keywords_list):
+                category = cat
+                break
+        
+        categorized.append({
+            'description': trans['description'],
+            'amount': trans['amount'],
+            'category': category,
+            'confidence': 'Manual (Keyword)',
             'user_editable': True
-        }
-        for t in transactions
-    ]
+        })
+    
+    return categorized
 
 def main(pdf_path):
     print(f"Processing: {pdf_path}")
+    
+    # Generate unique process ID and timestamp
+    process_id = str(uuid.uuid4())[:8]
+    process_timestamp = datetime.now().isoformat()
+    
+    # Extract PDF filename without extension
+    pdf_filename = os.path.splitext(os.path.basename(pdf_path))[0]
+    output_filename = f"{pdf_filename}_expenses.json"
+    output_path = os.path.join('results', output_filename)
     
     transactions = extract_pdf(pdf_path)
     print(f"Found {len(transactions)} transactions")
@@ -124,9 +197,14 @@ def main(pdf_path):
         total += amount
     
     results = {
+        "meta": {
+            "process_id": process_id,
+            "processed_at": process_timestamp,
+            "pdf_file": os.path.basename(pdf_path),
+            "source_path": pdf_path
+        },
         "status": "success",
-        "timestamp": datetime.now().isoformat(),
-        "pdf_file": os.path.basename(pdf_path),
+        "timestamp": process_timestamp,
         "cache_location": os.path.expanduser("~/.cache/huggingface/hub/"),
         "transactions": categorized,
         "summary": {
@@ -137,10 +215,34 @@ def main(pdf_path):
     }
     
     os.makedirs('results', exist_ok=True)
-    with open('results/expenses.json', 'w') as f:
+    with open(output_path, 'w') as f:
         json.dump(results, f, indent=2)
     
-    print(f"✅ Saved to results/expenses.json")
+    # Add to processing log for multi-user tracking
+    log_entry = {
+        "process_id": process_id,
+        "processed_at": process_timestamp,
+        "pdf_file": os.path.basename(pdf_path),
+        "output_file": output_filename,
+        "transaction_count": len(categorized),
+        "total_amount": total
+    }
+    
+    log_file = 'results/processing_log.json'
+    if os.path.exists(log_file):
+        with open(log_file, 'r') as f:
+            log = json.load(f)
+    else:
+        log = {"processing_history": []}
+    
+    log["processing_history"].append(log_entry)
+    
+    with open(log_file, 'w') as f:
+        json.dump(log, f, indent=2)
+    
+    print(f"✅ Saved to {output_path}")
+    print(f"📋 Process ID: {process_id}")
+    print(f"📝 Tracking added to {log_file}")
 
 if __name__ == "__main__":
     main(sys.argv[1])
