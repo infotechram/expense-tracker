@@ -63,7 +63,7 @@ def show_cache_info():
             item_path = os.path.join(cache_dir, item)
             if os.path.isdir(item_path):
                 print(f"   ✅ {item}")
-                
+
 # ─── Date Regex ───────────────────────────────────────────────────────────────
 DATE_REGEX = r'\b(\d{1,2}\s*[A-Za-z]{3,9}\s*\d{4})\b'
 
@@ -522,7 +522,8 @@ def categorize(transactions: list) -> list:
             'confidence': result['confidence'],
             'source': result['source'],
             'raw_line': trans.get('raw_line', ''),
-            'user_editable': True
+            'user_editable': True,
+            'day':trans['day_of_week'],
         })
 
     return categorized
