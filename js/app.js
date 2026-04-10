@@ -106,7 +106,7 @@ function drawChart(data) {
     if (chartInstance) {
         chartInstance.destroy();
     }
-    new Chart(ctx, {
+    chartInstance = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: Object.keys(data),
