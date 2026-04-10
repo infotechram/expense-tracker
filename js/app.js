@@ -14,10 +14,11 @@ async function upload() {
         return;
     }
 
-    // Store original filename without extension
-    uploadedFileName = file.name.replace(/\.[^/.]+$/, "");
+    // Generate a timestamp-based filename (same as what we'll upload)
+    const timestamp = Date.now();
+    uploadedFileName = String(timestamp);
 
-    const name = `uploads/${Date.now()}.pdf`;
+    const name = `uploads/${timestamp}.pdf`;
     const reader = new FileReader();
     
     reader.onload = async (e) => {
@@ -32,7 +33,7 @@ async function upload() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    message: `Upload PDF`,
+                    message: `Upload PDF: ${file.name}`,
                     content: base64
                 })
             }
