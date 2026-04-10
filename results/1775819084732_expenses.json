@@ -1,0 +1,1294 @@
+{
+  "meta": {
+    "process_id": "3fc1443c",
+    "processed_at": "2026-04-10T11:06:01.038046",
+    "pdf_file": "1775819084732.pdf",
+    "source_path": "uploads/1775819084732.pdf"
+  },
+  "status": "success",
+  "timestamp": "2026-04-10T11:06:01.038046",
+  "cache_location": "/home/runner/.cache/huggingface/hub/",
+  "transactions": [
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "1,14,766.76",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01Mar2,026 ReceifvreodKmumaraKvuemlar \u20b9115",
+      "amount": "115",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "02:P3M6 UPTIransaIcDt1:i1o9n335388565 PaitdoHDFBCan4k712",
+      "amount": "2,284",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06:P5M0 UPTIransaIcDt6:i0o6n038620384 PaibdyHDFBCan4k712",
+      "amount": "20.70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A4M2 UPTIransaIcDt6:i0o6n124698430 PaibdyHDFBCan4k712",
+      "amount": "1,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P4M6 UPTIransaIcDt6:i4o2n724301402 PaibdyHDFBCan4k712",
+      "amount": "3,271",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P1M5 UPTIransaIcDt6:i4o2n709702014 PaibdyHDFBCan4k712",
+      "amount": "260",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03:P5M1 UPTIransaIcDt6:i4o2n718717114 PaibdyHDFBCan4k712",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P2M0 UPTIransaIcDt6:i4o2n769918959 PaibdyHDFBCan4k712",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "613",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P1M5 UPTIransaIcDt6:i0o6n272101164 PaibdyHDFBCan4k712",
+      "amount": "650",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P1M8 UPTIransaIcDt6:i0o6n256703445 PaibdyHDFBCan4k712",
+      "amount": "6,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P1M5 UPTIransaIcDt6:i0o6n217105173 PaibdyHDFBCan4k712",
+      "amount": "205",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P4M9 UPTIransaIcDt6:i0o6n260104876 PaibdyHDFBCan4k712",
+      "amount": "45",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M4 UPTIransaIcDt6:i0o6n265835663 PaibdyHDFBCan4k712",
+      "amount": "55",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M5 UPTIransaIcDt6:i0o6n281455492 PaibdyHDFBCan4k712",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P1M7 UPTIransaIcDt6:i0o6n294554427 PaibdyHDFBCan4k712",
+      "amount": "1,178.82",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:P2M8 UPTIransaIcDt6:i0o6n295968687 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "85",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A0M1 UPTIransaIcDt6:i4o2n932901655 PaibdyHDFBCan4k712",
+      "amount": "76",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P2M6 UPTIransaIcDt6:i4o2n903106057 PaibdyHDFBCan4k712",
+      "amount": "224",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06:P3M8 UPTIransaIcDt6:i4o2n923558935 PaibdyHDFBCan4k712",
+      "amount": "180",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P2M0 UPTIransaIcDt6:i4o2n989348243 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A3M6 UPTIransaIcDt6:i4o3n086872233 PaibdyHDFBCan4k712",
+      "amount": "140",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A4M9 UPTIransaIcDt6:i4o3n032174689 PaibdyHDFBCan4k712",
+      "amount": "65",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P2M2 UPTIransaIcDt6:i0o6n494145159 PaibdyHDFBCan4k712",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P0M2 UPTIransaIcDt6:i0o6n411150421 PaibdyHDFBCan4k712",
+      "amount": "30",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A4M3 UPTIransaIcDt6:i0o6n530373941 PaibdyHDFBCan4k712",
+      "amount": "913",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "920",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A5M4 UPTIransaIcDt6:i0o6n523184773 PaibdyHDFBCan4k712",
+      "amount": "378",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P3M1 UPTIransaIcDt6:i4o3n126119459 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P4M1 UPTIransaIcDt6:i4o3n197002587 PaibdyHDFBCan4k712",
+      "amount": "350",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M1 UPTIransaIcDt6:i4o3n149321589 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P0M3 UPTIransaIcDt6:i4o3n167320434 PaibdyHDFBCan4k712",
+      "amount": "143",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P2M2 UPTIransaIcDt6:i4o3n200275256 PaibdyHDFBCan4k712",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P1M9 UPTIransaIcDt6:i4o3n295996912 PaibdyHDFBCan4k712",
+      "amount": "600",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P4M4 UPTIransaIcDt6:i0o6n663612944 PaibdyHDFBCan4k712",
+      "amount": "1,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P5M5 UPTIransaIcDt6:i0o6n640917646 PaibdyHDFBCan4k712",
+      "amount": "649",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "720",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:P0M4 UPTIransaIcDt6:i0o6n612147700 PaibdyHDFBCan4k712",
+      "amount": "668",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P3M5 UPTIransaIcDt6:i0o6n729899957 PaibdyHDFBCan4k712",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P5M6 UPTIransaIcDt6:i0o6n707986587 PaibdyHDFBCan4k712",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P0M7 UPTIransaIcDt6:i0o6n716192102 PaibdyHDFBCan4k712",
+      "amount": "400",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P4M7 UPTIransaIcDt6:i4o3n319038601 PaibdyHDFBCan4k712",
+      "amount": "615",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P5M0 UPTIransaIcDt6:i4o3n348334840 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "130",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P0M8 UPTIransaIcDt6:i4o3n334441841 PaibdyHDFBCan4k712",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P1M0 UPTIransaIcDt6:i4o3n324442233 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A0M3 UPTIransaIcDt6:i4o3n421072823 PaibdyHDFBCan4k712",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "287",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P1M0 UPTIransaIcDt6:i4o3n422683469 PaibdyHDFBCan4k712",
+      "amount": "408",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P0M4 UPTIransaIcDt6:i0o6n844050744 PaibdyHDFBCan4k712",
+      "amount": "55",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M5 UPTIransaIcDt6:i0o6n891530153 PaibdyHDFBCan4k712",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P5M1 UPTIransaIcDt6:i0o6n857338075 PaibdyHDFBCan4k712",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A5M1 UPTIransaIcDt6:i0o6n998664512 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A5M4 UPTIransaIcDt6:i0o6n947566073 PaibdyHDFBCan4k712",
+      "amount": "10",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A5M8 UPTIransaIcDt6:i0o6n971671802 PaibdyHDFBCan4k712",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A0M0 UPTIransaIcDt6:i0o6n931453613 PaibdyHDFBCan4k712",
+      "amount": "2,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "02:P4M7 UPTIransaIcDt6:i0o6n989790247 PaibdyHDFBCan4k712",
+      "amount": "124",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03:P5M5 UPTIransaIcDt6:i0o6n965387329 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A0M7 UPTIransaIcDt6:i4o3n632258259 PaibdyHDFBCan4k712",
+      "amount": "1,306",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A5M4 UPTIransaIcDt6:i4o3n655368966 PaibdyHDFBCan4k712",
+      "amount": "260",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "02:P2M8 UPTIransaIcDt6:i4o3n649999199 PaibdyHDFBCan4k712",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P3M9 UPTIransaIcDt6:i0o7n017451150 PaibdyHDFBCan4k712",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M8 UPTIransaIcDt6:i0o7n061841984 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P5M7 UPTIransaIcDt6:i0o7n040445098 PaibdyHDFBCan4k712",
+      "amount": "800",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P2M5 UPTIransaIcDt6:i0o7n008259653 PaitdoHDFBCan4k712",
+      "amount": "15",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A4M0 UPTIransaIcDt6:i0o7n148862112 PaibdyHDFBCan4k712",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "214",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P1M2 UPTIransaIcDt6:i4o3n733802336 PaibdyHDFBCan4k712",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P1M3 UPTIransaIcDt6:i0o7n131893356 PaibdyHDFBCan4k712",
+      "amount": "105",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P1M8 UPTIransaIcDt6:i4o3n724131292 PaibdyHDFBCan4k712",
+      "amount": "45",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M4 UPTIransaIcDt6:i4o3n752524862 PaibdyHDFBCan4k712",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P5M2 UPTIransaIcDt6:i4o3n727428294 PaibdyHDFBCan4k712",
+      "amount": "840",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P5M3 UPTIransaIcDt6:i4o3n781529213 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A1M7 UPTIransaIcDt6:i4o3n856267227 PaibdyHDFBCan4k712",
+      "amount": "84",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A4M2 UPTIransaIcDt6:i4o3n837774729 PaibdyHDFBCan4k712",
+      "amount": "30",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P0M5 UPTIransaIcDt6:i4o3n850358448 PaibdyHDFBCan4k712",
+      "amount": "1,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P2M3 UPTIransaIcDt6:i4o3n838180980 PaibdyHDFBCan4k712",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P4M8 UPTIransaIcDt6:i0o7n230923990 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P4M9 UPTIransaIcDt6:i0o7n224016288 PaibdyHDFBCan4k712",
+      "amount": "17",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P5M4 UPTIransaIcDt6:i0o7n296717408 PaibdyHDFBCan4k712",
+      "amount": "375.01",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P2M4 UPTIransaIcDt6:i0o7n209636785 PaibdyHDFBCan4k712",
+      "amount": "3,500",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P0M8 UPTIransaIcDt6:i4o3n986904166 PaibdyHDFBCan4k712",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P2M7 UPTIransaIcDt6:i4o3n972340535 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M8 UPTIransaIcDt6:i4o3n919527625 PaibdyHDFBCan4k712",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P4M1 UPTIransaIcDt6:i4o3n948227240 PaibdyHDFBCan4k712",
+      "amount": "895",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "15",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A0M6 UPTIransaIcDt6:i4o4n035683567 PaibdyHDFBCan4k712",
+      "amount": "180",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A2M3 UPTIransaIcDt6:i4o4n015084377 PaibdyHDFBCan4k712",
+      "amount": "250",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A2M6 UPTIransaIcDt6:i4o4n051779494 PaibdyHDFBCan4k712",
+      "amount": "201",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P4M6 UPTIransaIcDt6:i4o4n085581181 PaibdyHDFBCan4k712",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P5M8 UPTIransaIcDt6:i0o7n407204378 PaibdyHDFBCan4k712",
+      "amount": "310",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P0M5 UPTIransaIcDt6:i4o4n050692673 PaibdyHDFBCan4k712",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P0M8 UPTIransaIcDt6:i0o7n401330413 PaibdyHDFBCan4k712",
+      "amount": "689",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P5M9 UPTIransaIcDt6:i0o7n446650269 PaibdyHDFBCan4k712",
+      "amount": "433",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P3M4 UPTIransaIcDt6:i0o7n495050072 PaibdyHDFBCan4k712",
+      "amount": "105",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M1 UPTIransaIcDt6:i4o4n123567893 PaibdyHDFBCan4k712",
+      "amount": "12",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M8 UPTIransaIcDt6:i4o4n146732269 PaibdyHDFBCan4k712",
+      "amount": "14",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P4M6 UPTIransaIcDt6:i4o4n178039841 PaibdyHDFBCan4k712",
+      "amount": "200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:A1M7 UPTIransaIcDt6:i4o4n298778446 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P2M3 UPTIransaIcDt6:i4o4n243699834 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03:P5M4 UPTIransaIcDt6:i0o7n614912412 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P2M2 UPTIransaIcDt6:i0o7n667514844 PaibdyHDFBCan4k712",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P3M3 UPTIransaIcDt6:i0o7n675611594 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P3M6 UPTIransaIcDt6:i0o7n625318521 PaibdyHDFBCan4k712",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "450",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M0 UPTIransaIcDt6:i0o7n668746862 PaibdyHDFBCan4k712",
+      "amount": "250",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:A0M9 UPTIransaIcDt6:i0o7n770188424 PaibdyHDFBCan4k712",
+      "amount": "365",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P4M6 UPTIransaIcDt6:i4o4n353427904 PaibdyHDFBCan4k712",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P2M1 UPTIransaIcDt6:i4o4n381435133 PaibdyHDFBCan4k712",
+      "amount": "5,200",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:A2M1 UPTIransaIcDt6:i4o4n486778572 PaibdyHDFBCan4k712",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A3M0 UPTIransaIcDt6:i4o4n412884751 PaibdyHDFBCan4k712",
+      "amount": "43",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A5M2 UPTIransaIcDt6:i4o4n409388197 PaibdyHDFBCan4k712",
+      "amount": "130",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P1M6 UPTIransaIcDt6:i4o4n445798719 PaibdyHDFBCan4k712",
+      "amount": "10",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P0M5 UPTIransaIcDt6:i4o4n445996618 PaibdyHDFBCan4k712",
+      "amount": "267",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "4",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P0M8 UPTIransaIcDt6:i0o7n860540661 PaibdyHDFBCan4k712",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:P1M3 UPTIransaIcDt6:i0o7n820356516 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:P2M5 UPTIransaIcDt6:i0o7n834571291 PaibdyHDFBCan4k712",
+      "amount": "1,516.80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "02:P2M4 UPTIransaIcDt6:i0o7n956397705 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "815",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03:P0M6 UPTIransaIcDt6:i4o4n578905132 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "208",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P3M6 UPTIransaIcDt6:i0o8n096406831 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "494",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P3M8 UPTIransaIcDt6:i0o8n149765913 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "2,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P3M0 UPTIransaIcDt6:i0o8n195474865 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "700",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P2M1 UPTIransaIcDt6:i0o8n179677274 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "130",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "1,100",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P3M0 UPTIransaIcDt6:i0o8n188783655 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "1,500",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P4M5 UPTIransaIcDt6:i0o8n128691447 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "600",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06:P1M8 UPTIransaIcDt6:i0o8n142281461 PaibdyHDFBCan4k712",
+      "amount": "131",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:0P0M UPTIransaIcDt6:i0o8n185582260 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "999",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P3M9 UPTIransaIcDt6:i4o4n791906210 PaibdyHDFBCan4k712",
+      "amount": "3,484.56",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P3M5 UPTIransaIcDt6:i4o4n768311375 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "469.38",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P0M1 UPTIransaIcDt6:i4o4n716501109 PaibdyHDFBCan4k712",
+      "amount": "500",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P1M5 UPTIransaIcDt6:i4o4n754430326 PaibdyHDFBCan4k712",
+      "amount": "1,179",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:A0M9 UPTIransaIcDt6:i4o4n854621546 PaibdyHDFBCan4k712",
+      "amount": "30",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "359",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P5M1 UPTIransaIcDt6:i4o4n818440899 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "580",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03:P2M1 UPTIransaIcDt6:i4o4n887259151 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P5M5 UPTIransaIcDt6:i4o4n896074630 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P5M9 UPTIransaIcDt6:i4o4n862478923 PaibdyHDFBCan4k712",
+      "amount": "27,430",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M5 UPTIransaIcDt6:i4o4n856790314 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "69",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:0P0M UPTIransaIcDt6:i4o4n884474848 PaibdyHDFBCan4k712",
+      "amount": "126",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P0M7 UPTIransaIcDt6:i4o4n830392898 PaibdyHDFBCan4k712",
+      "amount": "215",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P4M8 UPTIransaIcDt6:i4o4n873886528 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "580",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:P0M2 UPTIransaIcDt6:i0o8n255706511 PaibdyHDFBCan4k712",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P3M2 UPTIransaIcDt6:i0o8n331041752 PaibdyHDFBCan4k712",
+      "amount": "60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P2M9 UPTIransaIcDt6:i0o8n371046138 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "335",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P5M7 UPTIransaIcDt6:i0o8n388268377 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "620",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P2M9 UPTIransaIcDt6:i4o5n056084077 PaibdyHDFBCan4k712",
+      "amount": "400",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M9 UPTIransaIcDt6:i4o5n081970515 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "242",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "04:P2M1 UPTIransaIcDt6:i0o8n561029925 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "460",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P4M6 UPTIransaIcDt6:i0o8n593870086 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "741.60",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A1M8 UPTIransaIcDt6:i0o8n600474175 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "140",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A0M2 UPTIransaIcDt6:i0o8n660683198 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "3,600",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "03:P1M2 UPTIransaIcDt6:i4o5n260603646 PaibdyStaBtaenokfIndXiXa3|0RuPacyrecdairtd",
+      "amount": "2,397.39",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:A0M9 UPTIransaIcDt6:i4o5n315365488 PaibdyHDFBCan4k712",
+      "amount": "400",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P4M0 UPTIransaIcDt6:i0o8n758313710 PaibdyHDFBCan4k712",
+      "amount": "360",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P5M5 UPTIransaIcDt6:i0o8n783100032 PaibdyHDFBCan4k712",
+      "amount": "620",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P4M2 UPTIransaIcDt6:i0o8n720115965 PaibdyHDFBCan4k712",
+      "amount": "1,018",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P3M8 UPTIransaIcDt6:i0o8n701037844 PaibdyHDFBCan4k712",
+      "amount": "540",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P3M8 UPTIransaIcDt6:i0o8n789550775 PaibdyHDFBCan4k712",
+      "amount": "90",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P4M7 UPTIransaIcDt6:i0o8n713032232 PaibdyHDFBCan4k712",
+      "amount": "590",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "11:A4M2 UPTIransaIcDt6:i0o8n800969655 PaibdyHDFBCan4k712",
+      "amount": "328.70",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "851.80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P5M4 UPTIransaIcDt6:i0o8n845381674 PaibdyHDFBCan4k712",
+      "amount": "649",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A2M0 UPTIransaIcDt6:i4o5n510248808 PaibdyHDFBCan4k712 10:A4M0 UPTIransaIcDt6:i4o5n558350981 PaibdyHDFBCan4k712",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A4M3 UPTIransaIcDt6:i4o5n589051268 PaibdyHDFBCan4k712",
+      "amount": "319",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "12:P5M0 UPTIransaIcDt6:i4o5n561858860 PaibdyHDFBCan4k712",
+      "amount": "300",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "01:P0M1 UPTIransaIcDt6:i4o5n539972935 PaibdyHDFBCan4k712",
+      "amount": "5",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P1M5 UPTIransaIcDt1:i6o3n289580896 PaitdoHDFBCan4k712",
+      "amount": "734",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "05:P2M0 UPTIransaIcDt6:i4o5n592695142 PaibdyHDFBCan4k712",
+      "amount": "551",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "06:P1M9 UPTIransaIcDt6:i0o8n926507874 PaibdyHDFBCan4k712",
+      "amount": "592",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "Transascttaitoenment 7397356i7n3f5o,tech.ram@gmail.com",
+      "amount": "104",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "08:P2M8 UPTIransaIcDt6:i0o8n928915854 PaibdyHDFBCan4k712",
+      "amount": "412",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "09:P0M5 UPTIransaIcDt6:i0o8n954021161 PaibdyHDFBCan4k712",
+      "amount": "80",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "10:A5M1 UPTIransaIcDt6:i0o9n025137643 PaibdyHDFBCan4k712",
+      "amount": "2,000",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    },
+    {
+      "description": "07:P5M0 UPTIransaIcDt6:i0o9n050799794 PaibdyHDFBCan4k712",
+      "amount": "219",
+      "category": "Other",
+      "confidence": "Manual (Keyword)",
+      "user_editable": true
+    }
+  ],
+  "summary": {
+    "total_spent": 230313.52000000002,
+    "by_category": {
+      "Other": 230313.52000000002
+    },
+    "transaction_count": 182
+  }
+}

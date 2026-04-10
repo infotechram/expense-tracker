@@ -15,6 +15,14 @@
       "output_file": "1775818911381_expenses.json",
       "transaction_count": 182,
       "total_amount": 230313.52000000002
+    },
+    {
+      "process_id": "3fc1443c",
+      "processed_at": "2026-04-10T11:06:01.038046",
+      "pdf_file": "1775819084732.pdf",
+      "output_file": "1775819084732_expenses.json",
+      "transaction_count": 182,
+      "total_amount": 230313.52000000002
     }
   ]
 }
