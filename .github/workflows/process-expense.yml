@@ -54,7 +54,7 @@ jobs:
         python scripts/process_pdf.py "${{ steps.pdf.outputs.pdf_file }}"
 
     - name: Upload results artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: expense-results
         path: results/expenses.json
