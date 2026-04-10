@@ -1,0 +1,1627 @@
+{
+  "meta": {
+    "process_id": "2716e40c",
+    "processed_at": "2026-04-10T15:26:34.473193",
+    "pdf_file": "1775834711977-bb5a24b9-cac8-4979-8ee4-d1607d43014b.pdf",
+    "source_path": "uploads/1775834711977-bb5a24b9-cac8-4979-8ee4-d1607d43014b.pdf"
+  },
+  "status": "success",
+  "transactions": [
+    {
+      "description": "Received from Kumaravel Kumar",
+      "amount": "115",
+      "category": "Transfer",
+      "confidence": "32%",
+      "source": "zero-shot-AI",
+      "raw_line": "01 Mar, 2026 Received from Kumaravel Kumar ₹115",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MITHRAN SUPER STORES",
+      "amount": "2,284",
+      "category": "Shopping",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "01 Mar, 2026 Paid to MITHRAN SUPER STORES ₹2,284",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Phasorz Technologies Private Limited",
+      "amount": "20.70",
+      "category": "Transfer",
+      "confidence": "27%",
+      "source": "zero-shot-AI",
+      "raw_line": "02 Mar, 2026 Paid to Phasorz Technologies Private Limited ₹20.70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Jothi Jo",
+      "amount": "1,000",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "02 Mar, 2026 Paid to Jothi Jo ₹1,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Kumaravel Kumar",
+      "amount": "3,271",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "02 Mar, 2026 Paid to Kumaravel Kumar ₹3,271",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SAI RAM AQUARIUM",
+      "amount": "260",
+      "category": "Entertainment",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "02 Mar, 2026 Paid to SAI RAM AQUARIUM ₹260",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to RAJESHWARI VARATHARAJ",
+      "amount": "20",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "02 Mar, 2026 Paid to RAJESHWARI VARATHARAJ ₹20",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to ANTHONIYAR KOVIL JUNCTION",
+      "amount": "80",
+      "category": "Transfer",
+      "confidence": "16%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to ANTHONIYAR KOVIL JUNCTION ₹80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to ARISTOTLE PLATO",
+      "amount": "613",
+      "category": "Transportation",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to ARISTOTLE PLATO ₹613",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Thalapathi Venkat",
+      "amount": "650",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to Thalapathi Venkat ₹650",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SSV LAW ASSOCIATES",
+      "amount": "6,000",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to SSV LAW ASSOCIATES ₹6,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to VELIDIS ANDHRA RESTAURANT",
+      "amount": "205",
+      "category": "Healthcare",
+      "confidence": "76%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to VELIDIS ANDHRA RESTAURANT ₹205",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Smart Q",
+      "amount": "45",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to SmartQ ₹45",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Smart Q",
+      "amount": "55",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to SmartQ ₹55",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "150",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to Prakash Raji ₹150",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MYJIO",
+      "amount": "1,178.82",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "03 Mar, 2026 Paid to MYJIO ₹1,178.82",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to THAMARAISELVI SRIDHAR",
+      "amount": "40",
+      "category": "Transportation",
+      "confidence": "33%",
+      "source": "zero-shot-AI",
+      "raw_line": "04 Mar, 2026 Paid to THAMARAISELVI SRIDHAR ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Senthilkumar Pethiyan",
+      "amount": "100",
+      "category": "Transfer",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "04 Mar, 2026 Paid to Senthilkumar Pethiyan ₹100",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "85",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "04 Mar, 2026 Paid to Sagupar Sathick M ₹85",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Smart Q",
+      "amount": "76",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "04 Mar, 2026 Paid to SmartQ ₹76",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SUPER SARAVANA STORES TEX CHROMPET",
+      "amount": "224",
+      "category": "Transportation",
+      "confidence": "35%",
+      "source": "zero-shot-AI",
+      "raw_line": "04 Mar, 2026 Paid to SUPER SARAVANA STORES TEX CHROMPET ₹224",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AALADIPATTIYAN JP Nagar",
+      "amount": "180",
+      "category": "Transfer",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "04 Mar, 2026 Paid to AALADIPATTIYAN JP Nagar ₹180",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "05 Mar, 2026 Paid to Prakash Raji ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "140",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "05 Mar, 2026 Paid to Sagupar Sathick M ₹140",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to PIZZA HUT",
+      "amount": "65",
+      "category": "Food & Dining",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "05 Mar, 2026 Paid to PIZZA HUT ₹65",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "300",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "05 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to S PRAMMASAKTHI",
+      "amount": "30",
+      "category": "Healthcare",
+      "confidence": "16%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to S PRAMMASAKTHI ₹30",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Amazon Pay on Delivery",
+      "amount": "913",
+      "category": "Transfer",
+      "confidence": "36%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to Amazon Pay on Delivery ₹913",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to DILLIBAI K",
+      "amount": "920",
+      "category": "Bills & Utilities",
+      "confidence": "26%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to DILLIBAI K ₹920",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AMARAVATHY SWEET STALL",
+      "amount": "378",
+      "category": "Healthcare",
+      "confidence": "53%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to AMARAVATHY SWEET STALL ₹378",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to S PRAMMASAKTHI",
+      "amount": "40",
+      "category": "Healthcare",
+      "confidence": "16%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to S PRAMMASAKTHI ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MANOJ",
+      "amount": "350",
+      "category": "Food & Dining",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to MANOJ ₹350",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to RAJESHWARI VARATHARAJ",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "06 Mar, 2026 Paid to RAJESHWARI VARATHARAJ ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MITHRAN SUPER STORES",
+      "amount": "143",
+      "category": "Shopping",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "07 Mar, 2026 Paid to MITHRAN SUPER STORES ₹143",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Pasupathi 10",
+      "amount": "100",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "07 Mar, 2026 Paid to Pasupathi 10 ₹100",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Kotak FAS Tag",
+      "amount": "600",
+      "category": "Entertainment",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "07 Mar, 2026 Paid to Kotak FASTag ₹600",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "1,000",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "07 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹1,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Bharti Airtel Limited",
+      "amount": "649",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "07 Mar, 2026 Paid to Bharti Airtel Limited ₹649",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to HOTEL JAYALAKSHMI",
+      "amount": "720",
+      "category": "Shopping",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "07 Mar, 2026 Paid to HOTEL JAYALAKSHMI ₹720",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MITHRAN SUPER STORES",
+      "amount": "668",
+      "category": "Shopping",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to MITHRAN SUPER STORES ₹668",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Adhinarayanan Kondal",
+      "amount": "150",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to Adhinarayanan Kondal ₹150",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "20",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to Sagupar Sathick M ₹20",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to dr.gayathri kiruba",
+      "amount": "400",
+      "category": "Healthcare",
+      "confidence": "63%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to dr.gayathri kiruba ₹400",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to GANDHI MEDICALS",
+      "amount": "615",
+      "category": "Healthcare",
+      "confidence": "89%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to GANDHI MEDICALS ₹615",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI RAMDEV FANCY GIFT AND STATIONER",
+      "amount": "130",
+      "category": "Entertainment",
+      "confidence": "34%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to SRI RAMDEV FANCY GIFT AND STATIONER ₹130",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI RAMDEV FANCY GIFT AND STATIONER",
+      "amount": "80",
+      "category": "Entertainment",
+      "confidence": "34%",
+      "source": "zero-shot-AI",
+      "raw_line": "08 Mar, 2026 Paid to SRI RAMDEV FANCY GIFT AND STATIONER ₹80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to G.elumalai Malai",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "09 Mar, 2026 Paid to G.elumalai Malai ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sukumar Sukumar",
+      "amount": "20",
+      "category": "Transfer",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "09 Mar, 2026 Paid to Sukumar Sukumar ₹20",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Amazon Pay on Delivery",
+      "amount": "287",
+      "category": "Transfer",
+      "confidence": "36%",
+      "source": "zero-shot-AI",
+      "raw_line": "09 Mar, 2026 Paid to Amazon Pay on Delivery ₹287",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SURESH MURUGESAN",
+      "amount": "408",
+      "category": "Healthcare",
+      "confidence": "43%",
+      "source": "zero-shot-AI",
+      "raw_line": "09 Mar, 2026 Paid to SURESH MURUGESAN ₹408",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Anthoniammal",
+      "amount": "55",
+      "category": "Food & Dining",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "09 Mar, 2026 Paid to Anthoniammal ₹55",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "09 Mar, 2026 Paid to Sagupar Sathick M ₹50",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sri Senthur Murugan Agenc",
+      "amount": "300",
+      "category": "Transfer",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to Sri Senthur Murugan Agenc ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to S PRAMMASAKTHI",
+      "amount": "40",
+      "category": "Healthcare",
+      "confidence": "16%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to S PRAMMASAKTHI ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to THOMSON TYRES",
+      "amount": "10",
+      "category": "Transfer",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to THOMSON TYRES ₹10",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Jothiprakash",
+      "amount": "50",
+      "category": "Transfer",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to Jothiprakash ₹50",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to karthi hdfc",
+      "amount": "2,000",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to karthi hdfc ₹2,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Taco Bell Embassy Splendid",
+      "amount": "124",
+      "category": "Shopping",
+      "confidence": "31%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to Taco Bell Embassy Splendid ₹124",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to CUT COFFEE",
+      "amount": "40",
+      "category": "Food & Dining",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "10 Mar, 2026 Paid to CUT COFFEE ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Paid to Prakash Raji ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sujith Sujith",
+      "amount": "1,306",
+      "category": "Transfer",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Paid to Sujith Sujith ₹1,306",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SHRI BALAAJEE BHAVAN",
+      "amount": "260",
+      "category": "Shopping",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Paid to SHRI BALAAJEE BHAVAN ₹260",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Janaki Jagan",
+      "amount": "50",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Paid to Janaki Jagan ₹50",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "300",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Paid to Prakash Raji ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Received from Friends Fun Forever",
+      "amount": "800",
+      "category": "Entertainment",
+      "confidence": "54%",
+      "source": "zero-shot-AI",
+      "raw_line": "11 Mar, 2026 Received from Friends Fun Forever ₹800",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Gajendiran Ramadoss",
+      "amount": "15",
+      "category": "Transfer",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to Gajendiran Ramadoss ₹15",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Muthulakshmi Sakthinathar",
+      "amount": "50",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to Muthulakshmi Sakthinathar ₹50",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Taco Bell Embassy Splendid",
+      "amount": "214",
+      "category": "Shopping",
+      "confidence": "31%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to Taco Bell Embassy Splendid ₹214",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to CUT COFFEE",
+      "amount": "20",
+      "category": "Food & Dining",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to CUT COFFEE ₹20",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI PADMA VILAS HOTEL",
+      "amount": "105",
+      "category": "Healthcare",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to SRI PADMA VILAS HOTEL ₹105",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to LAKSHMIPATHI KUPPURAO",
+      "amount": "45",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to LAKSHMIPATHI KUPPURAO ₹45",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "150",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to Sagupar Sathick M ₹150",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sembaruthi Shikakai",
+      "amount": "840",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "12 Mar, 2026 Paid to Sembaruthi Shikakai ₹840",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to Prakash Raji ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MITHRAN SUPER STORES",
+      "amount": "84",
+      "category": "Shopping",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to MITHRAN SUPER STORES ₹84",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sumithra Adhinarayanan",
+      "amount": "30",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to Sumithra Adhinarayanan ₹30",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to BIRLA COSMETICS PRIVATE LIMITED",
+      "amount": "1,000",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to BIRLA COSMETICS PRIVATE LIMITED ₹1,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Kannan Krishnan",
+      "amount": "200",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to Kannan Krishnan ₹200",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to VIJAYAKUMAR K",
+      "amount": "50",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to VIJAYAKUMAR K ₹50",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Venkatesan Vengamalai",
+      "amount": "300",
+      "category": "Transfer",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to Venkatesan Vengamalai ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MEDPLUS GUDUVANCHERI",
+      "amount": "17",
+      "category": "Healthcare",
+      "confidence": "30%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to MEDPLUS GUDUVANCHERI ₹17",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "375.01",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "13 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹375.01",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SUDHAKAR S",
+      "amount": "3,500",
+      "category": "Transfer",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "14 Mar, 2026 Paid to SUDHAKAR S ₹3,500",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to VIJAYAKUMAR K",
+      "amount": "60",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "14 Mar, 2026 Paid to VIJAYAKUMAR K ₹60",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to LAKSHMIPATHI KUPPURAO",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "14 Mar, 2026 Paid to LAKSHMIPATHI KUPPURAO ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "100",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "14 Mar, 2026 Paid to Sagupar Sathick M ₹100",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI AARYA BHAVAN",
+      "amount": "895",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "14 Mar, 2026 Paid to SRI AARYA BHAVAN ₹895",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to LAKSHMIPATHI KUPPURAO",
+      "amount": "15",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to LAKSHMIPATHI KUPPURAO ₹15",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MOHANRAJ V",
+      "amount": "180",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to MOHANRAJ V ₹180",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "250",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to Prakash Raji ₹250",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SURESH MURUGESAN",
+      "amount": "201",
+      "category": "Healthcare",
+      "confidence": "43%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to SURESH MURUGESAN ₹201",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Adhinarayanan Kondal",
+      "amount": "60",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to Adhinarayanan Kondal ₹60",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to VALARMATHI",
+      "amount": "310",
+      "category": "Healthcare",
+      "confidence": "36%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to VALARMATHI ₹310",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MOHANRAJ V",
+      "amount": "80",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to MOHANRAJ V ₹80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to PIZZA HUT",
+      "amount": "689",
+      "category": "Food & Dining",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to PIZZA HUT ₹689",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Pandian Stores",
+      "amount": "433",
+      "category": "Shopping",
+      "confidence": "50%",
+      "source": "zero-shot-AI",
+      "raw_line": "15 Mar, 2026 Paid to Pandian Stores ₹433",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sangeetha Veg Restaurant Perungalathur",
+      "amount": "105",
+      "category": "Food & Dining",
+      "confidence": "49%",
+      "source": "zero-shot-AI",
+      "raw_line": "16 Mar, 2026 Paid to Sangeetha Veg Restaurant Perungalathur ₹105",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Selvi",
+      "amount": "80",
+      "category": "Transfer",
+      "confidence": "31%",
+      "source": "zero-shot-AI",
+      "raw_line": "16 Mar, 2026 Paid to Selvi ₹80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to PASUMAI ANGADI",
+      "amount": "12",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "16 Mar, 2026 Paid to PASUMAI ANGADI ₹12",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sukumar Sukumar",
+      "amount": "14",
+      "category": "Transfer",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "16 Mar, 2026 Paid to Sukumar Sukumar ₹14",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Karthik G",
+      "amount": "200",
+      "category": "Transfer",
+      "confidence": "27%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to Karthik G ₹200",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to Prakash Raji ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Adhinarayanan Kondal",
+      "amount": "40",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to Adhinarayanan Kondal ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AMARAAVATHI SWEETS AND BAKERS",
+      "amount": "70",
+      "category": "Shopping",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to AMARAAVATHI SWEETS AND BAKERS ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Suvarna R S",
+      "amount": "60",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to Suvarna R S ₹60",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "200",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹200",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "50",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to Sagupar Sathick M ₹50",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "450",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "17 Mar, 2026 Paid to Prakash Raji ₹450",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Bal a",
+      "amount": "250",
+      "category": "Transfer",
+      "confidence": "28%",
+      "source": "zero-shot-AI",
+      "raw_line": "18 Mar, 2026 Paid to Bal a ₹250",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SREE GURU MEDICALS",
+      "amount": "365",
+      "category": "Healthcare",
+      "confidence": "78%",
+      "source": "zero-shot-AI",
+      "raw_line": "18 Mar, 2026 Paid to SREE GURU MEDICALS ₹365",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MOHAMED SADIQ S",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "18 Mar, 2026 Paid to MOHAMED SADIQ S ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to KARTHI KD",
+      "amount": "5,200",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to KARTHI KD ₹5,200",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to RADHAKRISHNAN V",
+      "amount": "20",
+      "category": "Transfer",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to RADHAKRISHNAN V ₹20",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to GIJU P VIJAYAN",
+      "amount": "43",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to GIJU P VIJAYAN ₹43",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to TASTIA FARMS AND FOODS PRIVATE LIMITED",
+      "amount": "130",
+      "category": "Food & Dining",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to TASTIA FARMS AND FOODS PRIVATE LIMITED ₹130",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to HOTEL SABARI",
+      "amount": "10",
+      "category": "Entertainment",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to HOTEL SABARI ₹10",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to PUNALUR SRI SARAVANA BHAVAN",
+      "amount": "267",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to PUNALUR SRI SARAVANA BHAVAN ₹267",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to PUNALUR SRI SARAVANA BHAVAN",
+      "amount": "4",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to PUNALUR SRI SARAVANA BHAVAN ₹4",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sadhasivaraj A",
+      "amount": "150",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to Sadhasivaraj A ₹150",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to utchimahali A",
+      "amount": "100",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "19 Mar, 2026 Paid to utchimahali A ₹100",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AYYANAR FUELS",
+      "amount": "1,516.80",
+      "category": "Food & Dining",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "20 Mar, 2026 Paid to AYYANAR FUELS ₹1,516.80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to ANNAPOORNA HOTEL",
+      "amount": "815",
+      "category": "Shopping",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "20 Mar, 2026 Paid to ANNAPOORNA HOTEL ₹815",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Flipkart",
+      "amount": "208",
+      "category": "Shopping",
+      "confidence": "49%",
+      "source": "zero-shot-AI",
+      "raw_line": "21 Mar, 2026 Paid to Flipkart ₹208",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to LOURDES ENTERPRISES",
+      "amount": "494",
+      "category": "Entertainment",
+      "confidence": "57%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to LOURDES ENTERPRISES ₹494",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to M/S.MADRAS MACHAN'S",
+      "amount": "2,000",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to M/S.MADRAS MACHAN'S ₹2,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MADHA GREESHMA",
+      "amount": "130",
+      "category": "Transfer",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to MADHA GREESHMA ₹130",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Taco Bell Marina Mall",
+      "amount": "131",
+      "category": "Food & Dining",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to Taco Bell Marina Mall ₹131",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MAMAEARTH",
+      "amount": "999",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to MAMAEARTH ₹999",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Life Style International Pvt Ltd",
+      "amount": "3,484.56",
+      "category": "Entertainment",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to Life Style International Pvt Ltd ₹3,484.56",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Spar Hypermarkets",
+      "amount": "469.38",
+      "category": "Shopping",
+      "confidence": "67%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to Spar Hypermarkets ₹469.38",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Siva Siva",
+      "amount": "500",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "22 Mar, 2026 Paid to Siva Siva ₹500",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to OMNIWARE TECHNOLOGIES PRIVATE LIMITED UPI",
+      "amount": "1,179",
+      "category": "Other",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to OMNIWARE TECHNOLOGIES PRIVATE LIMITED UPI ₹1,179",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to KUMARAVEL P",
+      "amount": "30",
+      "category": "Food & Dining",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to KUMARAVEL P ₹30",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SWIGGY",
+      "amount": "359",
+      "category": "Healthcare",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to SWIGGY ₹359",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Shriram Thangapandian",
+      "amount": "580",
+      "category": "Other",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to Shriram Thangapandian ₹580",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Suvarna R S",
+      "amount": "40",
+      "category": "Transfer",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to Suvarna R S ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to S PRAMMASAKTHI",
+      "amount": "40",
+      "category": "Healthcare",
+      "confidence": "16%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to S PRAMMASAKTHI ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to G R THANGAMALIGAI JEWELLERS",
+      "amount": "27,430",
+      "category": "Transfer",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to G R THANGAMALIGAI JEWELLERS ₹27,430",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to ROKESH S",
+      "amount": "69",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to ROKESH S ₹69",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AMMAN VEGITABLES",
+      "amount": "215",
+      "category": "Entertainment",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to AMMAN VEGITABLES ₹215",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to KUMARAVEL PANDIYAN KANAGARAJ",
+      "amount": "580",
+      "category": "Healthcare",
+      "confidence": "20%",
+      "source": "zero-shot-AI",
+      "raw_line": "23 Mar, 2026 Paid to KUMARAVEL PANDIYAN KANAGARAJ ₹580",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "300",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "24 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Prakash Raji",
+      "amount": "70",
+      "category": "Transfer",
+      "confidence": "25%",
+      "source": "zero-shot-AI",
+      "raw_line": "24 Mar, 2026 Paid to Prakash Raji ₹70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to HEMALATHA C",
+      "amount": "60",
+      "category": "Healthcare",
+      "confidence": "31%",
+      "source": "zero-shot-AI",
+      "raw_line": "24 Mar, 2026 Paid to HEMALATHA C ₹60",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to ERODE SHREE AMMAN ME",
+      "amount": "335",
+      "category": "Healthcare",
+      "confidence": "37%",
+      "source": "zero-shot-AI",
+      "raw_line": "24 Mar, 2026 Paid to ERODE SHREE AMMAN ME ₹335",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sangeetha Veg Restaurant Perungalathur",
+      "amount": "620",
+      "category": "Food & Dining",
+      "confidence": "49%",
+      "source": "zero-shot-AI",
+      "raw_line": "25 Mar, 2026 Paid to Sangeetha Veg Restaurant Perungalathur ₹620",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Saravanan",
+      "amount": "400",
+      "category": "Transfer",
+      "confidence": "30%",
+      "source": "zero-shot-AI",
+      "raw_line": "25 Mar, 2026 Paid to Saravanan ₹400",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Taco Bell Embassy Splendid",
+      "amount": "242",
+      "category": "Shopping",
+      "confidence": "31%",
+      "source": "zero-shot-AI",
+      "raw_line": "26 Mar, 2026 Paid to Taco Bell Embassy Splendid ₹242",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MR AND MRS FOOD HOUSE",
+      "amount": "460",
+      "category": "Food & Dining",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "26 Mar, 2026 Paid to MR AND MRS FOOD HOUSE ₹460",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Eternal Limited",
+      "amount": "741.60",
+      "category": "Other",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "27 Mar, 2026 Paid to Eternal Limited ₹741.60",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to NAVIN ELECTRICALS AND HARDWARES",
+      "amount": "140",
+      "category": "Healthcare",
+      "confidence": "24%",
+      "source": "zero-shot-AI",
+      "raw_line": "27 Mar, 2026 Paid to NAVIN ELECTRICALS AND HARDWARES ₹140",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to VINAYAGAM S",
+      "amount": "3,600",
+      "category": "Food & Dining",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "27 Mar, 2026 Paid to VINAYAGAM S ₹3,600",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Balasubramanian Auto Diesel Centre",
+      "amount": "300",
+      "category": "Shopping",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "27 Mar, 2026 Paid to Balasubramanian Auto Diesel Centre ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AXIS BANK LIMITED",
+      "amount": "2,397.39",
+      "category": "Transfer",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to AXIS BANK LIMITED ₹2,397.39",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to CAFE 5",
+      "amount": "400",
+      "category": "Transfer",
+      "confidence": "27%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to CAFE 5 ₹400",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to CAFE 6",
+      "amount": "360",
+      "category": "Transfer",
+      "confidence": "27%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to CAFE 6 ₹360",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to S S SUPER SHOP",
+      "amount": "620",
+      "category": "Shopping",
+      "confidence": "69%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to S S SUPER SHOP ₹620",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MITHRAN SUPER STORES",
+      "amount": "1,018",
+      "category": "Shopping",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to MITHRAN SUPER STORES ₹1,018",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AKAGENCIES",
+      "amount": "540",
+      "category": "Entertainment",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to AKAGENCIES ₹540",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "90",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "28 Mar, 2026 Paid to Sagupar Sathick M ₹90",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Amarnath M",
+      "amount": "590",
+      "category": "Transfer",
+      "confidence": "31%",
+      "source": "zero-shot-AI",
+      "raw_line": "29 Mar, 2026 Paid to Amarnath M ₹590",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to IRCTC Web UPI",
+      "amount": "328.70",
+      "category": "Shopping",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "29 Mar, 2026 Paid to IRCTC Web UPI ₹328.70",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to IRCTC Web UPI",
+      "amount": "851.80",
+      "category": "Shopping",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "29 Mar, 2026 Paid to IRCTC Web UPI ₹851.80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Bharti Airtel Limited",
+      "amount": "649",
+      "category": "Transfer",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to Bharti Airtel Limited ₹649",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Senthilkumar Pethiyan",
+      "amount": "40",
+      "category": "Transfer",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to Senthilkumar Pethiyan ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Sagupar Sathick M",
+      "amount": "40",
+      "category": "Other",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to Sagupar Sathick M ₹40",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AMARAAVATHI SWEETS AND BAKERS",
+      "amount": "319",
+      "category": "Shopping",
+      "confidence": "18%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to AMARAAVATHI SWEETS AND BAKERS ₹319",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SRI SENTHUR MURUGAN AGENC",
+      "amount": "300",
+      "category": "Healthcare",
+      "confidence": "39%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to SRI SENTHUR MURUGAN AGENC ₹300",
+      "user_editable": true
+    },
+    {
+      "description": "Received from Google Pay rewards",
+      "amount": "5",
+      "category": "Transfer",
+      "confidence": "29%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Received from Google Pay rewards ₹5",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Myntra",
+      "amount": "734",
+      "category": "Shopping",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to Myntra ₹734",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to Edelweiss Tokio Life Insurance Company Limited",
+      "amount": "551",
+      "category": "Other",
+      "confidence": "27%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to Edelweiss Tokio Life Insurance Company Limited ₹551",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to TN CHN Guduvanchery HS KFC 6778",
+      "amount": "592",
+      "category": "Food & Dining",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to TN CHN Guduvanchery HS KFC 6778 ₹592",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to TN CHN Guduvanchery HS KFC 6778",
+      "amount": "104",
+      "category": "Food & Dining",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to TN CHN Guduvanchery HS KFC 6778 ₹104",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to AMMAN VEGITABLES",
+      "amount": "412",
+      "category": "Entertainment",
+      "confidence": "22%",
+      "source": "zero-shot-AI",
+      "raw_line": "30 Mar, 2026 Paid to AMMAN VEGITABLES ₹412",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to MITHRAN SUPER STORES",
+      "amount": "80",
+      "category": "Shopping",
+      "confidence": "23%",
+      "source": "zero-shot-AI",
+      "raw_line": "31 Mar, 2026 Paid to MITHRAN SUPER STORES ₹80",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to SSV LAW ASSOCIATES",
+      "amount": "2,000",
+      "category": "Transfer",
+      "confidence": "21%",
+      "source": "zero-shot-AI",
+      "raw_line": "31 Mar, 2026 Paid to SSV LAW ASSOCIATES ₹2,000",
+      "user_editable": true
+    },
+    {
+      "description": "Paid to PEARLTRI FOODS PVT L",
+      "amount": "219",
+      "category": "Entertainment",
+      "confidence": "19%",
+      "source": "zero-shot-AI",
+      "raw_line": "31 Mar, 2026 Paid to PEARLTRI FOODS PVT L ₹219",
+      "user_editable": true
+    }
+  ],
+  "summary": {
+    "total_spent": 111660.76,
+    "by_category": {
+      "Transfer": 71945.91,
+      "Shopping": 10985.88,
+      "Entertainment": 7244.56,
+      "Transportation": 877.0,
+      "Healthcare": 7403.01,
+      "Other": 3776.6,
+      "Food & Dining": 8507.8,
+      "Bills & Utilities": 920.0
+    },
+    "transaction_count": 178
+  }
+}
