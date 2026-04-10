@@ -188,12 +188,13 @@ def extract_with_fitz(pdf_path: str) -> list:
             description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
             description = clean_description(description)
 
-            if description and len(description) > 3:
-                transactions.append({
-                    'description': description,
-                    'amount': amount_match.group(1),
-                    'raw_line': row_text
-                })
+           # Keep transactions if they have an amount and at least some description
+if amount_match and description:
+    transactions.append({
+        'description': description,
+        'amount': amount_match.group(1),
+        'raw_line': row_text
+    })
 
     doc.close()
     return transactions
