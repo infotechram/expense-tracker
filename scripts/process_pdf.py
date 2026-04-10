@@ -148,7 +148,24 @@ def is_summary_row(text: str) -> bool:
 
 def _is_header_row(text: str) -> bool:
     text_lower = text.lower()
-    return any(kw in text_lower for kw in SKIP_KEYWORDS) or is_summary_row(text)
+
+    # Skip obvious statement period headers
+    if "transaction statement period" in text_lower:
+        return True
+
+    # Skip summary rows like "Sent ₹..." or "Received ₹..."
+    if re.search(r'\b(sent|received)\b', text_lower):
+        # If no counterparty mentioned, treat as summary
+        if not re.search(r'\bto\b|\bfrom\b', text_lower):
+            return True
+
+    # Skip other header keywords only if no amount present
+    if any(kw in text_lower for kw in SKIP_KEYWORDS):
+        if not re.search(r'₹\s*[\d,]+(?:\.\d{2})?', text):
+            return True
+
+    return False
+
 
 
 def extract_with_fitz(pdf_path: str) -> list:
@@ -426,99 +443,50 @@ def simple_categorize_one(description: str) -> dict:
 
 
 def categorize(transactions: list) -> list:
-    """
-    Full categorization pipeline:
-    1. Check contact map (learned from past runs / user input)
-    2. Detect personal transfer → ask user if unknown contact
-    3. Zero-shot AI (Hugging Face) if available
-    4. Keyword / fuzzy fallback
-    """
     contact_map = load_contact_map()
     categorized = []
 
-    # Load HF classifier once if available
-    # ✅ Using cross-encoder/nli-MiniLM2-L6-H768 — 6x faster than bart-large,
-    #    similar accuracy, no numpy conflict
     hf_classifier = None
     if HF_AVAILABLE:
         try:
-            print("📥 Loading Hugging Face model from cache...")
             hf_classifier = pipeline(
                 "zero-shot-classification",
                 model="cross-encoder/nli-MiniLM2-L6-H768",
                 device=-1
             )
-            print("✅ Model loaded!")
-            show_cache_info()
         except Exception as e:
-            print(f"⚠️  HF model load failed: {e}. Using fallback.")
+            print(f"⚠️ HF model load failed: {e}. Using fallback.")
 
-    # ── Step 1 & 2: Contact map + personal transfer prompts (interactive) ────
-    # Collect which transactions still need AI after manual resolution
-    pre_results = {}   # index → result dict
-    ai_needed_indices = []
+    # Batch AI classification if available
+    if hf_classifier:
+        batch_descs = [t['description'] for t in transactions]
+        batch_output = hf_classifier(batch_descs, CATEGORIES, multi_label=False)
+
+        if isinstance(batch_output, dict):
+            batch_output = [batch_output]
 
     for i, trans in enumerate(transactions):
         desc = trans['description']
         contact = extract_contact_name(desc)
 
-        # Contact map hit
+        # Contact map override
         if contact and contact in contact_map:
-            pre_results[i] = {
+            result = {
                 'category': contact_map[contact],
                 'confidence': '100% (learned)',
                 'source': 'contact-map'
             }
-
-        # Unknown personal transfer → ask user NOW (before slow AI batch)
-        elif contact and is_personal_transfer(desc):
-            print(f"\n❓ Personal payment: \"{desc}\"")
-            print(f"   Contact : {contact}")
-            print("   Category:")
-            for idx, cat in enumerate(CATEGORIES, 1):
-                print(f"   {idx}. {cat}")
-            try:
-                choice = int(input("   Enter number (0 = let AI decide): ").strip())
-                if 1 <= choice <= len(CATEGORIES):
-                    chosen = CATEGORIES[choice - 1]
-                    contact_map[contact] = chosen
-                    save_contact_map(contact_map)
-                    print(f"   ✅ Saved '{contact}' → '{chosen}'")
-                    pre_results[i] = {
-                        'category': chosen,
-                        'confidence': '100% (user-input)',
-                        'source': 'user-input'
-                    }
-                else:
-                    ai_needed_indices.append(i)   # user chose 0 → let AI handle
-            except (ValueError, EOFError):
-                ai_needed_indices.append(i)
-
+        elif hf_classifier:
+            res = batch_output[i]
+            result = {
+                'category': res['labels'][0],
+                'confidence': f"{res['scores'][0]:.0%}",
+                'source': 'zero-shot-AI'
+            }
         else:
-            ai_needed_indices.append(i)
+            # Fallback only if AI unavailable
+            result = simple_categorize_one(desc)
 
-    # ── Step 3: Batch AI for all remaining transactions at once ───────────────
-    # ✅ Single batch call instead of N individual calls = much faster
-    ai_results = {}
-    if ai_needed_indices and hf_classifier:
-        batch_descs = [transactions[i]['description'] for i in ai_needed_indices]
-        print(f"\n🤖 Running AI on {len(batch_descs)} transactions in one batch...")
-        try:
-            batch_output = categorize_hf_batch(hf_classifier, batch_descs)
-            for idx, result in zip(ai_needed_indices, batch_output):
-                ai_results[idx] = result
-            print("   ✅ AI batch done!")
-        except Exception as e:
-            print(f"⚠️  AI batch failed: {e}. Using keyword fallback for all.")
-
-    # ── Step 4: Keyword/fuzzy fallback for anything still unresolved ──────────
-    for i in ai_needed_indices:
-        if i not in ai_results:
-            ai_results[i] = simple_categorize_one(transactions[i]['description'])
-
-    # ── Assemble final results ────────────────────────────────────────────────
-    for i, trans in enumerate(transactions):
-        result = pre_results.get(i) or ai_results.get(i) or simple_categorize_one(trans['description'])
         categorized.append({
             'description': trans['description'],
             'amount': trans['amount'],
@@ -530,6 +498,7 @@ def categorize(transactions: list) -> list:
         })
 
     return categorized
+
 
 
 # ─── Main ──────────────────────────────────────────────────────────────────────
