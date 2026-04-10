@@ -145,17 +145,20 @@ def is_summary_row(text: str) -> bool:
         and not re.search(r'\bto\b|\bfrom\b', text, re.IGNORECASE)
         and len(text.split()) <= 3
     )
-
 def _is_header_row(text: str) -> bool:
     text_lower = text.lower()
 
-    # Skip obvious statement period headers
+    # Skip statement period headers
     if "transaction statement period" in text_lower:
         return True
 
-    # Skip summary rows like "Sent ₹..." or "Received ₹..."
+    # Skip month-only summaries with amounts
+    if re.search(r'\b(january|february|march|april|may|june|july|august|september|october|november|december)\b', text_lower):
+        if not re.search(r'\bto\b|\bfrom\b', text_lower):
+            return True
+
+    # Skip "Sent" / "Received" summaries without counterparty
     if re.search(r'\b(sent|received)\b', text_lower):
-        # If no counterparty mentioned, treat as summary
         if not re.search(r'\bto\b|\bfrom\b', text_lower):
             return True
 
@@ -165,6 +168,7 @@ def _is_header_row(text: str) -> bool:
             return True
 
     return False
+
 
 
 
