@@ -184,7 +184,17 @@ def _is_header_row(text: str) -> bool:
 
     return False
 
-
+def is_received_transaction(raw_line: str) -> bool:
+    """
+    Returns True if the transaction is money received (not spent).
+    GPay received transactions contain 'received from' or description starts with 'From'.
+    """
+    text = raw_line.lower()
+    return bool(
+        re.search(r'\breceived\s+from\b', text) or
+        re.search(r'^from\s+[a-z]', text) or
+        re.search(r'\bcredited\b', text)
+    )
 
 
 def extract_with_fitz(pdf_path: str) -> list:
@@ -226,6 +236,8 @@ def extract_with_fitz(pdf_path: str) -> list:
 
            # Keep transactions if they have an amount and at least some description
             if amount_match and description:
+                 if is_received_transaction(row_text):   # ← add this
+                    continue    
                 transactions.append({
                     'description': description,
                     'amount': amount_match.group(1),
@@ -266,6 +278,8 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                         description = clean_description(description)
 
                         if description and len(description) > 3:
+                            if is_received_transaction(row_text):   # ← add this
+                                    continue                            
                             transactions.append({
                                 'description': description,
                                 'amount': amount_match.group(1),
@@ -294,6 +308,8 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                     description = clean_description(description)
 
                     if description and len(description) > 3:
+                        if is_received_transaction(line):   # ← add this
+                            continue
                         transactions.append({
                             'description': description,
                             'amount': amount_match.group(1),
