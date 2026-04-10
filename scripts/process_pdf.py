@@ -309,12 +309,26 @@ def simple_categorize(transactions):
         if category == 'Other' and RAPIDF_AVAILABLE:
             # prepare choices and labels
             choices = [k for k, c in flat]
-            match, score, idx = rf_process.extractOne(desc_lower, choices, scorer=rf_fuzz.token_sort_ratio, score_cutoff=60)
-            if match:
-                # find category for matched keyword
-                matched_kw, matched_cat = flat[idx]
-                category = matched_cat
-                confidence = f'Fuzzy {int(score)}%'
+            try:
+                res = rf_process.extractOne(desc_lower, choices, scorer=rf_fuzz.token_sort_ratio, score_cutoff=60)
+            except Exception:
+                res = None
+
+            if res:
+                # res can be (match, score, idx) or (match, score)
+                if len(res) == 3:
+                    match, score, idx = res
+                else:
+                    match, score = res
+                    try:
+                        idx = choices.index(match)
+                    except ValueError:
+                        idx = None
+
+                if idx is not None and 0 <= idx < len(flat):
+                    _, matched_cat = flat[idx]
+                    category = matched_cat
+                    confidence = f'Fuzzy {int(score)}%'
 
         categorized.append({
             'description': trans['description'],
