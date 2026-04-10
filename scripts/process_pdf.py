@@ -558,13 +558,15 @@ def main(pdf_path: str):
 
     # ── Summary ───────────────────────────────────────────────────────────
     summary: dict[str, float] = {}
+    by_day: dict[str, float] = {}          # ← this line is missing in your code
+    DAY_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
     total = 0.0
     for t in categorized:
         amount = float(t['amount'].replace(',', ''))
         cat = t['category']
         day = t.get('day_of_week') or 'Unknown'   # ← add
         summary[cat] = summary.get(cat, 0.0) + amount
-        by_day[day]  = by_day.get(day, 0.0) + amount   # ← add
+        by_day[day]  = by_day.get(day, 0.0) + amount   # ← was failing because by_day didn't exist yet
         total += amount
 
     # Sort by_day in Mon→Sun order
