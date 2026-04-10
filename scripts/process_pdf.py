@@ -51,19 +51,32 @@ def clean_description(text):
     if not text:
         return ""
     
-    # Remove special characters and extra spaces
-    text = re.sub(r'[\d]{2}[AP]M', '', text)  # Remove times
-    text = re.sub(r'UPI\s*Transaction\s*ID[:\s]*[\w\d]+', '', text)  # Remove UPI IDs
-    text = re.sub(r'Transaction\s*ID[:\s]*[\w\d]+', '', text)  # Remove Transaction IDs
+    # Remove "Paitdo" prefix (transaction type)
+    text = re.sub(r'^Paitdo\s*', '', text, flags=re.IGNORECASE)
     
-    # Add spaces before capital letters in the middle of words (CamelCase)
+    # Remove times (with various formats)
+    text = re.sub(r'[\d]{1,2}:\d{2}\s*[AP]M', '', text)
+    text = re.sub(r'[\d]{2}[AP]M', '', text)
+    
+    # Remove UPI/Transaction IDs
+    text = re.sub(r'UPI\s*Transaction\s*ID[:\s]*[\w\d]+', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Transaction\s*ID[:\s]*[\w\d]+', '', text, flags=re.IGNORECASE)
+    
+    # Remove dates (handles formats like "03Mar2026" and "03Mar,2026")
+    text = re.sub(r'^\d{1,2}\s*[A-Za-z]{3}\s*,?\s*\d{4}', '', text).strip()
+    text = re.sub(r'\d{1,2}[A-Za-z]{3},?\d{4}', '', text).strip()
+    
+    # Add spaces before capital letters in mixed case (CamelCase)
     text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
     
-    # Remove leading/trailing numbers and dates
-    text = re.sub(r'^\d{2}[A-Za-z]{3}\d{4}', '', text).strip()
+    # Split all-caps sequences (VELIDAINSDHRRAESTAURANT → VELIDA INSDHRRA ESTAURANT)
+    text = re.sub(r'([A-Z]{3,})([A-Z][a-z])', r'\1 \2', text)
     
     # Clean up multiple spaces
     text = re.sub(r'\s+', ' ', text).strip()
+    
+    # Remove trailing numbers (like IDs)
+    text = re.sub(r'\s+\d+$', '', text).strip()
     
     return text
 
@@ -184,14 +197,38 @@ def categorize(transactions):
 def simple_categorize(transactions):
     """Simple fallback with keyword matching"""
     keywords = {
-        "Food & Dining": ["restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner", "hotel", "tavern", "bistro", "diner", "bar", "bakery", "bakehouse"],
-        "Groceries": ["supermarket", "grocery", "market", "super", "mart", "store", "shop", "walmart", "costco"],
-        "Transportation": ["uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol", "fuel", "parking", "metro", "ola"],
-        "Shopping": ["amazon", "store", "shop", "buy", "purchase", "mall", "flipkart", "retail", "clothing", "apparel"],
-        "Bills & Utilities": ["bill", "electric", "water", "gas", "internet", "phone", "mobile", "utility", "telephone"],
-        "Healthcare": ["doctor", "hospital", "medicine", "pharmacy", "health", "clinic", "medical"],
-        "Entertainment": ["movie", "cinema", "spotify", "netflix", "game", "ticket", "theatre"],
-        "Transfer": ["received", "transfer", "sent", "paid"],
+        "Food & Dining": [
+            "restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner", "hotel", "tavern", 
+            "bistro", "diner", "bar", "bakery", "bakehouse", "estaurant", "velida", "thalap", 
+            "myjio", "esserliv", "saarth", "sweet", "biryani", "dhaba", "eatery", "snack"
+        ],
+        "Groceries": [
+            "supermarket", "grocery", "market", "super", "mart", "store", "shop", "wallmark", 
+            "costco", "fresh", "organic", "daily", "provisions"
+        ],
+        "Transportation": [
+            "uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol", "fuel", "parking", 
+            "metro", "ola", "cab", "commute", "transit"
+        ],
+        "Shopping": [
+            "amazon", "mall", "flipkart", "retail", "clothing", "apparel", "store", "shop", 
+            "purchase", "buy", "mart", "bazaar", "emporium"
+        ],
+        "Bills & Utilities": [
+            "bill", "electric", "water", "gas", "internet", "phone", "mobile", "utility", 
+            "telephone", "airtel", "jio", "vi", "vodafone", "bsnl", "broadband", "dth"
+        ],
+        "Healthcare": [
+            "doctor", "hospital", "medicine", "pharmacy", "health", "clinic", "medical", 
+            "doctor", "medic", "pharmacy", "care", "wellness"
+        ],
+        "Entertainment": [
+            "movie", "cinema", "spotify", "netflix", "game", "ticket", "theatre", "theater", 
+            "show", "concert", "music", "streaming"
+        ],
+        "Transfer": [
+            "received", "transfer", "sent", "paid", "deposit", "withdraw"
+        ],
     }
     
     categorized = []
