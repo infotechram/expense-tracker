@@ -13,6 +13,12 @@ except:
     FITZ_AVAILABLE = False
 
 try:
+    from rapidfuzz import process as rf_process, fuzz as rf_fuzz
+    RAPIDF_AVAILABLE = True
+except:
+    RAPIDF_AVAILABLE = False
+
+try:
     import transformers
     print(f"\n{'='*60}")
     print(f"🔍 Hugging Face Cache Location:")
@@ -68,21 +74,34 @@ def clean_description(text):
     text = re.sub(r'UPI\s*Transaction\s*ID[:\s]*[\w\d]+', '', text, flags=re.IGNORECASE)
     text = re.sub(r'Transaction\s*ID[:\s]*[\w\d]+', '', text, flags=re.IGNORECASE)
     
-    # Remove dates (handles formats like "03Mar2026" and "03Mar,2026")
+    # Remove dates - be aggressive with multiple formats
+    # Matches: 03Mar,2026 | 03Mar 2026 | 03Mar2026 | 03 Mar 2026
     text = re.sub(r'^\d{1,2}\s*[A-Za-z]{3}\s*,?\s*\d{4}', '', text).strip()
-    text = re.sub(r'\d{1,2}[A-Za-z]{3},?\d{4}', '', text).strip()
+    text = re.sub(r'^(\d{1,2})[,\s]*([A-Za-z]{3})[,\s]*(\d{4})', '', text).strip()
+    text = re.sub(r'^\d{8,}', '', text).strip()  # Remove timestamps
     
-    # Add spaces before capital letters in mixed case (CamelCase)
+    # Remove leading numbers/dates more aggressively
+    text = re.sub(r'^[\d\s,]+', '', text).strip()
+    
+    # Add spaces before capital letters followed by lowercase (CamelCase)
     text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
     
-    # Split all-caps sequences (VELIDAINSDHRRAESTAURANT → VELIDA INSDHRRA ESTAURANT)
-    text = re.sub(r'([A-Z]{3,})([A-Z][a-z])', r'\1 \2', text)
+    # Insert spaces in capital sequences more intelligently
+    # Use simple approach: insert space before each capital that follows lowercase
+    text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
+    
+    # For all-caps words, try to split them at common boundaries
+    # Pattern: Capital letter sequence followed by another capital and lowercase
+    text = re.sub(r'([A-Z]{2,})([A-Z][a-z])', r'\1 \2', text)
     
     # Clean up multiple spaces
     text = re.sub(r'\s+', ' ', text).strip()
     
     # Remove trailing numbers (like IDs)
     text = re.sub(r'\s+\d+$', '', text).strip()
+    
+    # Remove merchant codes (patterns like numbers after merchant names)
+    text = re.sub(r'\s\d{10,}$', '', text).strip()
     
     return text
 
@@ -249,60 +268,62 @@ def categorize(transactions):
 
 def simple_categorize(transactions):
     """Simple fallback with keyword matching"""
+    # Flatten keywords into a mapping for fuzzy matching
     keywords = {
         "Food & Dining": [
-            "restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner", "hotel", "tavern", 
-            "bistro", "diner", "bar", "bakery", "bakehouse", "estaurant", "velida", "thalap", 
-            "myjio", "esserliv", "saarth", "sweet", "biryani", "dhaba", "eatery", "snack"
+            "restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner", "hotel", "tavern",
+            "bistro", "diner", "bar", "bakery", "bakehouse", "estaurant", "velida", "thalap",
+            "vaetnhkiat", "rsahji", "prak", "sweet", "biryani", "dhaba", "eatery", "snack",
+            "aristop", "restaurant"
         ],
-        "Groceries": [
-            "supermarket", "grocery", "market", "super", "mart", "store", "shop", "wallmark", 
-            "costco", "fresh", "organic", "daily", "provisions"
-        ],
-        "Transportation": [
-            "uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol", "fuel", "parking", 
-            "metro", "ola", "cab", "commute", "transit"
-        ],
-        "Shopping": [
-            "amazon", "mall", "flipkart", "retail", "clothing", "apparel", "store", "shop", 
-            "purchase", "buy", "mart", "bazaar", "emporium"
-        ],
-        "Bills & Utilities": [
-            "bill", "electric", "water", "gas", "internet", "phone", "mobile", "utility", 
-            "telephone", "airtel", "jio", "vi", "vodafone", "bsnl", "broadband", "dth"
-        ],
-        "Healthcare": [
-            "doctor", "hospital", "medicine", "pharmacy", "health", "clinic", "medical", 
-            "doctor", "medic", "pharmacy", "care", "wellness"
-        ],
-        "Entertainment": [
-            "movie", "cinema", "spotify", "netflix", "game", "ticket", "theatre", "theater", 
-            "show", "concert", "music", "streaming"
-        ],
-        "Transfer": [
-            "received", "transfer", "sent", "paid", "deposit", "withdraw"
-        ],
+        "Groceries": ["supermarket", "grocery", "market", "super", "mart", "store", "shop", "wallmark", "costco", "fresh", "organic"],
+        "Transportation": ["uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol", "fuel", "parking", "metro", "ola", "cab"],
+        "Shopping": ["amazon", "mall", "flipkart", "retail", "clothing", "apparel", "purchase", "buy", "mart", "bazaar", "associates"],
+        "Bills & Utilities": ["bill", "electric", "water", "gas", "internet", "phone", "mobile", "airtel", "jio", "vodafone", "bsnl", "broadband", "dth"],
+        "Healthcare": ["doctor", "hospital", "medicine", "pharmacy", "health", "clinic", "medical"],
+        "Entertainment": ["movie", "cinema", "spotify", "netflix", "game", "ticket", "theatre", "show"],
+        "Transfer": ["received", "transfer", "sent", "paid", "deposit", "withdraw"],
     }
-    
+
+    # Build a flat keyword -> category map for fuzzy lookup
+    flat = []
+    for cat, kw_list in keywords.items():
+        for kw in kw_list:
+            flat.append((kw, cat))
+
     categorized = []
     for trans in transactions:
-        desc_lower = trans['description'].lower()
-        category = "Other"
-        
-        # Match against keywords (prioritize specific matches)
-        for cat, keywords_list in keywords.items():
-            if any(keyword in desc_lower for keyword in keywords_list):
+        desc = trans['description'] or ''
+        desc_lower = desc.lower()
+        category = 'Other'
+        confidence = 'Manual (Keyword)'
+
+        # First try exact substring match
+        for cat, kw_list in keywords.items():
+            if any(kw in desc_lower for kw in kw_list):
                 category = cat
+                confidence = 'Manual (Substring)'
                 break
-        
+
+        # If still Other and rapidfuzz available, do fuzzy matching
+        if category == 'Other' and RAPIDF_AVAILABLE:
+            # prepare choices and labels
+            choices = [k for k, c in flat]
+            match, score, idx = rf_process.extractOne(desc_lower, choices, scorer=rf_fuzz.token_sort_ratio, score_cutoff=60)
+            if match:
+                # find category for matched keyword
+                matched_kw, matched_cat = flat[idx]
+                category = matched_cat
+                confidence = f'Fuzzy {int(score)}%'
+
         categorized.append({
             'description': trans['description'],
             'amount': trans['amount'],
             'category': category,
-            'confidence': 'Manual (Keyword)',
+            'confidence': confidence,
             'user_editable': True
         })
-    
+
     return categorized
 
 def main(pdf_path):
