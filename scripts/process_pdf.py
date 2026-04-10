@@ -46,6 +46,27 @@ def show_cache_info():
             if os.path.isdir(item_path):
                 print(f"   ✅ {item}")
 
+def clean_description(text):
+    """Clean extracted text by adding spaces between concatenated words"""
+    if not text:
+        return ""
+    
+    # Remove special characters and extra spaces
+    text = re.sub(r'[\d]{2}[AP]M', '', text)  # Remove times
+    text = re.sub(r'UPI\s*Transaction\s*ID[:\s]*[\w\d]+', '', text)  # Remove UPI IDs
+    text = re.sub(r'Transaction\s*ID[:\s]*[\w\d]+', '', text)  # Remove Transaction IDs
+    
+    # Add spaces before capital letters in the middle of words (CamelCase)
+    text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
+    
+    # Remove leading/trailing numbers and dates
+    text = re.sub(r'^\d{2}[A-Za-z]{3}\d{4}', '', text).strip()
+    
+    # Clean up multiple spaces
+    text = re.sub(r'\s+', ' ', text).strip()
+    
+    return text
+
 def extract_pdf(pdf_path):
     """Extract transactions from PDF using table detection"""
     transactions = []
@@ -75,9 +96,9 @@ def extract_pdf(pdf_path):
                             if amount and amount.group(1):
                                 # Remove amount from description to clean it up
                                 description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_str).strip()
-                                # Remove UPI/Transaction IDs
-                                description = re.sub(r'(UPI\s*Transaction\s*ID|Transaction\s*ID)[:\s]*[\w\d]+', '', description).strip()
-                                description = re.sub(r'[\d]+\s*[AP]M', '', description).strip()  # Remove times
+                                
+                                # Clean the description
+                                description = clean_description(description)
                                 
                                 if description and len(description) > 3:
                                     transactions.append({
@@ -103,7 +124,9 @@ def extract_pdf(pdf_path):
                         amount = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
                         if amount and amount.group(1):
                             description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
-                            description = re.sub(r'(UPI\s*Transaction\s*ID|Transaction\s*ID)[:\s]*[\w\d]+', '', description).strip()
+                            
+                            # Clean the description
+                            description = clean_description(description)
                             
                             if description and len(description) > 3:
                                 transactions.append({
@@ -161,13 +184,14 @@ def categorize(transactions):
 def simple_categorize(transactions):
     """Simple fallback with keyword matching"""
     keywords = {
-        "Food & Dining": ["restaurant", "food", "cafe", "pizza", "lunch", "dinner", "coffee"],
-        "Transportation": ["uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol"],
-        "Shopping": ["amazon", "store", "shop", "buy", "purchase", "mall", "flipkart"],
-        "Bills & Utilities": ["bill", "electric", "water", "gas", "internet", "phone", "mobile"],
-        "Healthcare": ["doctor", "hospital", "medicine", "pharmacy", "health", "clinic"],
-        "Entertainment": ["movie", "cinema", "spotify", "netflix", "game", "ticket"],
-        "Transfer": ["received", "transfer", "sent"],
+        "Food & Dining": ["restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner", "hotel", "tavern", "bistro", "diner", "bar", "bakery", "bakehouse"],
+        "Groceries": ["supermarket", "grocery", "market", "super", "mart", "store", "shop", "walmart", "costco"],
+        "Transportation": ["uber", "taxi", "auto", "travel", "bus", "train", "gas", "petrol", "fuel", "parking", "metro", "ola"],
+        "Shopping": ["amazon", "store", "shop", "buy", "purchase", "mall", "flipkart", "retail", "clothing", "apparel"],
+        "Bills & Utilities": ["bill", "electric", "water", "gas", "internet", "phone", "mobile", "utility", "telephone"],
+        "Healthcare": ["doctor", "hospital", "medicine", "pharmacy", "health", "clinic", "medical"],
+        "Entertainment": ["movie", "cinema", "spotify", "netflix", "game", "ticket", "theatre"],
+        "Transfer": ["received", "transfer", "sent", "paid"],
     }
     
     categorized = []
@@ -175,7 +199,7 @@ def simple_categorize(transactions):
         desc_lower = trans['description'].lower()
         category = "Other"
         
-        # Match against keywords
+        # Match against keywords (prioritize specific matches)
         for cat, keywords_list in keywords.items():
             if any(keyword in desc_lower for keyword in keywords_list):
                 category = cat
