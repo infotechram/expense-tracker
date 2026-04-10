@@ -30,7 +30,13 @@
                 <div>Transactions: <span id="totalTrans">0</span></div>
                 <div>Categories: <span id="totalCats">0</span></div>
             </div>
-
+            <div>
+                <label for="groupBy">View by</label>
+                <select id="groupBy" onchange="renderChart()">
+                    <option value="category">Category</option>
+                    <option value="day_of_week">Day of Week</option>
+                </select>
+            </div>
             <canvas id="chart"></canvas>
 
             <table id="table" border="1">

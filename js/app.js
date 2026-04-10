@@ -86,8 +86,12 @@ function showResults() {
     document.getElementById('totalSpent').textContent = summary.total_spent.toFixed(2);
     document.getElementById('totalTrans').textContent = summary.transaction_count;
     document.getElementById('totalCats').textContent = Object.keys(summary.by_category).length;
-    
-    drawChart(summary.by_category);
+    const groupBy = document.getElementById('groupBy').value;
+    if (groupBy === 'day_of_week') {
+        drawChart(summary.by_day_of_week);
+    } else {
+        drawChart(summary.by_category);
+    }
     fillTable(results.transactions);
 }
 

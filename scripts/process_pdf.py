@@ -562,8 +562,18 @@ def main(pdf_path: str):
     for t in categorized:
         amount = float(t['amount'].replace(',', ''))
         cat = t['category']
+        day = t.get('day_of_week') or 'Unknown'   # ← add
         summary[cat] = summary.get(cat, 0.0) + amount
+        by_day[day]  = by_day.get(day, 0.0) + amount   # ← add
         total += amount
+
+    # Sort by_day in Mon→Sun order
+    by_day_sorted = {
+    d: round(by_day[d], 2)
+    for d in DAY_ORDER if d in by_day
+    }
+    if 'Unknown' in by_day:
+        by_day_sorted['Unknown'] = round(by_day['Unknown'], 2)
 
     # ── Save results ──────────────────────────────────────────────────────
     results = {
@@ -578,6 +588,7 @@ def main(pdf_path: str):
         "summary": {
             "total_spent": round(total, 2),
             "by_category": {k: round(v, 2) for k, v in summary.items()},
+            "by_day_of_week": by_day_sorted, 
             "transaction_count": len(categorized)
         }
     }
