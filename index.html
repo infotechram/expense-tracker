@@ -9,8 +9,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>💰 Expense Categorizer</h1>
-        
+        <h1>&#128176; Expense Categorizer</h1>
+
         <div id="uploadSection">
             <input type="file" id="fileInput" accept=".pdf" />
             <input type="password" id="tokenInput" placeholder="GitHub Token" />
@@ -24,27 +24,29 @@
 
         <div id="resultsSection" style="display:none;">
             <h2>Results</h2>
-            
+
             <div class="stats">
-                <div>Total: ₹<span id="totalSpent">0</span></div>
+                <div>Total: &#8377;<span id="totalSpent">0</span></div>
                 <div>Transactions: <span id="totalTrans">0</span></div>
                 <div>Categories: <span id="totalCats">0</span></div>
             </div>
-            <div>
+
+            <div style="margin: 12px 0;">
                 <label for="groupBy">View by</label>
                 <select id="groupBy" onchange="refreshChart()">
                     <option value="category">Category</option>
                     <option value="day_of_week">Day of Week</option>
                 </select>
             </div>
+
             <canvas id="chart"></canvas>
 
-            <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
-                <span id="dayBreakdown" style="display:none; font-size:14px; color: var(--color-text-secondary);"></span>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:12px;">
+                <span id="dayBreakdown" style="display:none; font-size:14px; color:gray;"></span>
                 <button id="viewAllBtn" onclick="viewAll()" style="display:none;">View All</button>
             </div>
 
-            <table id="table" border="1">
+            <table id="table" border="1" style="width:100%; margin-top:12px;">
                 <tr>
                     <th>#</th>
                     <th>Description</th>
@@ -55,8 +57,10 @@
                 </tr>
             </table>
 
-            <button onclick="save()">Save Changes</button>
-            <button onclick="download()">Download JSON</button>
+            <div style="margin-top:12px;">
+                <button onclick="save()">Save Changes</button>
+                <button onclick="download()">Download JSON</button>
+            </div>
         </div>
     </div>
 

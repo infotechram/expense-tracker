@@ -14,7 +14,7 @@ function generateUUID() {
     });
 }
 
-// ─── Upload ────────────────────────────────────────────────────────────────────
+// ─── Upload ───────────────────────────────────────────────────────────────────
 
 async function upload() {
     const file = document.getElementById('fileInput').files[0];
@@ -60,26 +60,24 @@ async function upload() {
 
     reader.readAsDataURL(file);
 }
-// ─── Polling ───────────────────────────────────────────────────────────────────
+// ─── Polling ──────────────────────────────────────────────────────────────────
 
 async function pollResults() {
     const expectedFileName = `${uploadedFileName}_expenses.json`;
 
     for (let i = 0; i < 120; i++) {
         const res = await fetch(`${RAW_URL}/results/${expectedFileName}?t=${Date.now()}`);
-
         if (res.ok) {
             results = await res.json();
             showResults();
             return;
         }
-
         await new Promise(r => setTimeout(r, 3000));
     }
     alert('Timeout: Could not find processed file or processing took too long');
 }
 
-// ─── Results ───────────────────────────────────────────────────────────────────
+// ─── Results ──────────────────────────────────────────────────────────────────
 
 function showResults() {
     document.getElementById('processingSection').style.display = 'none';
@@ -90,38 +88,36 @@ function showResults() {
     document.getElementById('totalTrans').textContent = summary.transaction_count;
     document.getElementById('totalCats').textContent = Object.keys(summary.by_category).length;
 
-    // Default chart — category view
     drawChart(summary.by_category);
-
-    // Show all transactions on initial load
     fillTable(results.transactions);
 }
 
-// ─── Chart ─────────────────────────────────────────────────────────────────────
+// ─── Chart ────────────────────────────────────────────────────────────────────
 
 function refreshChart() {
     const groupBy = document.getElementById('groupBy').value;
 
-    // Reset day filter state when switching views
     document.getElementById('dayBreakdown').style.display = 'none';
     document.getElementById('viewAllBtn').style.display = 'none';
+    fillTable(results.transactions);
 
     if (groupBy === 'day_of_week') {
         drawChart(results.summary.by_day_of_week);
-        // Show all transactions by default when switching to day view
-        fillTable(results.transactions);
     } else {
         drawChart(results.summary.by_category);
-        // Restore all transactions when switching back to category view
-        fillTable(results.transactions);
     }
 }
 
 function drawChart(data) {
-    const ctx = document.getElementById('chart').getContext('2d');
+    const canvas = document.getElementById('chart');
+    const ctx = canvas.getContext('2d');
 
     if (chartInstance) {
         chartInstance.destroy();
+    }
+
+    if (canvas._clickHandler) {
+        canvas.removeEventListener('click', canvas._clickHandler);
     }
 
     chartInstance = new Chart(ctx, {
@@ -137,55 +133,57 @@ function drawChart(data) {
             }]
         },
         options: {
-            onClick: (event, elements) => {
-                if (elements.length === 0) return;
-
-                const groupBy = document.getElementById('groupBy').value;
-                const index = elements[0].index;
-                const label = Object.keys(data)[index];
-
-                if (groupBy === 'day_of_week') {
-                    showDayTransactions(label);
-                } else {
-                    showCategoryTransactions(label);
-                }
-            },
             plugins: {
                 tooltip: {
                     callbacks: {
                         label: (context) => {
                             const label = context.label || '';
                             const value = context.parsed || 0;
-                            return ` ${label}: ₹${value.toFixed(2)}`;
+                            return ` ${label}: \u20B9${value.toFixed(2)}`;
                         }
                     }
                 }
             }
         }
     });
+
+    canvas._clickHandler = function(event) {
+        const elements = chartInstance.getElementsAtEventForMode(
+            event, 'nearest', { intersect: true }, false
+        );
+        if (elements.length === 0) return;
+
+        const index = elements[0].index;
+        const label = Object.keys(data)[index];
+        const groupBy = document.getElementById('groupBy').value;
+
+        if (groupBy === 'day_of_week') {
+            showDayTransactions(label);
+        } else {
+            showCategoryTransactions(label);
+        }
+    };
+
+    canvas.addEventListener('click', canvas._clickHandler);
 }
 
-// ─── Day filter ────────────────────────────────────────────────────────────────
+// ─── Filters ──────────────────────────────────────────────────────────────────
 
 function showDayTransactions(day) {
     const filtered = results.transactions.filter(t => t.day_of_week === day);
-
-    const breakdown = document.getElementById('dayBreakdown');
-    breakdown.textContent = `Showing ${filtered.length} transactions for ${day}`;
-    breakdown.style.display = 'inline';
+    document.getElementById('dayBreakdown').textContent =
+        `Showing ${filtered.length} transactions for ${day}`;
+    document.getElementById('dayBreakdown').style.display = 'inline';
     document.getElementById('viewAllBtn').style.display = 'inline-block';
-
     fillTable(filtered);
 }
 
 function showCategoryTransactions(category) {
     const filtered = results.transactions.filter(t => t.category === category);
-
-    const breakdown = document.getElementById('dayBreakdown');
-    breakdown.textContent = `Showing ${filtered.length} transactions for ${category}`;
-    breakdown.style.display = 'inline';
+    document.getElementById('dayBreakdown').textContent =
+        `Showing ${filtered.length} transactions for ${category}`;
+    document.getElementById('dayBreakdown').style.display = 'inline';
     document.getElementById('viewAllBtn').style.display = 'inline-block';
-
     fillTable(filtered);
 }
 
@@ -195,7 +193,7 @@ function viewAll() {
     fillTable(results.transactions);
 }
 
-// ─── Table ─────────────────────────────────────────────────────────────────────
+// ─── Table ────────────────────────────────────────────────────────────────────
 
 function esc(str) {
     return String(str || '')
@@ -217,10 +215,10 @@ function fillTable(transactions) {
         row.innerHTML = `
             <td>${i + 1}</td>
             <td>${esc(t.description)}</td>
-            <td>₹${esc(t.amount)}</td>
+            <td>&#8377;${esc(t.amount)}</td>
             <td>
                 <input type="text" value="${esc(t.category)}"
-                    onchange="edits[${i}]=this.value" style="width:100px;">
+                    onchange="edits[${i}]=this.value" style="width:120px;">
             </td>
             <td>${esc(t.date) || '-'}</td>
             <td>${esc(t.day_of_week) || '-'}</td>
@@ -228,7 +226,7 @@ function fillTable(transactions) {
     });
 }
 
-// ─── Save & Download ───────────────────────────────────────────────────────────
+// ─── Save & Download ──────────────────────────────────────────────────────────
 
 function save() {
     Object.keys(edits).forEach(i => {
@@ -238,7 +236,7 @@ function save() {
     const summary = {};
     let total = 0;
     results.transactions.forEach(t => {
-        const amt = parseFloat(t.amount.replace(',', ''));
+        const amt = parseFloat(String(t.amount).replace(',', ''));
         summary[t.category] = (summary[t.category] || 0) + amt;
         total += amt;
     });
