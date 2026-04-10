@@ -236,7 +236,7 @@ def extract_with_fitz(pdf_path: str) -> list:
 
            # Keep transactions if they have an amount and at least some description
             if amount_match and description:
-                 if is_received_transaction(row_text):   # ← add this
+                if is_received_transaction(row_text):   # ← add this
                     continue    
                 transactions.append({
                     'description': description,
