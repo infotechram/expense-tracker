@@ -1,0 +1,1303 @@
+{
+  "status": "success",
+  "timestamp": "2026-04-10T10:33:18.673933",
+  "pdf_file": "1775817113979.pdf",
+  "cache_location": "/home/runner/.cache/huggingface/hub/",
+  "transactions": [
+    {
+      "description": "01Marc2h02-631Marc2h026 \u20b91,14,766.76 \u20b9920",
+      "amount": "1,14,766.76",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "01Mar2,026 ReceifvreodKmumaraKvuemlar \u20b9115",
+      "amount": "115",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "01Mar2,026 PaitdoMITHRSAUNPESRTORES \u20b92,284",
+      "amount": "2,284",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "02Mar2,026 PaitdoPhasoTrezchnolPorgiiveLasitmeited \u20b920.70",
+      "amount": "20.70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "02Mar2,026 PaitdoJotJhoi \u20b91,000",
+      "amount": "1,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "02Mar2,026 PaitdoKumaraKvuemlar \u20b93,271",
+      "amount": "3,271",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "02Mar2,026 PaitdoSARIAMAQUARIUM \u20b9260",
+      "amount": "260",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "02Mar2,026 PaitdoRAJESHWVAARRIATHARAJ \u20b920",
+      "amount": "20",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoANTHONIKYOAVRIJLUNCTION \u20b980",
+      "amount": "80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoARISTOPTLLAETO \u20b9613",
+      "amount": "613",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoThalapVaetnhkiat \u20b9650",
+      "amount": "650",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoSSVLAWASSOCIATES \u20b96,000",
+      "amount": "6,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoVELIDAINSDHRRAESTAURANT \u20b9205",
+      "amount": "205",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoSmartQ \u20b945",
+      "amount": "45",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoSmartQ \u20b955",
+      "amount": "55",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoPrakaRsahji \u20b9150",
+      "amount": "150",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "03Mar2,026 PaitdoMYJIO \u20b91,178.82",
+      "amount": "1,178.82",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoTHAMARAISSERLIVDIHAR \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSenthilPkeutmhairyan \u20b9100",
+      "amount": "100",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSagupSaarthMick \u20b985",
+      "amount": "85",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSmartQ \u20b976",
+      "amount": "76",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoSUPESRARAVASNTAORETSEXCHROMPET \u20b9224",
+      "amount": "224",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "04Mar2,026 PaitdoAALADIPATTJIPNYaAgNar \u20b9180",
+      "amount": "180",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoPrakaRsahji \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoSagupSaarthMick \u20b9140",
+      "amount": "140",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoPIZZHAUT \u20b965",
+      "amount": "65",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "05Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoSPRAMMASAKTHI \u20b930",
+      "amount": "30",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoAmazoPnayonDelivery \u20b9913",
+      "amount": "913",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoDILLIKBAI \u20b9920",
+      "amount": "920",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoAMARAVATSHWYEESTTALL \u20b9378",
+      "amount": "378",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoSPRAMMASAKTHI \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoMANOJ \u20b9350",
+      "amount": "350",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "06Mar2,026 PaitdoRAJESHWVAARRIATHARAJ \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoMITHRSAUNPESRTORES \u20b9143",
+      "amount": "143",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoPasupa1t0hi \u20b9100",
+      "amount": "100",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoKotaFkASTag \u20b9600",
+      "amount": "600",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b91,000",
+      "amount": "1,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoBharAtiirLtiemlited \u20b9649",
+      "amount": "649",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "07Mar2,026 PaitdoHOTEJLAYALAKSHMI \u20b9720",
+      "amount": "720",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoMITHRSAUNPESRTORES \u20b9668",
+      "amount": "668",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoAdhinaraKyoanndaanl \u20b9150",
+      "amount": "150",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoSagupSaarthMick \u20b920",
+      "amount": "20",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 Paitdodr.gaykaitrhurbia \u20b9400",
+      "amount": "400",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoGANDHMIEDICALS \u20b9615",
+      "amount": "615",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoSRRIAMDEFVANCGYIFATNDSTATIONER \u20b9130",
+      "amount": "130",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "08Mar2,026 PaitdoSRRIAMDEFVANCGYIFATNDSTATIONER \u20b980",
+      "amount": "80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoG.elumMaallaaii \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoSukumSaurkumar \u20b920",
+      "amount": "20",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoAmazoPnayonDelivery \u20b9287",
+      "amount": "287",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoSURESMHURUGESAN \u20b9408",
+      "amount": "408",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoAnthoniammal \u20b955",
+      "amount": "55",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "09Mar2,026 PaitdoSagupSaarthMick \u20b950",
+      "amount": "50",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoSrSienthMuurrugAagnenc \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoSPRAMMASAKTHI \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoTHOMSOTNYRES \u20b910",
+      "amount": "10",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoJothiprakash \u20b950",
+      "amount": "50",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 Paitdokarthhdifc \u20b92,000",
+      "amount": "2,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoTacBoelElmbasSspylendid \u20b9124",
+      "amount": "124",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "10Mar2,026 PaitdoCUTCOFFEE \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoPrakaRsahji \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoSujiStuhjith \u20b91,306",
+      "amount": "1,306",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoSHRBIALAAJBEHEAVAN \u20b9260",
+      "amount": "260",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoJanaJkaigan \u20b950",
+      "amount": "50",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 PaitdoPrakaRsahji \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "11Mar2,026 ReceifvreodFmrieFnudnFsorever \u20b9800",
+      "amount": "800",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoGajendRiarmaandoss \u20b915",
+      "amount": "15",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoMuthulakSsahkmtihinathar \u20b950",
+      "amount": "50",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoTacBoelElmbasSspylendid \u20b9214",
+      "amount": "214",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoCUTCOFFEE \u20b920",
+      "amount": "20",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoSRPIADMVAILAHSOTEL \u20b9105",
+      "amount": "105",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoLAKSHMIPKAUTPHPIURAO \u20b945",
+      "amount": "45",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoSagupSaarthMick \u20b9150",
+      "amount": "150",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "12Mar2,026 PaitdoSembarSuhtihkiakai \u20b9840",
+      "amount": "840",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoPrakaRsahji \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoMITHRSAUNPESRTORES \u20b984",
+      "amount": "84",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoSumitAhdrhainarayanan \u20b930",
+      "amount": "30",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoBIRLCAOSMETIPCRSIVALTIEMITED \u20b91,000",
+      "amount": "1,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoKannKarnishnan \u20b9200",
+      "amount": "200",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoVIJAYAKUKMAR \u20b950",
+      "amount": "50",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoVenkateVseanngamalai \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoMEDPLUGSUDUVANCHERI \u20b917",
+      "amount": "17",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "13Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b9375.01",
+      "amount": "375.01",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoSUDHAKSAR \u20b93,500",
+      "amount": "3,500",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoVIJAYAKUKMAR \u20b960",
+      "amount": "60",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoLAKSHMIPKAUTPHPIURAO \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoSagupSaarthMick \u20b9100",
+      "amount": "100",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "14Mar2,026 PaitdoSRAIARYBAHAVAN \u20b9895",
+      "amount": "895",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoLAKSHMIPKAUTPHPIURAO \u20b915",
+      "amount": "15",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoMOHANRAVJ \u20b9180",
+      "amount": "180",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoPrakaRsahji \u20b9250",
+      "amount": "250",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoSURESMHURUGESAN \u20b9201",
+      "amount": "201",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoAdhinaraKyoanndaanl \u20b960",
+      "amount": "60",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoVALARMATHI \u20b9310",
+      "amount": "310",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoMOHANRAVJ \u20b980",
+      "amount": "80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoPIZZHAUT \u20b9689",
+      "amount": "689",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "15Mar2,026 PaitdoPandiSatnores \u20b9433",
+      "amount": "433",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoSangeeVtehgRaestauPrearnutngalathur \u20b9105",
+      "amount": "105",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoSelvi \u20b980",
+      "amount": "80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoPASUMAANIGADI \u20b912",
+      "amount": "12",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "16Mar2,026 PaitdoSukumSaurkumar \u20b914",
+      "amount": "14",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoKartGhik \u20b9200",
+      "amount": "200",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoPrakaRsahji \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoAdhinaraKyoanndaanl \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoAMARAAVASTWHEIETASNDBAKERS \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoSuvarRnSa \u20b960",
+      "amount": "60",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b9200",
+      "amount": "200",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoSagupSaarthMick \u20b950",
+      "amount": "50",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "17Mar2,026 PaitdoPrakaRsahji \u20b9450",
+      "amount": "450",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "18Mar2,026 PaitdoBaal \u20b9250",
+      "amount": "250",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "18Mar2,026 PaitdoSREGEURUMEDICALS \u20b9365",
+      "amount": "365",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "18Mar2,026 PaitdoMOHAMESDADISQ \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoKARTKHDI \u20b95,200",
+      "amount": "5,200",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoRADHAKRISHVNAN \u20b920",
+      "amount": "20",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoGIJPUVIJAYAN \u20b943",
+      "amount": "43",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoTASTFIAARMASNDFOODPSRIVALTIEMITED \u20b9130",
+      "amount": "130",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoHOTESLABARI \u20b910",
+      "amount": "10",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoPUNALUSRRSIARAVABNHAAVAN \u20b9267",
+      "amount": "267",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoPUNALUSRRSIARAVABNHAAVAN \u20b94",
+      "amount": "4",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoSadhasiAvaraj \u20b9150",
+      "amount": "150",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "19Mar2,026 PaitdoutchimaAhali \u20b9100",
+      "amount": "100",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "20Mar2,026 PaitdoAYYANAFRUELS \u20b91,516.80",
+      "amount": "1,516.80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "20Mar2,026 PaitdoANNAPOORHNOATEL \u20b9815",
+      "amount": "815",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "21Mar2,026 PaitdoFlipkart \u20b9208",
+      "amount": "208",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoLOURDEESNTERPRISES \u20b9494",
+      "amount": "494",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoM/S.MADMRAACSHAN'S \u20b92,000",
+      "amount": "2,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoTIMEZOENNETERTAINPMVETNLTTD \u20b9700",
+      "amount": "700",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoMADHAGREESHMA \u20b9130",
+      "amount": "130",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoTIMEZOENNETERTAINPMVETNLTTD \u20b91,100",
+      "amount": "1,100",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoTIMEZOENNETERTAINPMVETNLTTD \u20b91,500",
+      "amount": "1,500",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoTIMEZOENNETERTAINPMVETNLTTD \u20b9600",
+      "amount": "600",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoTacBoelMlariMnaall \u20b9131",
+      "amount": "131",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoMAMAEARTH \u20b9999",
+      "amount": "999",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoLifSetyIlneternaPtviLtotndal \u20b93,484.56",
+      "amount": "3,484.56",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoSpaHrypermarkets \u20b9469.38",
+      "amount": "469.38",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "22Mar2,026 PaitdoSivSaiva \u20b9500",
+      "amount": "500",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoOMNIWATREECHNOLOGPIREISVALTIEMITUEPDI \u20b91,179",
+      "amount": "1,179",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoKUMARAVPEL \u20b930",
+      "amount": "30",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoSWIGGY \u20b9359",
+      "amount": "359",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoShrirTahmangapandian \u20b9580",
+      "amount": "580",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoSuvarRnSa \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoSPRAMMASAKTHI \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoGRTHANGAMALJIEGWAEILLERS \u20b927,430",
+      "amount": "27,430",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoROKESSH \u20b969",
+      "amount": "69",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoDATPEALMSTEASKPECIAANLDBEVERJLUYICVEILLAGE \u20b9126",
+      "amount": "126",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoAMMANVEGITABLES \u20b9215",
+      "amount": "215",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "23Mar2,026 PaitdoKUMARAVPEALNDIYKAANNAGARAJ \u20b9580",
+      "amount": "580",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoPrakaRsahji \u20b970",
+      "amount": "70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoHEMALATCHA \u20b960",
+      "amount": "60",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "24Mar2,026 PaitdoERODSEHREAEMMANME \u20b9335",
+      "amount": "335",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "25Mar2,026 PaitdoSangeeVtehgRaestauPrearnutngalathur \u20b9620",
+      "amount": "620",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "25Mar2,026 PaitdoSaravanan \u20b9400",
+      "amount": "400",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "26Mar2,026 PaitdoTacBoelElmbasSspylendid \u20b9242",
+      "amount": "242",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "26Mar2,026 PaitdoMRANDMRSFOODHOUSE \u20b9460",
+      "amount": "460",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoEterLniamlited \u20b9741.60",
+      "amount": "741.60",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoNAVIENLECTRICAANLDHSARDWARES \u20b9140",
+      "amount": "140",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoVINAYAGSAM \u20b93,600",
+      "amount": "3,600",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "27Mar2,026 PaitdoBalasubraAmuatnDoiiaensCeelntre \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoAXIBSANKLIMITED \u20b92,397.39",
+      "amount": "2,397.39",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoCAF5E \u20b9400",
+      "amount": "400",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoCAF6E \u20b9360",
+      "amount": "360",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoSSSUPESRHOP \u20b9620",
+      "amount": "620",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoMITHRSAUNPESRTORES \u20b91,018",
+      "amount": "1,018",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoAKAGENCIES \u20b9540",
+      "amount": "540",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "28Mar2,026 PaitdoSagupSaarthMick \u20b990",
+      "amount": "90",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "29Mar2,026 PaitdoAmarnaMth \u20b9590",
+      "amount": "590",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "29Mar2,026 PaitdoIRCTWCebUPI \u20b9328.70",
+      "amount": "328.70",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "29Mar2,026 PaitdoIRCTWCebUPI \u20b9851.80",
+      "amount": "851.80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoBharAtiirLtiemlited \u20b9649",
+      "amount": "649",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoSenthilPkeutmhairyan \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoSagupSaarthMick \u20b940",
+      "amount": "40",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoAMARAAVASTWHEIETASNDBAKERS \u20b9319",
+      "amount": "319",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoSRSIENTHUMRURUGAANGENC \u20b9300",
+      "amount": "300",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 ReceifvreodGmoogPlaeyrewards \u20b95",
+      "amount": "5",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoMyntra \u20b9734",
+      "amount": "734",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoEdelweTiosksLiiofIensuraCnocmepaLniymited \u20b9551",
+      "amount": "551",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoTNCHNGuduvancHhSeKrFyC6778 \u20b9592",
+      "amount": "592",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoTNCHNGuduvancHhSeKrFyC6778 \u20b9104",
+      "amount": "104",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "30Mar2,026 PaitdoAMMANVEGITABLES \u20b9412",
+      "amount": "412",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "31Mar2,026 PaitdoMITHRSAUNPESRTORES \u20b980",
+      "amount": "80",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "31Mar2,026 PaitdoSSVLAWASSOCIATES \u20b92,000",
+      "amount": "2,000",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    },
+    {
+      "description": "31Mar2,026 PaitdoPEARLTFROIODPSVTL \u20b9219",
+      "amount": "219",
+      "category": "Uncategorized",
+      "confidence": "Manual",
+      "user_editable": true
+    }
+  ],
+  "summary": {
+    "total_spent": 230453.52000000002,
+    "by_category": {
+      "Uncategorized": 230453.52000000002
+    },
+    "transaction_count": 184
+  }
+}
