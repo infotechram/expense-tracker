@@ -55,6 +55,14 @@
       "output_file": "1775820517882-2f47954a-773e-4bcd-ab0d-a34814fa5ddb_expenses.json",
       "transaction_count": 169,
       "total_amount": 104596.06000000001
+    },
+    {
+      "process_id": "93fc83cd",
+      "processed_at": "2026-04-10T11:35:55.250287",
+      "pdf_file": "1775820873715-a1dc87f8-840c-45f3-98c4-65cc3c55349c.pdf",
+      "output_file": "1775820873715-a1dc87f8-840c-45f3-98c4-65cc3c55349c_expenses.json",
+      "transaction_count": 169,
+      "total_amount": 104596.06000000001
     }
   ]
 }
