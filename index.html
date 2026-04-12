@@ -455,7 +455,9 @@ async function pollTrainingRun(token) {
         `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${TRAIN_WORKFLOW}/runs?per_page=1`,
         { headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json',
           
-         },  'body': JSON.stringify({ folder: 'Users/Ram' }) }
+         },  'body': JSON.stringify({  inputs: {
+        folder: 'Users/Ram'
+      } }) }
       );
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
