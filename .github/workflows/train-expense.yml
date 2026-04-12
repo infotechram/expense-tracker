@@ -2,6 +2,10 @@ name: Train Expense Model
 
 on:
   workflow_dispatch:
+    inputs:
+      folder:
+        description: "Folder containing training.csv"
+        required: true
 
 jobs:
   train:
