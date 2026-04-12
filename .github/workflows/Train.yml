@@ -1,0 +1,40 @@
+name: Train Expense Model
+
+# Triggered by the Train button in index.html via GitHub API
+on:
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install scikit-learn pandas joblib
+
+      - name: Delete existing model
+        run: |
+          rm -f results/expense_model.pkl
+          rm -f results/label_map.json
+          echo "✅ Old model deleted"
+
+      - name: Train new model
+        run: python train_model.py
+
+      - name: Commit new model to GitHub
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results/expense_model.pkl results/label_map.json
+          git commit -m "🤖 Retrained model — $(date '+%Y-%m-%d %H:%M UTC')" || echo "Nothing to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

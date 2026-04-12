@@ -1,0 +1,346 @@
+Merchant,Category
+Swiggy,Food & Dining
+Zomato,Food & Dining
+Dominos Pizza,Food & Dining
+McDonalds,Food & Dining
+KFC,Food & Dining
+Burger King,Food & Dining
+Pizza Hut,Food & Dining
+Cafe Coffee Day,Food & Dining
+Starbucks,Food & Dining
+Hotel Saravana Bhavan,Food & Dining
+Biryani Blues,Food & Dining
+Barbeque Nation,Food & Dining
+Subway,Food & Dining
+Paid to Ravi Hotel,Food & Dining
+To Annapoorna Restaurant,Food & Dining
+To Murugan Idli Shop,Food & Dining
+Dunzo food order,Food & Dining
+DMart,Groceries
+BigBasket,Groceries
+Blinkit,Groceries
+Zepto,Groceries
+Reliance Smart,Groceries
+More Supermarket,Groceries
+Big Bazaar,Groceries
+Spencer Retail,Groceries
+Nilgiris Supermarket,Groceries
+Grocery store,Groceries
+Supermarket purchase,Groceries
+Vegetables market,Groceries
+To local kirana store,Groceries
+to STORES,Groceries
+Uber,Transportation
+Ola,Transportation
+Rapido,Transportation
+Auto fare,Transportation
+Petrol pump,Transportation
+HP Petrol,Transportation
+Indian Oil petrol,Transportation
+BMTC bus pass,Transportation
+Metro card recharge,Transportation
+IRCTC train ticket,Transportation
+IndiGo flight,Transportation
+Air India ticket,Transportation
+Parking fee,Transportation
+Toll payment,Transportation
+To cab driver Ramesh,Transportation
+Amazon,Shopping
+Flipkart,Shopping
+Myntra,Shopping
+Ajio,Shopping
+Nykaa,Shopping
+Meesho,Shopping
+Snapdeal,Shopping
+Decathlon,Shopping
+H M clothing,Shopping
+Westside mall,Shopping
+Lifestyle store,Shopping
+Croma electronics,Shopping
+Vijay Sales,Shopping
+Reliance Digital,Shopping
+Online shopping,Shopping
+Airtel postpaid,Bills & Utilities
+Jio recharge,Bills & Utilities
+Vodafone bill,Bills & Utilities
+BSNL broadband,Bills & Utilities
+BESCOM electricity,Bills & Utilities
+TNEB electricity bill,Bills & Utilities
+MSEDCL electricity,Bills & Utilities
+Piped gas bill,Bills & Utilities
+Water tax,Bills & Utilities
+DTH recharge,Bills & Utilities
+Tata Sky recharge,Bills & Utilities
+Netflix subscription,Bills & Utilities
+Amazon Prime,Bills & Utilities
+Hotstar subscription,Bills & Utilities
+Google One storage,Bills & Utilities
+Society maintenance,Bills & Utilities
+House rent,Bills & Utilities
+Apollo Pharmacy,Healthcare
+MedPlus,Healthcare
+Netmeds,Healthcare
+PharmEasy,Healthcare
+Doctor consultation,Healthcare
+Hospital OPD,Healthcare
+Manipal Hospital,Healthcare
+Fortis Hospital,Healthcare
+Dental clinic,Healthcare
+Diagnostic lab test,Healthcare
+Thyrocare,Healthcare
+Lybrate doctor fee,Healthcare
+Gym membership,Healthcare
+Yoga class fee,Healthcare
+Medical store,Healthcare
+Health insurance premium,Healthcare
+BookMyShow,Entertainment
+PVR Cinemas,Entertainment
+INOX movie,Entertainment
+Spotify,Entertainment
+Apple Music,Entertainment
+Steam game,Entertainment
+PlayStation store,Entertainment
+Ludo King in-app purchase,Entertainment
+Escape room ticket,Entertainment
+Concert ticket,Entertainment
+Theme park entry,Entertainment
+Cricket match ticket,Entertainment
+To Priya,Transfer
+To Rahul,Transfer
+To Amit Kumar,Transfer
+To Sundar,Transfer
+Sent to Meena,Transfer
+Paid to Karthik,Transfer
+To Lakshmi,Transfer
+To Vijay,Transfer
+Family transfer,Transfer
+Rent to landlord,Transfer
+Split bill payment,Transfer
+To Ravi,Transfer
+ATM withdrawal,Other
+Bank charges,Other
+Loan EMI,Other
+Insurance premium,Other
+Mutual fund SIP,Other
+Tax payment,Other
+Charity donation,Other
+School fees,Other
+College tuition,Other
+Courier service,Other
+Printing shop,Other
+Swiggy food delivery,Food & Dining
+Zomato delivery,Food & Dining
+Swiggy Genie,Food & Dining
+Dominos order,Food & Dining
+Pizza delivery,Food & Dining
+Restaurant payment,Food & Dining
+Food court,Food & Dining
+Bakery shop,Food & Dining
+Tea stall,Food & Dining
+Juice bar,Food & Dining
+Haldirams,Food & Dining
+Saravana Bhavan,Food & Dining
+Darshini hotel,Food & Dining
+Mess payment,Food & Dining
+Tiffin center,Food & Dining
+Cloud kitchen,Food & Dining
+Lunch payment,Food & Dining
+Dinner payment,Food & Dining
+Breakfast payment,Food & Dining
+Chai payment,Food & Dining
+Grocery delivery,Groceries
+DMart purchase,Groceries
+BigBasket delivery,Groceries
+Blinkit delivery,Groceries
+Zepto delivery,Groceries
+Milk purchase,Groceries
+Fruits vegetables,Groceries
+Weekly grocery,Groceries
+Kirana store,Groceries
+Provision store,Groceries
+Supermart purchase,Groceries
+Nature Fresh,Groceries
+Heritage Fresh,Groceries
+Spar supermarket,Groceries
+Lulu hypermarket,Groceries
+Ratnadeep supermarket,Groceries
+Aavin milk,Groceries
+Namdharis fresh,Groceries
+Food items purchase,Groceries
+Monthly grocery,Groceries
+Uber cab,Transportation
+Ola cab booking,Transportation
+Rapido bike,Transportation
+Auto payment,Transportation
+Cab fare,Transportation
+Bus ticket,Transportation
+Train ticket,Transportation
+Flight ticket,Transportation
+Fuel payment,Transportation
+Petrol payment,Transportation
+Diesel payment,Transportation
+HP fuel,Transportation
+Indian Oil,Transportation
+Shell petrol,Transportation
+KSRTC bus,Transportation
+TSRTC bus,Transportation
+Metro recharge,Transportation
+Namma Metro,Transportation
+DMRC metro,Transportation
+IRCTC booking,Transportation
+Air ticket,Transportation
+IndiGo booking,Transportation
+SpiceJet ticket,Transportation
+Toll plaza,Transportation
+Parking charges,Transportation
+Amazon order,Shopping
+Flipkart order,Shopping
+Online order,Shopping
+Myntra fashion,Shopping
+Nykaa beauty,Shopping
+Meesho order,Shopping
+Ajio purchase,Shopping
+Clothing purchase,Shopping
+Footwear purchase,Shopping
+Electronics purchase,Shopping
+Mobile purchase,Shopping
+Laptop purchase,Shopping
+Croma purchase,Shopping
+Vijay Sales purchase,Shopping
+Home decor,Shopping
+Furniture purchase,Shopping
+Ikea purchase,Shopping
+Gift purchase,Shopping
+Stationery purchase,Shopping
+Decathlon sports,Shopping
+H&M purchase,Shopping
+Zara clothing,Shopping
+Westside purchase,Shopping
+Reliance Trends,Shopping
+FBB fashion,Shopping
+Electricity bill,Bills & Utilities
+EB bill payment,Bills & Utilities
+Power bill,Bills & Utilities
+BESCOM bill,Bills & Utilities
+TNEB bill,Bills & Utilities
+Water bill,Bills & Utilities
+Gas bill,Bills & Utilities
+LPG cylinder,Bills & Utilities
+Mobile bill,Bills & Utilities
+Phone recharge,Bills & Utilities
+Prepaid recharge,Bills & Utilities
+Postpaid bill,Bills & Utilities
+Airtel bill,Bills & Utilities
+Jio bill,Bills & Utilities
+Vi payment,Bills & Utilities
+Internet bill,Bills & Utilities
+Broadband payment,Bills & Utilities
+Netflix bill,Bills & Utilities
+Hotstar payment,Bills & Utilities
+Disney plus,Bills & Utilities
+SonyLIV subscription,Bills & Utilities
+Prime Video,Bills & Utilities
+Maintenance charges,Bills & Utilities
+Apartment maintenance,Bills & Utilities
+Rent payment,Bills & Utilities
+Medicine purchase,Healthcare
+Pharmacy bill,Healthcare
+Apollo pharmacy,Healthcare
+Doctor fee,Healthcare
+Consultation fee,Healthcare
+Hospital bill,Healthcare
+Lab test payment,Healthcare
+Blood test,Healthcare
+Scan payment,Healthcare
+Dental treatment,Healthcare
+Eye checkup,Healthcare
+Gym fees,Healthcare
+Fitness center,Healthcare
+Protein supplement,Healthcare
+Health checkup,Healthcare
+Vaccination payment,Healthcare
+Physio session,Healthcare
+Ayurvedic treatment,Healthcare
+Medical bill,Healthcare
+Health insurance,Healthcare
+Movie ticket,Entertainment
+Cinema ticket,Entertainment
+PVR ticket,Entertainment
+INOX ticket,Entertainment
+BookMyShow booking,Entertainment
+Concert payment,Entertainment
+Event ticket,Entertainment
+Sports ticket,Entertainment
+Amusement park,Entertainment
+Gaming payment,Entertainment
+Spotify payment,Entertainment
+Music subscription,Entertainment
+OTT subscription,Entertainment
+Web series subscription,Entertainment
+Videogame purchase,Entertainment
+PlayStation payment,Entertainment
+Xbox payment,Entertainment
+Escape room,Entertainment
+Theme park,Entertainment
+Zoo entry,Entertainment
+Sent to friend,Transfer
+Money transfer,Transfer
+UPI transfer,Transfer
+GPay transfer,Transfer
+PhonePe transfer,Transfer
+Paytm transfer,Transfer
+NEFT transfer,Transfer
+IMPS transfer,Transfer
+Fund transfer,Transfer
+Personal transfer,Transfer
+Split bill,Transfer
+Splitwise payment,Transfer
+To brother,Transfer
+To sister,Transfer
+To friend,Transfer
+To colleague,Transfer
+To mother,Transfer
+To father,Transfer
+To wife,Transfer
+To husband,Transfer
+ATM cash withdrawal,Other
+Cash withdrawal,Other
+Bank service charge,Other
+Processing fee,Other
+EMI payment,Other
+Home loan EMI,Other
+Car loan EMI,Other
+Personal loan EMI,Other
+LIC premium,Other
+Life insurance,Other
+SIP investment,Other
+Mutual fund,Other
+Stock purchase,Other
+Fixed deposit,Other
+Income tax payment,Other
+GST payment,Other
+School fees payment,Other
+Tuition fees,Other
+Donation payment,Other
+Temple donation,Other
+SWEET,Food & Dining
+Paid to SWEET STALL,Food & Dining
+Paid to sweet shop,Food & Dining
+Paid to bakery,Food & Dining
+Paid to hotel,Food & Dining
+Paid to restaurant,Food & Dining
+Paid to cafe,Food & Dining
+Paid to dhaba,Food & Dining
+Paid to mess,Food & Dining
+Paid to tea stall,Food & Dining
+Paid to juice shop,Food & Dining
+Paid to AMARAVATHY SWEET STALL,Food & Dining
+Rahul,Transfer
+Priya,Transfer
+Amit Kumar,Transfer
+Sundar,Transfer
+Meena,Transfer
+Karthik,Transfer
+Lakshmi,Transfer
+Vijay,Transfer
+Ravi,Transfer
