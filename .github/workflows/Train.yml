@@ -1,6 +1,5 @@
 name: Train Expense Model
 
-# Triggered by the Train button in index.html via GitHub API
 on:
   workflow_dispatch:
 
@@ -20,13 +19,7 @@ jobs:
       - name: Install dependencies
         run: pip install scikit-learn pandas joblib
 
-      - name: Delete existing model
-        run: |
-          rm -f results/expense_model.pkl
-          rm -f results/label_map.json
-          echo "✅ Old model deleted"
-
-      - name: Train new model
+      - name: Run train_model.py
         run: python train_model.py
 
       - name: Commit new model to GitHub

@@ -27,6 +27,7 @@ MODEL_DIR     = os.path.join(DATA_FOLDER, "results")
 MODEL_PATH    = os.path.join(MODEL_DIR, "expense_model.pkl")
 LABEL_PATH    = os.path.join(MODEL_DIR, "label_map.json")
 
+
 # ── 1. Load CSV ────────────────────────────────────────────────────
 if not os.path.exists(CSV_FILE):
     print(f"❌ File not found: {CSV_FILE}")
@@ -160,10 +161,28 @@ for merchant, pred, prob in zip(test_merchants, preds, probas):
 
 print("─" * 62)
 
+# ── 8. Training succeeded → now delete old model → save new ───────
+#
+#   This block runs ONLY if training completed without errors.
+#   If training failed above, exit(1) was called and we never reach here.
+#   So the old model is always safe until we are 100% ready to replace it.
+#
+print("\n🗑️  Deleting old model...")
+ 
+if os.path.exists(MODEL_PATH):
+    os.remove(MODEL_PATH)
+    print(f"   Deleted: {MODEL_PATH}")
+ 
+if os.path.exists(LABEL_PATH):
+    os.remove(LABEL_PATH)
+    print(f"   Deleted: {LABEL_PATH}")
+
 # ── 9. Save model and label map ────────────────────────────────────
+
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 joblib.dump(model, MODEL_PATH)
+
 
 label_map = {
     "categories": CATEGORIES,
