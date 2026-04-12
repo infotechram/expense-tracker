@@ -27,7 +27,7 @@ args = parser.parse_args()
 
 DATA_FOLDER   = args.folder
 CSV_FILE      = os.path.join(DATA_FOLDER, "TrainingData/training_data.csv")
-MODEL_DIR     = os.path.join(DATA_FOLDER, "results")
+MODEL_DIR     = os.path.join(DATA_FOLDER, "ExpenseModel")
 MODEL_PATH    = os.path.join(MODEL_DIR, "expense_model.pkl")
 LABEL_PATH    = os.path.join(MODEL_DIR, "label_map.json")
 
