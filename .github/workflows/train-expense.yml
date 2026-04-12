@@ -6,6 +6,9 @@ on:
       folder:
         description: "Folder containing training.csv"
         required: true
+        
+permissions:
+  contents: write
 
 jobs:
   train:
