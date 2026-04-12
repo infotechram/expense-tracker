@@ -415,10 +415,11 @@ async function triggerTraining() {
         headers: {
           'Authorization': `token ${token}`,
           'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github+json',
-          'body': JSON.stringify({ folder: 'Users/Ram' })
+          'Accept': 'application/vnd.github+json'
         },
-        body: JSON.stringify({ ref: 'main' })
+        body: JSON.stringify({ ref: 'main',
+           inputs: { folder: 'Users/Ram' } // workflow input
+         })
       }
     );
 
@@ -453,8 +454,8 @@ async function pollTrainingRun(token) {
       const res = await fetch(
         `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${TRAIN_WORKFLOW}/runs?per_page=1`,
         { headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json',
-           'body': JSON.stringify({ folder: 'Users/Ram' })
-         } }
+          
+         },  'body': JSON.stringify({ folder: 'Users/Ram' }) }
       );
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
