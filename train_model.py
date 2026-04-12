@@ -9,7 +9,7 @@ Run:
     pip install scikit-learn pandas joblib
     python train_model.py
 """
-
+import argparse
 import pandas as pd
 import joblib
 import json
@@ -21,7 +21,11 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
 # ── Paths ──────────────────────────────────────────────────────────
-DATA_FOLDER   = "Users/Ram"
+parser = argparse.ArgumentParser()
+parser.add_argument("--folder", required=True, help="Base folder containing TrainingData/training_data.csv")
+args = parser.parse_args()
+
+DATA_FOLDER   = args.folder
 CSV_FILE      = os.path.join(DATA_FOLDER, "TrainingData/training_data.csv")
 MODEL_DIR     = os.path.join(DATA_FOLDER, "results")
 MODEL_PATH    = os.path.join(MODEL_DIR, "expense_model.pkl")
