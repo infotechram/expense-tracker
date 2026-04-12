@@ -24,7 +24,7 @@ jobs:
         run: pip install scikit-learn pandas joblib
 
       - name: Run train_model.py
-        run: python train_model.py
+        run: python train_model.py --folder ${{ github.event.inputs.folder }}
 
       - name: Commit new model to GitHub
         run: |
