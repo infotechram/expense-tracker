@@ -3,7 +3,7 @@ name: Process Expense PDF
 on:
   push:
     paths:
-      - 'uploads/*.pdf'
+       - 'Users/*/uploads/*.pdf'
     branches:
       - main
 
@@ -47,8 +47,8 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
-        mkdir -p processed/
-        mv uploads/*.pdf processed/
-        git add results/ processed/
+        mkdir -p "${{ steps.pdf.outputs.folder }}/processed"
+        mv "${{ steps.pdf.outputs.pdf_file }}" "${{ steps.pdf.outputs.folder }}/processed/"
+        git add "${{ steps.pdf.outputs.folder }}/"
         git commit -m "✨ Processed: ${{ steps.pdf.outputs.pdf_name }}" || echo "No changes to commit"
         git push origin main || echo "Nothing to push"
