@@ -134,7 +134,7 @@ y = df[label_col].tolist()
         max_iter=2000,
         dual=False           # Prefer dual=False when n_samples > n_features
     ))
-])
+ ])
 
 # ── 7. Evaluate with cross-validation ─────────────────────────────
 print("📊 Running 5-fold cross-validation...")
