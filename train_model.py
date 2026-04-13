@@ -20,6 +20,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
+DEFAULT_CSV = "DefaultTrainingData/training_data.csv" 
+
 # ── Paths ──────────────────────────────────────────────────────────
 parser = argparse.ArgumentParser()
 parser.add_argument("--folder", required=True, help="Base folder containing TrainingData/training_data.csv")
@@ -33,9 +35,14 @@ LABEL_PATH    = os.path.join(MODEL_DIR, "label_map.json")
 
 
 # ── 1. Load CSV ────────────────────────────────────────────────────
-if not os.path.exists(CSV_FILE):
-    print(f"❌ File not found: {CSV_FILE}")
-    print("   Run collect_training_data.py first")
+if os.path.exists(CSV_FILE):
+    df = pd.read_csv(CSV_FILE).dropna()
+    print(f"📄 Using training data from {CSV_FILE}")
+elif os.path.exists(DEFAULT_CSV):
+    df = pd.read_csv(DEFAULT_CSV).dropna()
+    print(f"⚠️ Requested file not found, using default training data: {DEFAULT_CSV}")
+else:
+    print(f"❌ No training data found at {CSV_FILE} or {DEFAULT_CSV}")
     exit(1)
 
 df = pd.read_csv(CSV_FILE).dropna()
