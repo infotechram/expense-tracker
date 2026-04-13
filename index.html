@@ -352,7 +352,9 @@ async function upload() {
 
   const uniqueId = `${Date.now()}-${generateUUID()}`;
   uploadedFileName = uniqueId;
-  const name = `uploads/${uniqueId}.pdf`;
+  const folder = document.getElementById('userName').value.trim();
+  const name = `Users/${folder}/uploads/${uniqueId}.pdf`;
+  uploadedFileName = uniqueId;
   const reader = new FileReader();
 
   reader.onload = async (e) => {
@@ -379,7 +381,8 @@ function setLabel(msg) { document.getElementById('procLabel').textContent = msg;
 async function pollResults() {
   const expectedFileName = `${uploadedFileName}_expenses.json`;
   for (let i = 0; i < 120; i++) {
-    const res = await fetch(`${RAW_URL}/results/${expectedFileName}?t=${Date.now()}`);
+    const folder = document.getElementById('userName').value.trim();
+    const res = await fetch(`${RAW_URL}/Users/${folder}/results/${expectedFileName}?t=${Date.now()}`);
     if (res.ok) { results = await res.json(); showResults(); return; }
     setLabel(`Analysing… (${i + 1}/120)`);
     await new Promise(r => setTimeout(r, 3000));

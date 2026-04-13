@@ -1,22 +1,10 @@
-"""
-process_pdf.py
-Extracts transactions from a GPay PDF statement and categorizes them
-using a trained scikit-learn model.
-
-Run:
-    pip install scikit-learn pdfplumber joblib pymupdf rapidfuzz
-    python process_pdf.py --folder "C:/MyExpenseApp" "march_statement.pdf"
-"""
-
 import sys
 import json
 import os
-import argparse
 from datetime import datetime
 import pdfplumber
 import re
 import uuid
-import joblib
 
 # ─── Optional Dependencies ────────────────────────────────────────────────────
 
@@ -33,37 +21,48 @@ try:
 except ImportError:
     RAPIDF_AVAILABLE = False
 
+try:
+    import transformers
+    print(f"\n{'='*60}")
+    print(f"🔍 Hugging Face Cache Location:")
+    print(f"   {transformers.utils.TRANSFORMERS_CACHE}")
+    print(f"{'='*60}\n")
+except Exception:
+    pass
 
-# ─── Argument Parsing ─────────────────────────────────────────────────────────
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--folder", required=True, help="Base folder containing ExpenseModel/")
-parser.add_argument("pdf", help="Path to the PDF file to process")
-args = parser.parse_args()
-
-MODEL_PATH = os.path.join(args.folder, "ExpenseModel", "expense_model.pkl")
-LABEL_PATH = os.path.join(args.folder, "ExpenseModel", "label_map.json")
+try:
+    from transformers import pipeline
+    HF_AVAILABLE = True
+except ImportError:
+    HF_AVAILABLE = False
 
 
-# ─── Load sklearn Model ───────────────────────────────────────────────────────
+# ─── Cache Info ───────────────────────────────────────────────────────────────
 
-if not os.path.exists(MODEL_PATH):
-    print(f"❌ Model not found: {MODEL_PATH}")
-    print(f"   Please train the model first using train_model.py --folder {args.folder}")
-    sys.exit(1)
+def show_cache_info():
+    """Display Hugging Face cache details."""
+    cache_dir = os.path.expanduser("~/.cache/huggingface/hub/")
 
-if not os.path.exists(LABEL_PATH):
-    print(f"❌ Label map not found: {LABEL_PATH}")
-    sys.exit(1)
+    if os.path.exists(cache_dir):
+        print(f"\n📦 Cache Directory: {cache_dir}")
 
-print(f"✅ Loading model from: {MODEL_PATH}")
-sk_model = joblib.load(MODEL_PATH)
+        total_size = 0
+        model_count = 0
+        for dirpath, _, filenames in os.walk(cache_dir):
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                total_size += os.path.getsize(filepath)
+                model_count += 1
 
-with open(LABEL_PATH) as f:
-    label_map = json.load(f)
+        size_gb = total_size / (1024 ** 3)
+        print(f"💾 Total Cache Size: {size_gb:.2f} GB")
+        print(f"📊 Total Files: {model_count}")
 
-CATEGORIES = label_map["categories"]
-print(f"   Categories: {CATEGORIES}\n")
+        print(f"\n📂 Cached Models:")
+        for item in os.listdir(cache_dir):
+            item_path = os.path.join(cache_dir, item)
+            if os.path.isdir(item_path):
+                print(f"   ✅ {item}")
 
 
 # ─── Text Cleaning ─────────────────────────────────────────────────────────────
@@ -104,16 +103,16 @@ def clean_description(text):
     # Remove long numeric IDs (10+ digits)
     text = re.sub(r'\b\d{10,}\b', '', text)
 
-    # CamelCase split: swiggyFood → swiggy Food
+    # ✅ CamelCase split: swiggyFood → swiggy Food
     text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
 
-    # ALL-CAPS prefix split: "SBIBank" → "SBI Bank"
+    # ✅ ALL-CAPS prefix split: "SBIBank" → "SBI Bank"
     text = re.sub(r'([A-Z]{2,})([A-Z][a-z])', r'\1 \2', text)
 
-    # Letter → digit boundary: "Swiggy123" → "Swiggy 123"
+    # ✅ Letter → digit boundary: "Swiggy123" → "Swiggy 123"
     text = re.sub(r'([A-Za-z])(\d)', r'\1 \2', text)
 
-    # Digit → letter boundary: "123Swiggy" → "123 Swiggy"
+    # ✅ Digit → letter boundary: "123Swiggy" → "123 Swiggy"
     text = re.sub(r'(\d)([A-Za-z])', r'\1 \2', text)
 
     # Remove leftover leading numbers / punctuation
@@ -135,46 +134,61 @@ SKIP_KEYWORDS = [
     'october', 'november', 'december'
 ]
 
-
 def extract_date_info(raw_line: str) -> dict:
     """Extract date and day of week from raw transaction line."""
+    # Matches: 03Mar,2026 | 03 Mar 2026 | 03Mar2026 | 03 Mar,2026
     match = re.search(r'(\d{1,2})\s*([A-Za-z]{3})\s*,?\s*(\d{4})', raw_line)
     if match:
         try:
             date_str = f"{match.group(1)} {match.group(2)} {match.group(3)}"
             dt = datetime.strptime(date_str, "%d %b %Y")
             return {
-                "date": dt.strftime("%d-%b-%Y"),
-                "day_of_week": dt.strftime("%A")
+                "date": dt.strftime("%d-%b-%Y"),        # 03-Mar-2026
+                "day_of_week": dt.strftime("%A")        # Monday
             }
         except ValueError:
             pass
     return {"date": None, "day_of_week": None}
 
-
+def is_summary_row(text: str) -> bool:
+    """
+    Detects summary/header rows like 'Sent ₹...' or 'Received ₹...'
+    but allows peer-to-peer transfers with 'to'/'from'.
+    """
+    return (
+        re.search(r'\b(sent|received)\b', text, re.IGNORECASE)
+        and not re.search(r'\bto\b|\bfrom\b', text, re.IGNORECASE)
+        and len(text.split()) <= 3
+    )
 def _is_header_row(text: str) -> bool:
     text_lower = text.lower()
 
+    # Skip statement period headers
     if "transaction statement period" in text_lower:
         return True
 
+    # Skip month-only summaries with amounts
     if re.search(r'\b(january|february|march|april|may|june|july|august|september|october|november|december)\b', text_lower):
         if not re.search(r'\bto\b|\bfrom\b', text_lower):
             return True
 
+    # Skip "Sent" / "Received" summaries without counterparty
     if re.search(r'\b(sent|received)\b', text_lower):
         if not re.search(r'\bto\b|\bfrom\b', text_lower):
             return True
 
+    # Skip other header keywords only if no amount present
     if any(kw in text_lower for kw in SKIP_KEYWORDS):
         if not re.search(r'₹\s*[\d,]+(?:\.\d{2})?', text):
             return True
 
     return False
 
-
 def is_received_transaction(raw_line: str) -> bool:
-    """Returns True if the transaction is money received (not spent)."""
+    """
+    Returns True if the transaction is money received (not spent).
+    GPay received transactions contain 'received from' or description starts with 'From'.
+    """
     text = raw_line.lower()
     return bool(
         re.search(r'\breceived\s+from\b', text) or
@@ -184,7 +198,9 @@ def is_received_transaction(raw_line: str) -> bool:
 
 
 def extract_with_fitz(pdf_path: str) -> list:
-    """Layout-aware extraction using PyMuPDF dict mode."""
+    """
+    Layout-aware extraction using PyMuPDF dict mode.
+    """
     transactions = []
     doc = fitz.open(pdf_path)
 
@@ -196,6 +212,7 @@ def extract_with_fitz(pdf_path: str) -> list:
             if block.get("type") != 0:
                 continue
             for line in block.get("lines", []):
+                # Use tolerance bucket (±5px) for better row grouping
                 y = round(line["bbox"][1] / 5) * 5
                 for span in line.get("spans", []):
                     span_text = span["text"].strip()
@@ -213,24 +230,25 @@ def extract_with_fitz(pdf_path: str) -> list:
             amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
             if not amount_match:
                 continue
-
-            date_info = extract_date_info(row_text)
+            date_info = extract_date_info(row_text)   # ← add this line
             description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
             description = clean_description(description)
 
+           # Keep transactions if they have an amount and at least some description
             if amount_match and description:
-                if is_received_transaction(row_text):
-                    continue
+                if is_received_transaction(row_text):   # ← add this
+                    continue    
                 transactions.append({
                     'description': description,
                     'amount': amount_match.group(1),
-                    'date': date_info['date'],
-                    'day_of_week': date_info['day_of_week'],
+                    'date': date_info['date'],           # ← add
+                    'day_of_week': date_info['day_of_week'],  # ← add
                     'raw_line': row_text
                 })
 
     doc.close()
     return transactions
+
 
 
 def extract_with_pdfplumber(pdf_path: str) -> list:
@@ -255,22 +273,22 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                         amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', row_text)
                         if not amount_match:
                             continue
-
-                        date_info = extract_date_info(row_text)
+                        date_info = extract_date_info(row_text)   # ← add this line
                         description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', row_text).strip()
                         description = clean_description(description)
 
                         if description and len(description) > 3:
-                            if is_received_transaction(row_text):
-                                continue
+                            if is_received_transaction(row_text):   # ← add this
+                                    continue                            
                             transactions.append({
                                 'description': description,
                                 'amount': amount_match.group(1),
-                                'date': date_info['date'],
-                                'day_of_week': date_info['day_of_week'],
+                                'date': date_info['date'],           # ← add
+                                'day_of_week': date_info['day_of_week'],  # ← add
                                 'raw_line': row_text
                             })
             else:
+                # No tables found — fall back to raw text
                 text = page.extract_text()
                 if not text:
                     continue
@@ -285,19 +303,18 @@ def extract_with_pdfplumber(pdf_path: str) -> list:
                     amount_match = re.search(r'₹\s*([\d,]+(?:\.\d{2})?)', line)
                     if not amount_match:
                         continue
-
-                    date_info = extract_date_info(line)
+                    date_info = extract_date_info(line)   # ← add this line
                     description = re.sub(r'₹\s*[\d,]+(?:\.\d{2})?', '', line).strip()
                     description = clean_description(description)
 
                     if description and len(description) > 3:
-                        if is_received_transaction(line):
+                        if is_received_transaction(line):   # ← add this
                             continue
                         transactions.append({
                             'description': description,
                             'amount': amount_match.group(1),
-                            'date': date_info['date'],
-                            'day_of_week': date_info['day_of_week'],
+                            'date': date_info['date'],           # ← add
+                            'day_of_week': date_info['day_of_week'],  # ← add
                             'raw_line': line
                         })
 
@@ -325,31 +342,206 @@ def extract_pdf(pdf_path: str) -> list:
 
 # ─── Categorization ────────────────────────────────────────────────────────────
 
+CATEGORIES = [
+    "Food & Dining",
+    "Groceries",
+    "Transportation",
+    "Shopping",
+    "Bills & Utilities",
+    "Entertainment",
+    "Healthcare",
+    "Transfer",
+    "Other"
+]
+
+# Contact-to-category memory (persisted across runs)
+CONTACT_MAP_FILE = "results/contact_map.json"
+
+
+def load_contact_map() -> dict:
+    if os.path.exists(CONTACT_MAP_FILE):
+        with open(CONTACT_MAP_FILE) as f:
+            return json.load(f)
+    return {}
+
+
+def save_contact_map(contact_map: dict):
+    os.makedirs("results", exist_ok=True)
+    with open(CONTACT_MAP_FILE, "w") as f:
+        json.dump(contact_map, f, indent=2)
+
+
+def extract_contact_name(description: str):
+    """Try to extract a person's name from a 'paid to <name>' description."""
+    match = re.search(
+        r'(?:to|paid)\s+([A-Za-z][A-Za-z\s]{2,30}?)(?:\s+via|\s+on|\s+ref|$)',
+        description, re.IGNORECASE
+    )
+    if match:
+        name = match.group(1).strip().lower()
+        # Filter out merchant-like names (contain digits or are too long)
+        if not re.search(r'\d', name) and len(name.split()) <= 4:
+            return name
+    return None
+
+
+def is_personal_transfer(description: str) -> bool:
+    """Detect if the transaction looks like a peer-to-peer payment."""
+    personal_patterns = [
+        r'\bsent\s+to\b', r'\bpaid\s+to\b', r'\btransfer(red)?\s+to\b',
+        r'\bvia\s+(gpay|google\s*pay|upi|phonepe|paytm)\b'
+    ]
+    desc_lower = description.lower()
+    return any(re.search(p, desc_lower) for p in personal_patterns)
+
+
+def categorize_hf_batch(classifier, descriptions: list) -> list:
+    """
+    ✅ Batch zero-shot — runs all at once instead of one-by-one.
+    multi_label=False fixes the deprecated multi_class warning.
+    batch_size=16 speeds up CPU inference significantly.
+    """
+    results = classifier(descriptions, CATEGORIES, multi_label=False, batch_size=16)
+    if isinstance(results, dict):   # single item returned as dict
+        results = [results]
+    return [
+        {
+            'category': r['labels'][0],
+            'confidence': f"{r['scores'][0]:.0%}",
+            'source': 'zero-shot-AI'
+        }
+        for r in results
+    ]
+
+
+def simple_categorize_one(description: str) -> dict:
+    """Keyword + optional fuzzy matching fallback."""
+    keywords = {
+        "Food & Dining": [
+            "restaurant", "food", "cafe", "coffee", "pizza", "lunch", "dinner",
+            "hotel", "tavern", "bistro", "diner", "bakery", "sweet", "biryani",
+            "dhaba", "eatery", "snack", "swiggy", "zomato", "burger", "barbeque"
+        ],
+        "Groceries": [
+            "supermarket", "grocery", "market", "mart", "store", "fresh",
+            "organic", "reliance smart", "dmart", "big bazaar", "more"
+        ],
+        "Transportation": [
+            "uber", "taxi", "auto", "travel", "bus", "train", "petrol",
+            "fuel", "parking", "metro", "ola", "cab", "rapido", "irctc", "flight"
+        ],
+        "Shopping": [
+            "amazon", "flipkart", "retail", "clothing", "apparel", "bazaar",
+            "myntra", "ajio", "mall", "nykaa", "meesho"
+        ],
+        "Bills & Utilities": [
+            "bill", "electric", "electricity", "water", "gas", "internet",
+            "phone", "mobile", "airtel", "jio", "vodafone", "bsnl",
+            "broadband", "dth", "bescom", "tneb", "postpaid", "recharge"
+        ],
+        "Healthcare": [
+            "doctor", "hospital", "medicine", "pharmacy", "health",
+            "clinic", "medical", "apollo", "diagnostic", "lab", "dental"
+        ],
+        "Entertainment": [
+            "movie", "cinema", "spotify", "netflix", "game", "ticket",
+            "theatre", "show", "pvr", "inox", "bookmyshow", "hotstar", "prime"
+        ],
+        "Transfer": [
+            "received", "transfer", "sent", "deposit", "withdraw", "wallet"
+        ],
+    }
+
+    desc_lower = description.lower()
+
+    # Exact substring match
+    for cat, kw_list in keywords.items():
+        if any(kw in desc_lower for kw in kw_list):
+            return {'category': cat, 'confidence': 'keyword-match', 'source': 'keyword'}
+
+    # Fuzzy match via rapidfuzz
+    if RAPIDF_AVAILABLE:
+        flat = [(kw, cat) for cat, kw_list in keywords.items() for kw in kw_list]
+        choices = [k for k, _ in flat]
+        try:
+            res = rf_process.extractOne(
+                desc_lower, choices,
+                scorer=rf_fuzz.token_sort_ratio,
+                score_cutoff=60
+            )
+            if res:
+                match_text, score, idx = res[0], res[1], res[2] if len(res) > 2 else choices.index(res[0])
+                _, matched_cat = flat[idx]
+                return {
+                    'category': matched_cat,
+                    'confidence': f'fuzzy-{int(score)}%',
+                    'source': 'fuzzy'
+                }
+        except Exception:
+            pass
+
+    return {'category': 'Other', 'confidence': 'no-match', 'source': 'fallback'}
+
+
 def categorize(transactions: list) -> list:
-    """Categorize all transactions using the trained sklearn model."""
+    contact_map = load_contact_map()
     categorized = []
 
-    descriptions = [t['description'] for t in transactions]
+    hf_classifier = None
+    if HF_AVAILABLE:
+        try:
+            hf_classifier = pipeline(
+                "zero-shot-classification",
+                model="cross-encoder/nli-MiniLM2-L6-H768",
+                device=-1
+            )
+        except Exception as e:
+            print(f"⚠️ HF model load failed: {e}. Using fallback.")
 
-    # Batch predict — fast single call for all transactions
-    preds  = sk_model.predict(descriptions)
-    probas = sk_model.predict_proba(descriptions)
+    # Batch AI classification if available
+    if hf_classifier:
+        batch_descs = [t['description'] for t in transactions]
+        batch_output = hf_classifier(batch_descs, CATEGORIES, multi_label=False)
+
+        if isinstance(batch_output, dict):
+            batch_output = [batch_output]
 
     for i, trans in enumerate(transactions):
-        conf = max(probas[i])
+        desc = trans['description']
+        contact = extract_contact_name(desc)
+
+        # Contact map override
+        if contact and contact in contact_map:
+            result = {
+                'category': contact_map[contact],
+                'confidence': '100% (learned)',
+                'source': 'contact-map'
+            }
+        elif hf_classifier:
+            res = batch_output[i]
+            result = {
+                'category': res['labels'][0],
+                'confidence': f"{res['scores'][0]:.0%}",
+                'source': 'zero-shot-AI'
+            }
+        else:
+            # Fallback only if AI unavailable
+            result = simple_categorize_one(desc)
+
         categorized.append({
             'description': trans['description'],
-            'amount':      trans['amount'],
-            'date':        trans.get('date'),
-            'day_of_week': trans.get('day_of_week'),
-            'category':    preds[i],
-            'confidence':  f"{conf:.0%}",
-            'source':      'sklearn',
-            'raw_line':    trans.get('raw_line', ''),
+            'amount': trans['amount'],
+            'date': trans.get('date'),              # ← add
+            'day_of_week': trans.get('day_of_week'),  # ← add
+            'category': result['category'],
+            'confidence': result['confidence'],
+            'source': result['source'],
+            'raw_line': trans.get('raw_line', ''),
             'user_editable': True
         })
 
     return categorized
+
 
 
 # ─── Main ──────────────────────────────────────────────────────────────────────
@@ -361,14 +553,13 @@ def main(pdf_path: str):
 
     print(f"\n🚀 Processing: {pdf_path}")
 
-    process_id        = str(uuid.uuid4())[:8]
+    process_id = str(uuid.uuid4())[:8]
     process_timestamp = datetime.now().isoformat()
 
-    pdf_filename    = os.path.splitext(os.path.basename(pdf_path))[0]
+    pdf_filename = os.path.splitext(os.path.basename(pdf_path))[0]
     output_filename = f"{pdf_filename}_expenses.json"
-    results_dir = os.path.join(args.folder, 'results')
-    output_path = os.path.join(results_dir, output_filename)
-    os.makedirs(results_dir, exist_ok=True)
+    output_path = os.path.join('results', output_filename)
+    os.makedirs('results', exist_ok=True)
 
     # ── Extract ───────────────────────────────────────────────────────────
     transactions = extract_pdf(pdf_path)
@@ -383,37 +574,39 @@ def main(pdf_path: str):
 
     # ── Summary ───────────────────────────────────────────────────────────
     summary: dict[str, float] = {}
-    by_day:  dict[str, float] = {}
-    DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    by_day: dict[str, float] = {}          # ← this line is missing in your code
+    DAY_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     total = 0.0
-
     for t in categorized:
         amount = float(t['amount'].replace(',', ''))
-        cat    = t['category']
-        day    = t.get('day_of_week') or 'Unknown'
+        cat = t['category']
+        day = t.get('day_of_week') or 'Unknown'   # ← add
         summary[cat] = summary.get(cat, 0.0) + amount
-        by_day[day]  = by_day.get(day, 0.0) + amount
+        by_day[day]  = by_day.get(day, 0.0) + amount   # ← was failing because by_day didn't exist yet
         total += amount
 
-    by_day_sorted = {d: round(by_day[d], 2) for d in DAY_ORDER if d in by_day}
+    # Sort by_day in Mon→Sun order
+    by_day_sorted = {
+    d: round(by_day[d], 2)
+    for d in DAY_ORDER if d in by_day
+    }
     if 'Unknown' in by_day:
         by_day_sorted['Unknown'] = round(by_day['Unknown'], 2)
 
     # ── Save results ──────────────────────────────────────────────────────
     results = {
         "meta": {
-            "process_id":   process_id,
+            "process_id": process_id,
             "processed_at": process_timestamp,
-            "pdf_file":     os.path.basename(pdf_path),
-            "source_path":  pdf_path,
-            "model_path":   MODEL_PATH
+            "pdf_file": os.path.basename(pdf_path),
+            "source_path": pdf_path
         },
         "status": "success",
         "transactions": categorized,
         "summary": {
-            "total_spent":       round(total, 2),
-            "by_category":       {k: round(v, 2) for k, v in summary.items()},
-            "by_day_of_week":    by_day_sorted,
+            "total_spent": round(total, 2),
+            "by_category": {k: round(v, 2) for k, v in summary.items()},
+            "by_day_of_week": by_day_sorted, 
             "transaction_count": len(categorized)
         }
     }
@@ -422,14 +615,14 @@ def main(pdf_path: str):
         json.dump(results, f, indent=2, ensure_ascii=False)
 
     # ── Processing log ────────────────────────────────────────────────────
-    log_file = os.path.join(args.folder, 'results', 'processing_log.json')
+    log_file = 'results/processing_log.json'
     log_entry = {
-        "process_id":       process_id,
-        "processed_at":     process_timestamp,
-        "pdf_file":         os.path.basename(pdf_path),
-        "output_file":      output_filename,
+        "process_id": process_id,
+        "processed_at": process_timestamp,
+        "pdf_file": os.path.basename(pdf_path),
+        "output_file": output_filename,
         "transaction_count": len(categorized),
-        "total_amount":     round(total, 2)
+        "total_amount": round(total, 2)
     }
 
     if os.path.exists(log_file):
@@ -457,4 +650,7 @@ def main(pdf_path: str):
 
 
 if __name__ == "__main__":
-    main(args.pdf)
+    if len(sys.argv) < 2:
+        print("Usage: python gpay_expense_categorizer.py <path_to_pdf>")
+        sys.exit(1)
+    main(sys.argv[1])
