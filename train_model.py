@@ -102,12 +102,11 @@ print("─" * 50)
 X = df[text_col].tolist()
 y = df[label_col].tolist()
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.2,
-    random_state=42,
-    stratify=y
-)
+# After — use cross-validation instead of a single split
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+print(f"🎯 Cross-validated Accuracy: {scores.mean():.1%} ± {scores.std():.1%}")
+model.fit(X, y)   # train on full data after evaluating
 
 print(f"\n📊 Train : {len(X_train)} samples")
 print(f"   Test  : {len(X_test)}  samples\n")
