@@ -403,7 +403,7 @@ function setTrainStatus(type, msg) {
 }
 
 async function triggerTraining() {
-  const folder = document.getElementById("folderInput").value.trim();
+  const folder = document.getElementById("userName").value.trim();
   if (!folder) {
     alert("Please enter a User Name");
     return;
