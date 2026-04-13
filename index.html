@@ -192,6 +192,11 @@
 
   <!-- Upload Card -->
   <div class="card" id="uploadSection">
+    <div class="card-section">
+      <h3>Welcome</h3>
+      <label for="folderInput">User Name:</label>
+      <input type="text" id="folderInput" placeholder="e.g. Users/Ram" required />
+    </div>
     <div class="card-title">Upload Statement</div>
     <div class="upload-area" id="dropZone">
       <input type="file" id="fileInput" accept=".pdf" onchange="onFileChosen(this)" />
@@ -399,6 +404,11 @@ function setTrainStatus(type, msg) {
 }
 
 async function triggerTraining() {
+  const folder = document.getElementById("folderInput").value.trim();
+  if (!folder) {
+    alert("Please enter a User Name");
+    return;
+  }
   const token = document.getElementById('tokenInput').value;
   if (!token) { showToast('Enter your GitHub token first'); return; }
 
@@ -418,7 +428,7 @@ async function triggerTraining() {
           'Accept': 'application/vnd.github+json'
         },
         body: JSON.stringify({ ref: 'main',
-           inputs: { folder: 'Users/Ram' } // workflow input
+           inputs: { folder: `Users/${folder}` } // workflow input
          })
       }
     );
