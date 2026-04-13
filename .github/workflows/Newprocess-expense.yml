@@ -39,6 +39,7 @@ jobs:
         
         echo "pdf_file=$PDF_FILE" >> $GITHUB_OUTPUT
         echo "pdf_name=$(basename $PDF_FILE)" >> $GITHUB_OUTPUT
+        echo "folder=$BASE_FOLDER" >> $GITHUB_OUTPUT
 
     - name: Process PDF
       run: |
