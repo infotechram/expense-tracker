@@ -300,6 +300,7 @@ let edits            = {};
 let uploadedFileName = null;
 let chartInstance    = null;
 let trainPollTimer   = null;
+let dynamicCategories = ['Other']; // populated from label_map.json
 
 // ── Helpers ────────────────────────────────────────────────────────
 function generateUUID() {
@@ -337,7 +338,7 @@ function validateCredentials() {
 function setAnalyseEnabled(v) { document.getElementById('analyseBtn').disabled = !v; }
 function setTrainEnabled(v)   { document.getElementById('trainBtn').disabled   = !v; }
 
-// ── Back — clear lower sections, keep credentials ──────────────────
+// ── Back ───────────────────────────────────────────────────────────
 function goBack() {
   hide('analyseSection');
   hide('processingSection');
@@ -510,7 +511,26 @@ async function pollTrainingRun(token) {
 //  RESULTS
 // ══════════════════════════════════════════════════════════════════
 
-function showResults() {
+// FIX 3 & 4 — async, awaited, correct GitHub raw URL
+async function loadCategories() {
+  try {
+    const mapRes = await fetch(`${RAW_URL}/Users/${getFolder()}/ExpenseModel/label_map.json?t=${Date.now()}`);
+    if (!mapRes.ok) throw new Error('label_map not found');
+    const mapData = await mapRes.json();
+    if (mapData.categories && mapData.categories.length) {
+      dynamicCategories = [...new Set([...mapData.categories, 'Other'])];
+    }
+  } catch (e) {
+    // Fallback — extract unique categories from the transactions themselves
+    if (results && results.transactions) {
+      dynamicCategories = [...new Set([...results.transactions.map(t => t.category), 'Other'])];
+    }
+  }
+}
+
+// FIX 3 — make showResults async and await loadCategories
+async function showResults() {
+  await loadCategories();
   show('resultsSection');
   const s = results.summary;
   document.getElementById('totalSpent').textContent = s.total_spent.toFixed(2);
@@ -569,30 +589,43 @@ function showCategoryTransactions(cat) {
 }
 function viewAll() { hide('dayInfo'); fillTable(results.transactions); }
 
+// FIX 1, 2 & 5 — build optionsHtml per row with selected category,
+//               use realIndex so filtered-table edits go to correct slot
 function fillTable(transactions) {
   const tbody = document.getElementById('txBody');
   tbody.innerHTML = '';
-  transactions.forEach((t, i) => {
+  transactions.forEach((t) => {
+    const realIndex  = results.transactions.indexOf(t);           // FIX 5
+    const optionsHtml = dynamicCategories.map(c =>               // FIX 1 & 2
+      `<option value="${esc(c)}" ${c === t.category ? 'selected' : ''}>${esc(c)}</option>`
+    ).join('');
+
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:.75rem">${i+1}</td>
+      <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:.75rem">${realIndex + 1}</td>
       <td>${esc(t.description)}</td>
       <td class="amount-col">₹${esc(t.amount)}</td>
-      <td><input class="cat-input" type="text" value="${esc(t.category)}" onchange="edits[${i}]=this.value" /></td>
+      <td><select class="cat-input" onchange="edits[${realIndex}]=this.value">${optionsHtml}</select></td>
       <td style="white-space:nowrap;font-size:.78rem">${esc(t.date)||'-'}</td>
       <td style="color:var(--muted);font-size:.78rem">${esc(t.day_of_week)||'-'}</td>`;
     tbody.appendChild(tr);
   });
+
   const cards = document.getElementById('txCards');
   cards.innerHTML = '';
-  transactions.forEach((t, i) => {
+  transactions.forEach((t) => {
+    const realIndex  = results.transactions.indexOf(t);           // FIX 5
+    const optionsHtml = dynamicCategories.map(c =>               // FIX 1 & 2
+      `<option value="${esc(c)}" ${c === t.category ? 'selected' : ''}>${esc(c)}</option>`
+    ).join('');
+
     const d = document.createElement('div');
     d.className = 'tx-card';
     d.innerHTML = `
       <div class="tx-desc">${esc(t.description)}</div>
       <div class="tx-amount">₹${esc(t.amount)}</div>
       <div class="tx-meta">${esc(t.date)||'-'} · ${esc(t.day_of_week)||'-'}</div>
-      <div class="tx-cat-wrap"><input class="cat-input" type="text" value="${esc(t.category)}" onchange="edits[${i}]=this.value" /></div>`;
+      <div class="tx-cat-wrap"><select class="cat-input" onchange="edits[${realIndex}]=this.value">${optionsHtml}</select></div>`;
     cards.appendChild(d);
   });
 }
