@@ -490,7 +490,7 @@ async function pollTrainingRun(token) {
       }
 
     } catch (err) {
-      setTrainStatus('running', `Checking status… (${attempt})`);
+      setTrainStatus('running', `Checking status… (${err})`);
     }
 
     if (attempt >= maxAttempts) {
