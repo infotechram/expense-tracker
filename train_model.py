@@ -97,19 +97,9 @@ for cat, n in sorted(counts.items()):
 print("─" * 50)
 print(f"  {'TOTAL':<25} {len(df):>5}")
 print("─" * 50)
-
-# ── 4. Split into train / test ─────────────────────────────────────
+# ── 4. Prepare data (no split needed) ─────────────────────────────
 X = df[text_col].tolist()
 y = df[label_col].tolist()
-
-# After — use cross-validation instead of a single split
-from sklearn.model_selection import cross_val_score
-scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
-print(f"🎯 Cross-validated Accuracy: {scores.mean():.1%} ± {scores.std():.1%}")
-model.fit(X, y)   # train on full data after evaluating
-
-print(f"\n📊 Train : {len(X_train)} samples")
-print(f"   Test  : {len(X_test)}  samples\n")
 
 # ── 5. Build model pipeline ────────────────────────────────────────
 model = Pipeline([
@@ -126,9 +116,15 @@ model = Pipeline([
     ))
 ])
 
-# ── 6. Train ───────────────────────────────────────────────────────
-print("🚀 Training model...")
-model.fit(X_train, y_train)
+# ── 6. Evaluate with cross-validation ─────────────────────────────
+print("📊 Running 5-fold cross-validation...")
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+print(f"🎯 Cross-validated Accuracy: {scores.mean():.1%} ± {scores.std():.1%}\n")
+
+# ── 7. Train on full data ──────────────────────────────────────────
+print("🚀 Training model on full dataset...")
+model.fit(X, y)
 print("✅ Training complete!\n")
 
 # ── 7. Evaluate ────────────────────────────────────────────────────
