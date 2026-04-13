@@ -17,6 +17,19 @@ import pdfplumber
 import re
 import uuid
 import joblib
+import re  # Ensure this is imported
+
+# YOU MUST PASTE THIS EXACTLY AS IT IS IN YOUR TRAINING SCRIPT
+def clean_descriptions(texts):
+    cleaned = []
+    for text in texts:
+        t = str(text).upper()
+        # Remove transaction noise
+        t = re.sub(r'\b(PAID TO|SENT TO|TO|PAYMENT FROM|UPI|PVT|LTD|LIMITED|TECHNOLOGIES)\b', '', t)
+        # Remove numbers and special characters
+        t = re.sub(r'[^A-Z\s]', ' ', t)
+        cleaned.append(" ".join(t.split()))
+    return cleaned
 
 # ─── Optional Dependencies ────────────────────────────────────────────────────
 
