@@ -460,7 +460,7 @@ async function pollTrainingRun(token) {
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const run = runs.workflow_runs.find(r => r.name === "Train Expense Model");
+      const run = data.workflow_runs.find(r => r.name === "Train Expense Model");
 
       if (!run) {
         setTrainStatus('running', 'Waiting for run to appear…');
@@ -490,7 +490,7 @@ async function pollTrainingRun(token) {
       }
 
     } catch (err) {
-      setTrainStatus('running', `Checking status… (${err})`);
+      setTrainStatus('running', `Checking status… (${attempt})`);
     }
 
     if (attempt >= maxAttempts) {
