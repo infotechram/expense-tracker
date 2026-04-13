@@ -37,16 +37,14 @@ LABEL_PATH    = os.path.join(MODEL_DIR, "label_map.json")
 
 # ── 1. Load CSV ────────────────────────────────────────────────────
 if os.path.exists(CSV_FILE):
-    df = pd.read_csv(CSV_FILE).dropna()
     print(f"📄 Using training data from {CSV_FILE}")
+    df = pd.read_csv(CSV_FILE).dropna()
 elif os.path.exists(DEFAULT_CSV):
-    df = pd.read_csv(DEFAULT_CSV).dropna()
     print(f"⚠️ Requested file not found, using default training data: {DEFAULT_CSV}")
+    df = pd.read_csv(DEFAULT_CSV).dropna()
 else:
     print(f"❌ No training data found at {CSV_FILE} or {DEFAULT_CSV}")
     exit(1)
-
-df = pd.read_csv(CSV_FILE).dropna()
 
 # ── Auto-detect column names ───────────────────────────────────────
 # Handles: Merchant/Category, text/label, description/category etc.
