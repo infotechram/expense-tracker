@@ -31,7 +31,7 @@ jobs:
     - name: Get uploaded PDF filename
       id: pdf
       run: |
-        PDF_FILE=$(ls -t uploads/*.pdf 2>/dev/null | head -1)
+        PDF_FILE=$(ls -t Users/*/uploads/*.pdf 2>/dev/null | head -1)
         if [ -z "$PDF_FILE" ]; then
           echo "No PDF found"
           exit 1
