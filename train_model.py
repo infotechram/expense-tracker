@@ -3,11 +3,11 @@ train_model.py
 Uses scikit-learn — no torch, no transformers, no DLL errors.
 
 CSV columns : Merchant, Category
-Saves to    : results/expense_model.pkl
+Saves to    : <folder>/ExpenseModel/expense_model.pkl
 
 Run:
     pip install scikit-learn pandas joblib
-    python train_model.py
+    python train_model.py --folder <your_folder>
 """
 import argparse
 import pandas as pd
@@ -17,10 +17,9 @@ import os
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_CSV = os.path.join(SCRIPT_DIR, "DefaultTrainingData", "training_data.csv")
 
 # ── Paths ──────────────────────────────────────────────────────────
@@ -28,11 +27,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--folder", required=True, help="Base folder containing TrainingData/training_data.csv")
 args = parser.parse_args()
 
-DATA_FOLDER   = args.folder
-CSV_FILE      = os.path.join(DATA_FOLDER, "TrainingData/training_data.csv")
-MODEL_DIR     = os.path.join(DATA_FOLDER, "ExpenseModel")
-MODEL_PATH    = os.path.join(MODEL_DIR, "expense_model.pkl")
-LABEL_PATH    = os.path.join(MODEL_DIR, "label_map.json")
+DATA_FOLDER = args.folder
+CSV_FILE    = os.path.join(DATA_FOLDER, "TrainingData/training_data.csv")
+MODEL_DIR   = os.path.join(DATA_FOLDER, "ExpenseModel")
+MODEL_PATH  = os.path.join(MODEL_DIR, "expense_model.pkl")
+LABEL_PATH  = os.path.join(MODEL_DIR, "label_map.json")
 
 
 # ── 1. Load CSV ────────────────────────────────────────────────────
@@ -43,7 +42,7 @@ if os.path.exists(CSV_FILE):
     dfs.append(pd.read_csv(CSV_FILE).dropna())
 
 if os.path.exists(DEFAULT_CSV):
-    print(f"⚠️ Using default training data: {DEFAULT_CSV}")
+    print(f"📄 Using default training data: {DEFAULT_CSV}")
     dfs.append(pd.read_csv(DEFAULT_CSV).dropna())
 
 if not dfs:
@@ -52,12 +51,10 @@ if not dfs:
 
 df = pd.concat(dfs, ignore_index=True).dropna()
 
-# ── Auto-detect column names ───────────────────────────────────────
-# Handles: Merchant/Category, text/label, description/category etc.
+# ── 2. Auto-detect column names ───────────────────────────────────
 cols = df.columns.tolist()
 print(f"\n📄 Columns found in CSV: {cols}")
 
-# Map whatever columns exist to text_col and label_col
 TEXT_ALIASES  = ["merchant", "text", "description", "transaction"]
 LABEL_ALIASES = ["category", "label", "cat"]
 
@@ -78,13 +75,13 @@ if not text_col or not label_col:
 
 print(f"   Using → input: '{text_col}'  |  label: '{label_col}'\n")
 
-# ── 2. Clean data ──────────────────────────────────────────────────
+# ── 3. Clean data ──────────────────────────────────────────────────
 df = df[df[text_col].str.strip()  != ""]
 df = df[df[label_col].str.strip() != ""]
 
 print(f"✅ Loaded {len(df)} training examples\n")
 
-# ── 3. Show category breakdown ─────────────────────────────────────
+# ── 4. Show category breakdown ─────────────────────────────────────
 CATEGORIES = sorted(df[label_col].unique().tolist())
 counts     = df[label_col].value_counts()
 
@@ -97,11 +94,12 @@ for cat, n in sorted(counts.items()):
 print("─" * 50)
 print(f"  {'TOTAL':<25} {len(df):>5}")
 print("─" * 50)
-# ── 4. Prepare data (no split needed) ─────────────────────────────
+
+# ── 5. Prepare data ────────────────────────────────────────────────
 X = df[text_col].tolist()
 y = df[label_col].tolist()
 
-# ── 5. Build model pipeline ────────────────────────────────────────
+# ── 6. Build model pipeline ────────────────────────────────────────
 model = Pipeline([
     ("tfidf", TfidfVectorizer(
         ngram_range=(1, 2),
@@ -116,26 +114,18 @@ model = Pipeline([
     ))
 ])
 
-# ── 6. Evaluate with cross-validation ─────────────────────────────
+# ── 7. Evaluate with cross-validation ─────────────────────────────
 print("📊 Running 5-fold cross-validation...")
-from sklearn.model_selection import cross_val_score
 scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
-print(f"🎯 Cross-validated Accuracy: {scores.mean():.1%} ± {scores.std():.1%}\n")
+accuracy = scores.mean()
+print(f"🎯 Cross-validated Accuracy: {accuracy:.1%} ± {scores.std():.1%}\n")
 
-# ── 7. Train on full data ──────────────────────────────────────────
+# ── 8. Train on full data ──────────────────────────────────────────
 print("🚀 Training model on full dataset...")
 model.fit(X, y)
 print("✅ Training complete!\n")
 
-# ── 7. Evaluate ────────────────────────────────────────────────────
-y_pred   = model.predict(X_test)
-accuracy = (pd.Series(y_pred) == pd.Series(y_test)).mean()
-
-print(f"🎯 Overall Accuracy : {accuracy:.1%}\n")
-print("📋 Per category results:")
-print(classification_report(y_test, y_pred, zero_division=0))
-
-# ── 8. Test with sample merchants ─────────────────────────────────
+# ── 9. Test with sample merchants ─────────────────────────────────
 test_merchants = [
     "Swiggy",
     "Zomato",
@@ -172,28 +162,21 @@ for merchant, pred, prob in zip(test_merchants, preds, probas):
 
 print("─" * 62)
 
-# ── 8. Training succeeded → now delete old model → save new ───────
-#
-#   This block runs ONLY if training completed without errors.
-#   If training failed above, exit(1) was called and we never reach here.
-#   So the old model is always safe until we are 100% ready to replace it.
-#
+# ── 10. Delete old model then save new ────────────────────────────
 print("\n🗑️  Deleting old model...")
- 
+
 if os.path.exists(MODEL_PATH):
     os.remove(MODEL_PATH)
     print(f"   Deleted: {MODEL_PATH}")
- 
+
 if os.path.exists(LABEL_PATH):
     os.remove(LABEL_PATH)
     print(f"   Deleted: {LABEL_PATH}")
 
-# ── 9. Save model and label map ────────────────────────────────────
-
+# ── 11. Save model and label map ───────────────────────────────────
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 joblib.dump(model, MODEL_PATH)
-
 
 label_map = {
     "categories": CATEGORIES,
@@ -209,13 +192,5 @@ print(f"""
   Model file  →  {MODEL_PATH}
   Label map   →  {LABEL_PATH}
   Accuracy    →  {accuracy:.1%}
-
-  Next steps:
-  1. Upload results/expense_model.pkl to GitHub
-  2. process_pdf.py will load it automatically
-
-  To retrain later with more data:
-    python collect_training_data.py
-    python train_model.py
 {'='*55}
 """)
