@@ -20,7 +20,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
-DEFAULT_CSV = "DefaultTrainingData/training_data.csv" 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_CSV = os.path.join(SCRIPT_DIR, "DefaultTrainingData", "training_data.csv")
 
 # ── Paths ──────────────────────────────────────────────────────────
 parser = argparse.ArgumentParser()
