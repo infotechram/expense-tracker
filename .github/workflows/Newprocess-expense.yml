@@ -36,7 +36,8 @@ jobs:
           echo "No PDF found"
           exit 1
         fi
-        
+        PDF_NAME=$(basename "$PDF_FILE")
+        BASE_FOLDER=$(dirname "$(dirname "$PDF_FILE")")  
         echo "pdf_file=$PDF_FILE" >> $GITHUB_OUTPUT
         echo "pdf_name=$(basename $PDF_FILE)" >> $GITHUB_OUTPUT
         echo "folder=$BASE_FOLDER" >> $GITHUB_OUTPUT
