@@ -36,12 +36,13 @@ jobs:
           echo "No PDF found"
           exit 1
         fi
+        
         echo "pdf_file=$PDF_FILE" >> $GITHUB_OUTPUT
         echo "pdf_name=$(basename $PDF_FILE)" >> $GITHUB_OUTPUT
 
     - name: Process PDF
       run: |
-        python scripts/process_pdf.py --folder "." "${{ steps.pdf.outputs.pdf_file }}"
+        python scripts/process_pdf.py --folder "${{ steps.pdf.outputs.folder }}" "${{ steps.pdf.outputs.pdf_file }}"
 
     - name: Commit results and archive PDF
       run: |
