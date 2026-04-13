@@ -120,7 +120,7 @@ y = df[label_col].tolist()
 # ])
 
 # 1. Improved Pipeline
- model = Pipeline([
+model = Pipeline([
     # HashingVectorizer keeps the model size tiny regardless of vocabulary size
     ("vectorizer", HashingVectorizer(ngram_range=(1, 3), n_features=2**14)),
     
