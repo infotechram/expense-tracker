@@ -348,11 +348,11 @@ function onFileChosen(input) {
 async function upload() {
   const file  = document.getElementById('fileInput').files[0];
   const token = document.getElementById('tokenInput').value;
-  if (!file || !token) { showToast('Please select a file and enter your GitHub token'); return; }
+  const folder = document.getElementById('userName').value.trim();
+  if (!file || !token || !folder) { showToast('Please select a file, enter your GitHub token, and provide a user name'); return; }
 
   const uniqueId = `${Date.now()}-${generateUUID()}`;
   uploadedFileName = uniqueId;
-  const folder = document.getElementById('userName').value.trim();
   const name = `Users/${folder}/uploads/${uniqueId}.pdf`;
   uploadedFileName = uniqueId;
   const reader = new FileReader();
