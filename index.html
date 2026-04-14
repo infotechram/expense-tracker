@@ -630,7 +630,10 @@ function fillTable(transactions) {
   });
 }
 
-function save() {
+async function save() {
+  if (!Object.keys(edits).length) { showToast('No changes to save'); return; }
+
+  // ── 1. Apply edits to in-memory results ───────────────────────────
   Object.keys(edits).forEach(i => { results.transactions[i].category = edits[i]; });
   const summary = {}; let total = 0;
   results.transactions.forEach(t => {
@@ -638,7 +641,89 @@ function save() {
     summary[t.category] = (summary[t.category]||0) + amt; total += amt;
   });
   results.summary = { total_spent: total, by_category: summary, transaction_count: results.transactions.length };
-  edits = {}; showToast('Changes saved ✓'); showResults();
+
+  // ── 2. Collect only the edited rows (description + final category) ─
+  const newRows = Object.keys(edits).map(i => {
+    const t = results.transactions[i];
+    return { merchant: t.description.replace(/,/g, ' '), category: t.category };
+  });
+
+  edits = {};
+
+  // ── 3. Push new rows to training CSV on GitHub ─────────────────────
+  await pushTrainingData(newRows);
+
+  showResults();
+}
+
+async function pushTrainingData(newRows) {
+  const token   = getToken();
+  const folder  = getFolder();
+  const csvPath = `Users/${folder}/TrainingData/training_data.csv`;
+  const apiUrl  = `https://api.github.com/repos/${GITHUB_REPO}/contents/${csvPath}`;
+  const headers = {
+    'Authorization': `token ${token}`,
+    'Content-Type':  'application/json',
+    'Accept':        'application/vnd.github+json'
+  };
+
+  showToast('Saving training data…', 60000);
+
+  try {
+    // ── Step 1: Try to fetch existing CSV to get SHA + content ────────
+    let existingContent = 'Merchant,Category\n';
+    let sha = null;
+
+    const getRes = await fetch(apiUrl, { headers });
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+      existingContent = atob(fileData.content.replace(/\n/g, ''));
+    }
+    // 404 means file doesn't exist yet — we'll create it fresh
+
+    // ── Step 2: Append only rows not already in the CSV ───────────────
+    const existingLines = new Set(
+      existingContent.trim().split('\n').map(l => l.trim().toLowerCase())
+    );
+    const rowsToAdd = newRows.filter(r => {
+      const line = `${r.merchant},${r.category}`.toLowerCase();
+      return !existingLines.has(line);
+    });
+
+    if (!rowsToAdd.length) {
+      showToast('No new training data to add (already exists)');
+      return;
+    }
+
+    const updatedContent = existingContent.trimEnd()
+      + '\n'
+      + rowsToAdd.map(r => `${r.merchant},${r.category}`).join('\n')
+      + '\n';
+
+    // ── Step 3: Push updated CSV back to GitHub ───────────────────────
+    const body = {
+      message: `📊 Add ${rowsToAdd.length} corrected transaction(s)`,
+      content: btoa(unescape(encodeURIComponent(updatedContent)))
+    };
+    if (sha) body.sha = sha;  // required for update; omit for new file
+
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(body)
+    });
+
+    if (putRes.ok) {
+      showToast(`✅ ${rowsToAdd.length} row(s) saved to training data`, 3500);
+    } else {
+      const err = await putRes.json().catch(() => ({}));
+      showToast(`❌ Save failed: ${err.message || putRes.status}`, 4000);
+    }
+
+  } catch (err) {
+    showToast(`❌ Error: ${err.message}`, 4000);
+  }
 }
 
 function download() {
