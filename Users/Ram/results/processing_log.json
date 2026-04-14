@@ -39,6 +39,14 @@
       "output_file": "1776100336161-8aa15244-6b28-4f98-9441-af62afd00df8_expenses.json",
       "transaction_count": 180,
       "total_amount": 114766.76
+    },
+    {
+      "process_id": "fa4222c9",
+      "processed_at": "2026-04-14T04:32:19.025170",
+      "pdf_file": "1776141046130-d64c7aa2-739c-45df-b301-d8fc322ef94d.pdf",
+      "output_file": "1776141046130-d64c7aa2-739c-45df-b301-d8fc322ef94d_expenses.json",
+      "transaction_count": 180,
+      "total_amount": 114766.76
     }
   ]
 }
