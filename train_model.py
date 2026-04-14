@@ -54,13 +54,13 @@ def clean_descriptions(texts):
 # ── 1. Load CSV ────────────────────────────────────────────────────
 dfs = []
 
-if os.path.exists(CSV_FILE):
-    print(f"📄 Using training data from {CSV_FILE}")
-    dfs.append(pd.read_csv(CSV_FILE).dropna())
-
 if os.path.exists(DEFAULT_CSV):
     print(f"📄 Using default training data: {DEFAULT_CSV}")
     dfs.append(pd.read_csv(DEFAULT_CSV).dropna())
+
+if os.path.exists(CSV_FILE):
+    print(f"📄 Using training data from {CSV_FILE}")
+    dfs.append(pd.read_csv(CSV_FILE).dropna())
 
 if not dfs:
     print(f"❌ No training data found at {CSV_FILE} or {DEFAULT_CSV}")

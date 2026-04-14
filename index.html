@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Expense Tracker</title>
+  <title>Expense Categorizer</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
@@ -715,7 +715,7 @@ async function pushTrainingData(newRows) {
     });
 
     if (putRes.ok) {
-      showToast(`✅ ${rowsToAdd.length} row(s) saved to training data`, 3500);
+      showToast(`✅ ${rowsToAdd.length} row(s) )saved to training data`, 3500);
     } else {
       const err = await putRes.json().catch(() => ({}));
       showToast(`❌ Save failed: ${err.message || putRes.status}`, 4000);
