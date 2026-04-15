@@ -25,7 +25,7 @@ from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import FunctionTransformer
-import re  # <--- THIS WAS MISSING
+import re
 
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_CSV = os.path.join(SCRIPT_DIR, "DefaultTrainingData", "training_data.csv")
@@ -59,7 +59,7 @@ if os.path.exists(DEFAULT_CSV):
     dfs.append(pd.read_csv(DEFAULT_CSV).dropna())
 
 if os.path.exists(CSV_FILE):
-    print(f"📄 Using training data from {CSV_FILE}")
+    print(f"📄 Using user training data from {CSV_FILE}")
     dfs.append(pd.read_csv(CSV_FILE).dropna())
 
 if not dfs:
@@ -67,6 +67,26 @@ if not dfs:
     exit(1)
 
 df = pd.concat(dfs, ignore_index=True).dropna()
+
+# ── 1b. Deduplicate — user corrections ALWAYS override default data ─
+# BUG FIX: Both CSVs may have the same merchant with different labels.
+# e.g. Default CSV: "G R THANGAMALIGAI JEWELLERS" → Others
+#      User CSV:    "Paid to G R THANGAMALIGAI JEWELLERS" → Shopping
+# After clean_descriptions, both map to "G R THANGAMALIGAI JEWELLERS".
+# Without deduplication the model sees conflicting labels and the majority
+# class (Others) wins. keep='last' ensures the user CSV (loaded last) wins.
+TEXT_ALIASES_TEMP = ["merchant", "text", "description", "transaction"]
+text_col_temp = next(
+    (c for c in df.columns.tolist() if c.lower() in TEXT_ALIASES_TEMP), None
+)
+if text_col_temp:
+    df['_cleaned_key'] = clean_descriptions(df[text_col_temp].tolist())
+    before = len(df)
+    df = df.drop_duplicates(subset=['_cleaned_key'], keep='last')
+    df = df.drop(columns=['_cleaned_key'])
+    after = len(df)
+    if before != after:
+        print(f"⚠️  Removed {before - after} conflicting label(s) — user corrections take priority.\n")
 
 # ── 2. Auto-detect column names ───────────────────────────────────
 cols = df.columns.tolist()
@@ -121,43 +141,13 @@ model = Pipeline([
     ("cleaner", FunctionTransformer(clean_descriptions)),
     ("tfidf", TfidfVectorizer(ngram_range=(1, 3), sublinear_tf=True)),
     ("clf", SGDClassifier(
-        loss='log_loss',      # This enables predict_proba
-        class_weight='balanced', 
-        penalty='l2', 
-        alpha=0.0001, 
+        loss='log_loss',
+        class_weight='balanced',
+        penalty='l2',
+        alpha=0.0001,
         max_iter=2000
     ))
 ])
-# model = Pipeline([
-#     ("tfidf", TfidfVectorizer(
-#         ngram_range=(1, 2),
-#         min_df=1,
-#         max_features=10000,
-#         sublinear_tf=True
-#     )),
-#     ("clf", LogisticRegression(
-#         max_iter=1000,
-#         C=5.0,
-#         solver="lbfgs",
-#     ))
-# ])
-
-# 1. Improved Pipeline
-# model = Pipeline([
-#     # HashingVectorizer keeps the model size tiny regardless of vocabulary size
-#     ("vectorizer", HashingVectorizer(ngram_range=(1, 3), n_features=2**14)),
-    
-#     # StandardScaling helps SVM converge faster
-#     ("scaler", StandardScaler(with_mean=False)),
-    
-#     # LinearSVC is the heavy-lifter for text accuracy
-#     ("clf", LinearSVC(
-#         C=0.8,               # Regularization to prevent overfitting to "Paid to"
-#         class_weight='balanced', 
-#         max_iter=2000,
-#         dual=False           # Prefer dual=False when n_samples > n_features
-#     ))
-#  ])
 
 # ── 7. Evaluate with cross-validation ─────────────────────────────
 print("📊 Running 5-fold cross-validation...")
@@ -192,6 +182,7 @@ test_merchants = [
     "Paid to AMARAVATHY SWEET STALL",
     "Paid to PIZZA HUT",
     "Paid to Mithran Super Stores, Chromepet",
+    "Paid to G R THANGAMALIGAI JEWELLERS",   # ← added to verify the fix
 ]
 
 print("\n🧪 Predictions on sample merchants:")

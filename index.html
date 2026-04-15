@@ -224,7 +224,7 @@
     <div class="card-title">Analyse Statement</div>
     <div class="analyse-title">📄 Select your PDF statement</div>
     <div class="analyse-desc">Browse and choose the bank statement PDF to analyse. Processing starts automatically once selected.</div>
-    <button class="btn btn-browse" onclick="document.getElementById('fileInput').click()">📂 Browse File</button>
+    <button class="btn btn-browse" onclick="document.getElementById('fileInput').value=''; document.getElementById('fileInput').click()">📂 Browse File</button>
     <div class="file-chosen hidden" id="fileChosen"></div>
   </div>
 
