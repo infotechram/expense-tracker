@@ -412,7 +412,7 @@ def main(pdf_path: str):
     if 'Unknown' in by_day:
         by_day_sorted['Unknown'] = round(by_day['Unknown'], 2)
 
-    # ── Save results ──────────────────────────────────────────────────────
+    # ── Save results temporarily ──────────────────────────────────────────────
     results = {
         "meta": {
             "process_id":   process_id,
@@ -434,13 +434,12 @@ def main(pdf_path: str):
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # ── Processing log ────────────────────────────────────────────────────
+    # ── Processing log ────────────────────────────────────────────────────────
     log_file = os.path.join(args.folder, 'results', 'processing_log.json')
     log_entry = {
         "process_id":       process_id,
         "processed_at":     process_timestamp,
         "pdf_file":         os.path.basename(pdf_path),
-        "output_file":      output_filename,
         "transaction_count": len(categorized),
         "total_amount":     round(total, 2)
     }
@@ -467,6 +466,23 @@ def main(pdf_path: str):
     print(f"\n✅ Saved  → {output_path}")
     print(f"📋 ID     → {process_id}")
     print(f"📝 Log    → {log_file}\n")
+
+    # ── Cleanup: Delete uploaded PDF and results JSON ────────────────────────
+    try:
+        if os.path.exists(pdf_path):
+            os.remove(pdf_path)
+            print(f"🗑️  Deleted uploaded PDF: {pdf_path}")
+    except Exception as e:
+        print(f"⚠️  Could not delete PDF: {e}")
+
+    try:
+        if os.path.exists(output_path):
+            os.remove(output_path)
+            print(f"🗑️  Deleted results JSON: {output_path}")
+    except Exception as e:
+        print(f"⚠️  Could not delete results: {e}")
+
+    print(f"\n✅ Cleanup complete — only processing log retained\n")
 
 
 if __name__ == "__main__":
