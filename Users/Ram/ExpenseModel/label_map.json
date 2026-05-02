@@ -1,0 +1,35 @@
+{
+  "categories": [
+    "Bills & Utilities",
+    "Entertainment",
+    "Food & Dining",
+    "Groceries",
+    "Healthcare",
+    "Other",
+    "Shopping",
+    "Transfer",
+    "Transportation"
+  ],
+  "label2id": {
+    "Bills & Utilities": 0,
+    "Entertainment": 1,
+    "Food & Dining": 2,
+    "Groceries": 3,
+    "Healthcare": 4,
+    "Other": 5,
+    "Shopping": 6,
+    "Transfer": 7,
+    "Transportation": 8
+  },
+  "id2label": {
+    "0": "Bills & Utilities",
+    "1": "Entertainment",
+    "2": "Food & Dining",
+    "3": "Groceries",
+    "4": "Healthcare",
+    "5": "Other",
+    "6": "Shopping",
+    "7": "Transfer",
+    "8": "Transportation"
+  }
+}
