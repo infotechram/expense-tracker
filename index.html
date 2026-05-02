@@ -374,23 +374,36 @@ function onFileChosen(input) {
 }
 
 async function startUpload(file) {
+  const token = getToken(), folder = getFolder();
   const uniqueId = `${Date.now()}-${generateUUID()}`;
   uploadedFileName = uniqueId;
+  const name = `Users/${folder}/uploads/${uniqueId}.pdf`;
 
   const reader = new FileReader();
   reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
     hide('analyseSection');
     show('processingSection');
-    setLabel(`Analysing "${file.name}"…`);
-    
-    // ── File is NOT uploaded/stored ──────────────────────────────────
-    // Processing happens locally only
-    await new Promise(r => setTimeout(r, 500)); // Simulate processing
-    
-    setLabel('Processing complete…');
-    await new Promise(r => setTimeout(r, 300));
-    hide('processingSection');
-    showResults();
+    setLabel(`Uploading "${file.name}"…`);
+
+    const res = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPO}/contents/${name}`,
+      {
+        method: 'PUT',
+        headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `Upload PDF: ${file.name}`, content: base64 })
+      }
+    );
+
+    if (res.ok) {
+      setLabel('Analysing your statement…');
+      pollResults();
+    } else {
+      hide('processingSection');
+      show('analyseSection');
+      setTrainEnabled(true);
+      showToast('Upload failed — check your token');
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -398,8 +411,17 @@ async function startUpload(file) {
 function setLabel(msg) { document.getElementById('procLabel').textContent = msg; }
 
 async function pollResults() {
-  // Results polling disabled - PDF processing happens locally only
-  showToast('Processing complete', 2000);
+  const expected = `${uploadedFileName}_expenses.json`;
+  for (let i = 0; i < 120; i++) {
+    const res = await fetch(`${RAW_URL}/Users/${getFolder()}/results/${expected}?t=${Date.now()}`);
+    if (res.ok) { results = await res.json(); hide('processingSection'); showResults(); return; }
+    setLabel(`Analysing… (${i + 1}/120)`);
+    await new Promise(r => setTimeout(r, 3000));
+  }
+  hide('processingSection');
+  show('analyseSection');
+  setTrainEnabled(true);
+  showToast('Timeout: processing took too long', 4000);
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -702,32 +724,6 @@ async function pushTrainingData(newRows) {
   } catch (err) {
     showToast(`❌ Error: ${err.message}`, 4000);
   }
-}
-
-async function save() {
-  if (!Object.keys(edits).length) { showToast('No changes to save'); return; }
-
-  // ── 1. Apply edits to in-memory results ───────────────────────────
-  Object.keys(edits).forEach(i => { results.transactions[i].category = edits[i]; });
-  const summary = {}; let total = 0;
-  results.transactions.forEach(t => {
-    const amt = parseFloat(String(t.amount).replace(',',''));
-    summary[t.category] = (summary[t.category]||0) + amt; total += amt;
-  });
-  results.summary = { total_spent: total, by_category: summary, transaction_count: results.transactions.length };
-
-  // ── 2. Collect only the edited rows (description + final category) ─
-  const newRows = Object.keys(edits).map(i => {
-    const t = results.transactions[i];
-    return { merchant: t.description.replace(/,/g, ' '), category: t.category };
-  });
-
-  edits = {};
-
-  // ── 3. Push new rows to training CSV on GitHub ─────────────────────
-  await pushTrainingData(newRows);
-
-  showResults();
 }
 
 function download() {
