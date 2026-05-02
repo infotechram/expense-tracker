@@ -255,13 +255,20 @@
 
     <div class="card">
       <div class="view-control">
+        <label for="monthFilter">Month</label>
+        <select id="monthFilter" onchange="refreshChart()">
+          <option value="all">All Months</option>
+        </select>
         <label for="groupBy">View by</label>
         <select id="groupBy" onchange="refreshChart()">
           <option value="category">Category</option>
           <option value="day_of_week">Day of Week</option>
+          <option value="compare_2_months">Compare Monthwise</option>
         </select>
       </div>
       <div class="chart-container"><canvas id="chart"></canvas></div>
+      <div class="chart-container hidden" id="chart2Container"><canvas id="chart2"></canvas></div>
+      <div class="chart-container hidden" id="chart3Container"><canvas id="chart3"></canvas></div>
       <div class="day-info hidden" id="dayInfo">
         <span class="day-label" id="dayBreakdown"></span>
         <button class="btn btn-ghost" onclick="viewAll()">View All</button>
@@ -299,6 +306,8 @@ let results          = null;
 let edits            = {};
 let uploadedFileName = null;
 let chartInstance    = null;
+let chartInstance2   = null;
+let chartInstance3   = null;
 let trainPollTimer   = null;
 let dynamicCategories = ['Other']; // populated from label_map.json
 
@@ -347,6 +356,8 @@ function goBack() {
   document.getElementById('fileChosen').classList.add('hidden');
   results = null; edits = {}; uploadedFileName = null;
   if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+  if (chartInstance2) { chartInstance2.destroy(); chartInstance2 = null; }
+  if (chartInstance3) { chartInstance3.destroy(); chartInstance3 = null; }
   setAnalyseEnabled(true);
   setTrainEnabled(true);
 }
@@ -572,6 +583,21 @@ async function showResults() {
   document.getElementById('totalSpent').textContent = s.total_spent.toFixed(2);
   document.getElementById('totalTrans').textContent = s.transaction_count;
   document.getElementById('totalCats').textContent  = Object.keys(s.by_category).length;
+  
+  // Populate month filter
+  const monthSelect = document.getElementById('monthFilter');
+  monthSelect.innerHTML = '<option value="all">All Months</option>';
+  if (s.by_month) {
+    Object.keys(s.by_month).sort().forEach(month => {
+      if (month !== 'Unknown') {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+      }
+    });
+  }
+  
   drawChart(s.by_category);
   fillTable(results.transactions);
   setTrainEnabled(true);
@@ -579,47 +605,124 @@ async function showResults() {
 
 function refreshChart() {
   const g = document.getElementById('groupBy').value;
-  hide('dayInfo'); fillTable(results.transactions);
-  drawChart(g === 'day_of_week' ? results.summary.by_day_of_week : results.summary.by_category);
+  const m = document.getElementById('monthFilter').value;
+  hide('dayInfo'); 
+  
+  // Filter transactions by month if selected
+  let filteredTransactions = results.transactions;
+  if (m !== 'all') {
+    filteredTransactions = results.transactions.filter(t => t.month === m);
+  }
+  
+  if (g === 'compare_2_months') {
+    // For compare, use all transactions, ignore month filter
+    drawChart(results.summary.by_category);
+  } else {
+    fillTable(filteredTransactions);
+    drawChart(g === 'day_of_week' ? results.summary.by_day_of_week : results.summary.by_category);
+  }
 }
 
 function drawChart(data) {
   const canvas = document.getElementById('chart');
   const ctx = canvas.getContext('2d');
+  const groupBy = document.getElementById('groupBy').value;
+  const months = Object.keys(results.summary.by_month || {}).filter(m => m !== 'Unknown');
+  
   if (chartInstance) chartInstance.destroy();
+  if (chartInstance2) chartInstance2.destroy();
   if (canvas._clickHandler) canvas.removeEventListener('click', canvas._clickHandler);
-  chartInstance = new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: Object.keys(data),
-      datasets: [{ data: Object.values(data),
-        backgroundColor: ['#7c6af7','#f76a8a','#fbbf24','#34d399','#60a5fa','#f472b6','#a78bfa','#fb923c','#2dd4bf','#e879f9'],
-        borderColor: '#1a1d27', borderWidth: 2 }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { position: window.innerWidth < 440 ? 'bottom' : 'right', labels: { color: '#7b7f99', font: { family: 'Sora', size: 11 }, boxWidth: 12, padding: 10 } },
-        tooltip: { callbacks: { label: c => ` ${c.label}: ₹${(c.parsed||0).toFixed(2)}` } }
+  
+  if (groupBy === 'compare_2_months' && (months.length === 2 || months.length === 3)) {
+    // Show multiple charts for comparison
+    const chartConfigs = [];
+    months.forEach((month, index) => {
+      const monthData = {};
+      results.transactions.filter(t => t.month === month).forEach(t => {
+        monthData[t.category] = (monthData[t.category] || 0) + parseFloat(t.amount.replace(',', ''));
+      });
+      chartConfigs.push({ month, data: monthData, index });
+    });
+    
+    // Create charts
+    chartConfigs.forEach(config => {
+      const canvasId = config.index === 0 ? 'chart' : config.index === 1 ? 'chart2' : 'chart3';
+      const containerId = config.index === 0 ? null : config.index === 1 ? 'chart2Container' : 'chart3Container';
+      if (containerId) show(containerId);
+      
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      const instance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(config.data),
+          datasets: [{ data: Object.values(config.data),
+            backgroundColor: ['#7c6af7','#f76a8a','#fbbf24','#34d399','#60a5fa','#f472b6','#a78bfa','#fb923c','#2dd4bf','#e879f9'],
+            borderColor: '#1a1d27', borderWidth: 2 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            title: { display: true, text: config.month },
+            legend: { position: window.innerWidth < 440 ? 'bottom' : 'right', labels: { color: '#7b7f99', font: { family: 'Sora', size: 11 }, boxWidth: 12, padding: 10 } },
+            tooltip: { callbacks: { label: c => ` ${c.label}: ₹${(c.parsed||0).toFixed(2)}` } }
+          }
+        }
+      });
+      
+      if (config.index === 0) chartInstance = instance;
+      else if (config.index === 1) chartInstance2 = instance;
+      else chartInstance3 = instance;
+      
+      // Click handler
+      canvas._clickHandler = function(ev) {
+        const els = instance.getElementsAtEventForMode(ev, 'nearest', { intersect: true }, false);
+        if (!els.length) return;
+        const label = Object.keys(config.data)[els[0].index];
+        showCategoryTransactionsForMonth(label, config.month);
+      };
+      canvas.addEventListener('click', canvas._clickHandler);
+    });
+    
+    // Hide unused containers
+    if (months.length === 2) hide('chart3Container');
+    
+  } else {
+    // Single chart
+    hide('chart2Container');
+    hide('chart3Container');
+    chartInstance = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: Object.keys(data),
+        datasets: [{ data: Object.values(data),
+          backgroundColor: ['#7c6af7','#f76a8a','#fbbf24','#34d399','#60a5fa','#f472b6','#a78bfa','#fb923c','#2dd4bf','#e879f9'],
+          borderColor: '#1a1d27', borderWidth: 2 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: window.innerWidth < 440 ? 'bottom' : 'right', labels: { color: '#7b7f99', font: { family: 'Sora', size: 11 }, boxWidth: 12, padding: 10 } },
+          tooltip: { callbacks: { label: c => ` ${c.label}: ₹${(c.parsed||0).toFixed(2)}` } }
+        }
       }
-    }
-  });
-  canvas._clickHandler = function(ev) {
-    const els = chartInstance.getElementsAtEventForMode(ev, 'nearest', { intersect: true }, false);
-    if (!els.length) return;
-    const label = Object.keys(data)[els[0].index];
-    document.getElementById('groupBy').value === 'day_of_week' ? showDayTransactions(label) : showCategoryTransactions(label);
-  };
-  canvas.addEventListener('click', canvas._clickHandler);
+    });
+    
+    canvas._clickHandler = function(ev) {
+      const els = chartInstance.getElementsAtEventForMode(ev, 'nearest', { intersect: true }, false);
+      if (!els.length) return;
+      const label = Object.keys(data)[els[0].index];
+      groupBy === 'day_of_week' ? showDayTransactions(label) : showCategoryTransactions(label);
+    };
+    canvas.addEventListener('click', canvas._clickHandler);
+  }
 }
 
-function showDayTransactions(day) {
-  const f = results.transactions.filter(t => t.day_of_week === day);
-  document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${day}`;
+function showCategoryTransactionsForMonth(cat, month) {
+  const f = results.transactions.filter(t => t.category === cat && t.month === month);
+  document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${cat} in ${month}`;
   show('dayInfo'); fillTable(f);
 }
-function showCategoryTransactions(cat) {
-  const f = results.transactions.filter(t => t.category === cat);
   document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${cat}`;
   show('dayInfo'); fillTable(f);
 }

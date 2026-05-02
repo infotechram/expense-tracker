@@ -350,11 +350,20 @@ def categorize(transactions: list) -> list:
 
     for i, trans in enumerate(transactions):
         conf = max(probas[i])
+        # Extract month from date if available
+        month = None
+        if trans.get('date'):
+            try:
+                dt = datetime.strptime(trans['date'], "%d-%b-%Y")
+                month = dt.strftime("%B %Y")  # e.g., "March 2026"
+            except ValueError:
+                pass
         categorized.append({
             'description': trans['description'],
             'amount':      trans['amount'],
             'date':        trans.get('date'),
             'day_of_week': trans.get('day_of_week'),
+            'month':       month,
             'category':    preds[i],
             'confidence':  f"{conf:.0%}",
             'source':      'sklearn',
@@ -397,6 +406,7 @@ def main(pdf_path: str):
     # ── Summary ───────────────────────────────────────────────────────────
     summary: dict[str, float] = {}
     by_day:  dict[str, float] = {}
+    by_month: dict[str, float] = {}
     DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     total = 0.0
 
@@ -404,13 +414,19 @@ def main(pdf_path: str):
         amount = float(t['amount'].replace(',', ''))
         cat    = t['category']
         day    = t.get('day_of_week') or 'Unknown'
+        month  = t.get('month') or 'Unknown'
         summary[cat] = summary.get(cat, 0.0) + amount
         by_day[day]  = by_day.get(day, 0.0) + amount
+        by_month[month] = by_month.get(month, 0.0) + amount
         total += amount
 
     by_day_sorted = {d: round(by_day[d], 2) for d in DAY_ORDER if d in by_day}
     if 'Unknown' in by_day:
         by_day_sorted['Unknown'] = round(by_day['Unknown'], 2)
+
+    by_month_sorted = {m: round(by_month[m], 2) for m in sorted(by_month.keys()) if m != 'Unknown'}
+    if 'Unknown' in by_month:
+        by_month_sorted['Unknown'] = round(by_month['Unknown'], 2)
 
     # ── Save results ──────────────────────────────────────────────────────
     results = {
@@ -427,6 +443,7 @@ def main(pdf_path: str):
             "total_spent":       round(total, 2),
             "by_category":       {k: round(v, 2) for k, v in summary.items()},
             "by_day_of_week":    by_day_sorted,
+            "by_month":          by_month_sorted,
             "transaction_count": len(categorized)
         }
     }
