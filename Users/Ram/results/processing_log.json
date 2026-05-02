@@ -47,6 +47,22 @@
       "output_file": "1777742481100-13aa515c-58cd-47b0-b5b8-61aa20ed3759_expenses.json",
       "transaction_count": 183,
       "total_amount": 171555.47
+    },
+    {
+      "process_id": "41d00a98",
+      "processed_at": "2026-05-02T17:35:11.558376",
+      "pdf_file": "1777743223432-525d3091-a30c-47d1-9d61-a79f687b7d9f.pdf",
+      "output_file": "1777743223432-525d3091-a30c-47d1-9d61-a79f687b7d9f_expenses.json",
+      "transaction_count": 449,
+      "total_amount": 291688.23
+    },
+    {
+      "process_id": "7b74200e",
+      "processed_at": "2026-05-02T17:41:41.232129",
+      "pdf_file": "1777743612154-f7256103-8986-4dbc-b434-234d8245886f.pdf",
+      "output_file": "1777743612154-f7256103-8986-4dbc-b434-234d8245886f_expenses.json",
+      "transaction_count": 183,
+      "total_amount": 171555.47
     }
   ]
 }
