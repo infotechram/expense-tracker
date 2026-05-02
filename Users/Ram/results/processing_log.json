@@ -1,0 +1,12 @@
+{
+  "processing_history": [
+    {
+      "process_id": "a6ab6350",
+      "processed_at": "2026-05-02T14:53:47.534132",
+      "pdf_file": "1777733541580-8990afee-951b-4c17-8525-c73f7e0c3730.pdf",
+      "output_file": "1777733541580-8990afee-951b-4c17-8525-c73f7e0c3730_expenses.json",
+      "transaction_count": 180,
+      "total_amount": 114766.76
+    }
+  ]
+}
