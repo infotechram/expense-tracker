@@ -723,9 +723,19 @@ function showCategoryTransactionsForMonth(cat, month) {
   document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${cat} in ${month}`;
   show('dayInfo'); fillTable(f);
 }
+
+function showDayTransactions(day) {
+  const f = results.transactions.filter(t => t.day_of_week === day);
+  document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${day}`;
+  show('dayInfo'); fillTable(f);
+}
+
+function showCategoryTransactions(cat) {
+  const f = results.transactions.filter(t => t.category === cat);
   document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${cat}`;
   show('dayInfo'); fillTable(f);
 }
+
 function viewAll() { hide('dayInfo'); fillTable(results.transactions); }
 
 // FIX 1, 2 & 5 — build optionsHtml per row with selected category,
