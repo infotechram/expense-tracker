@@ -310,6 +310,16 @@ let chartInstance2   = null;
 let chartInstance3   = null;
 let trainPollTimer   = null;
 let dynamicCategories = ['Other']; // populated from label_map.json
+const CATEGORY_PALETTE = ['#7c6af7','#60a5fa','#34d399','#fbbf24','#f76a8a','#f472b6','#a78bfa','#fb923c','#2dd4bf','#f97316','#10b981','#38bdf8'];
+
+function getCategoryColor(category) {
+  const key = String(category || 'Other').trim();
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 31 + key.charCodeAt(i)) | 0;
+  }
+  return CATEGORY_PALETTE[Math.abs(hash) % CATEGORY_PALETTE.length];
+}
 
 // ── Helpers ────────────────────────────────────────────────────────
 function generateUUID() {
@@ -588,17 +598,25 @@ async function showResults() {
   const monthSelect = document.getElementById('monthFilter');
   monthSelect.innerHTML = '<option value="all">All Months</option>';
   if (s.by_month) {
-    Object.keys(s.by_month).sort().forEach(month => {
-      if (month !== 'Unknown') {
-        const option = document.createElement('option');
-        option.value = month;
-        option.textContent = month;
-        monthSelect.appendChild(option);
-      }
+    const months = Object.keys(s.by_month).filter(m => m !== 'Unknown');
+    const monthOrder = {
+      January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+      July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
+    };
+    months.sort((a, b) => {
+      const [ma, ya] = a.split(' ');
+      const [mb, yb] = b.split(' ');
+      if (ya !== yb) return Number(ya) - Number(yb);
+      return monthOrder[ma] - monthOrder[mb];
+    }).forEach(month => {
+      const option = document.createElement('option');
+      option.value = month;
+      option.textContent = month;
+      monthSelect.appendChild(option);
     });
   }
   
-  drawChart(s.by_category);
+  drawChart(results.summary.by_category);
   fillTable(results.transactions);
   setTrainEnabled(true);
 }
@@ -606,19 +624,34 @@ async function showResults() {
 function refreshChart() {
   const g = document.getElementById('groupBy').value;
   const m = document.getElementById('monthFilter').value;
-  hide('dayInfo'); 
-  
-  // Filter transactions by month if selected
+  hide('dayInfo');
+
   let filteredTransactions = results.transactions;
   if (m !== 'all') {
     filteredTransactions = results.transactions.filter(t => t.month === m);
   }
-  
+
   if (g === 'compare_2_months') {
-    // For compare, use all transactions, ignore month filter
     drawChart(results.summary.by_category);
+    fillTable(results.transactions);
+    return;
+  }
+
+  fillTable(filteredTransactions);
+
+  if (m !== 'all') {
+    const chartData = {};
+    if (g === 'day_of_week') {
+      filteredTransactions.forEach(t => {
+        chartData[t.day_of_week || 'Unknown'] = (chartData[t.day_of_week || 'Unknown'] || 0) + parseFloat(t.amount.replace(',', ''));
+      });
+    } else {
+      filteredTransactions.forEach(t => {
+        chartData[t.category] = (chartData[t.category] || 0) + parseFloat(t.amount.replace(',', ''));
+      });
+    }
+    drawChart(chartData);
   } else {
-    fillTable(filteredTransactions);
     drawChart(g === 'day_of_week' ? results.summary.by_day_of_week : results.summary.by_category);
   }
 }
@@ -657,7 +690,7 @@ function drawChart(data) {
         data: {
           labels: Object.keys(config.data),
           datasets: [{ data: Object.values(config.data),
-            backgroundColor: ['#7c6af7','#f76a8a','#fbbf24','#34d399','#60a5fa','#f472b6','#a78bfa','#fb923c','#2dd4bf','#e879f9'],
+            backgroundColor: Object.keys(config.data).map(getCategoryColor),
             borderColor: '#1a1d27', borderWidth: 2 }]
         },
         options: {
@@ -696,7 +729,7 @@ function drawChart(data) {
       data: {
         labels: Object.keys(data),
         datasets: [{ data: Object.values(data),
-          backgroundColor: ['#7c6af7','#f76a8a','#fbbf24','#34d399','#60a5fa','#f472b6','#a78bfa','#fb923c','#2dd4bf','#e879f9'],
+          backgroundColor: Object.keys(data).map(getCategoryColor),
           borderColor: '#1a1d27', borderWidth: 2 }]
       },
       options: {

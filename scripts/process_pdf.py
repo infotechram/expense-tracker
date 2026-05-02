@@ -458,8 +458,7 @@ def main(pdf_path: str):
         "processed_at":     process_timestamp,
         "pdf_file":         os.path.basename(pdf_path),
         "output_file":      output_filename,
-        "transaction_count": len(categorized),
-        "total_amount":     round(total, 2)
+        "transaction_count": len(categorized)
     }
 
     if os.path.exists(log_file):
