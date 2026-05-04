@@ -77,6 +77,13 @@
       "pdf_file": "1777885026253-738f32df-6241-44d8-bf10-41607871137e.pdf",
       "output_file": "1777885026253-738f32df-6241-44d8-bf10-41607871137e_expenses.json",
       "transaction_count": 183
+    },
+    {
+      "process_id": "65f86d76",
+      "processed_at": "2026-05-04T09:09:12.744785",
+      "pdf_file": "1777885665856-61db941a-a08c-4f9e-8bc1-b12c275641f4.pdf",
+      "output_file": "1777885665856-61db941a-a08c-4f9e-8bc1-b12c275641f4_expenses.json",
+      "transaction_count": 500
     }
   ]
 }
