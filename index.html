@@ -620,15 +620,15 @@ async function showResults() {
     });
   }
   
-  drawChart(results.summary.by_category, document.getElementById('groupBy').value, monthSelect.value);
-  fillTable(results.transactions);
+  monthSelect.value = 'all';
+  document.getElementById('groupBy').value = 'category';
+  refreshChart();
   setTrainEnabled(true);
 }
 
 function refreshChart() {
   const groupBy = document.getElementById('groupBy').value;
   const monthSelect = document.getElementById('monthFilter');
-  const selectedMonth = monthSelect.value;
   hide('dayInfo');
 
   if (groupBy === 'compare_2_months') {
@@ -638,15 +638,16 @@ function refreshChart() {
     monthSelect.disabled = false;
   }
 
-  let filteredTransactions = results.transactions;
-  if (selectedMonth !== 'all') {
-    filteredTransactions = results.transactions.filter(t => t.month === selectedMonth);
-  }
-
+  const selectedMonth = monthSelect.value;
   if (groupBy === 'compare_2_months') {
     drawChart(results.summary.by_category, groupBy, 'all');
     fillTable(results.transactions);
     return;
+  }
+
+  let filteredTransactions = results.transactions;
+  if (selectedMonth !== 'all') {
+    filteredTransactions = results.transactions.filter(t => t.month === selectedMonth);
   }
 
   fillTable(filteredTransactions);
