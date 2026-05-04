@@ -586,6 +586,19 @@ async function loadCategories() {
 }
 
 // FIX 3 — make showResults async and await loadCategories
+function sortMonths(months) {
+  const monthOrder = {
+    January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+    July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
+  };
+  return months.slice().sort((a, b) => {
+    const [ma, ya] = a.split(' ');
+    const [mb, yb] = b.split(' ');
+    if (ya !== yb) return Number(ya) - Number(yb);
+    return monthOrder[ma] - monthOrder[mb];
+  });
+}
+
 async function showResults() {
   await loadCategories();
   show('resultsSection');
@@ -598,17 +611,8 @@ async function showResults() {
   const monthSelect = document.getElementById('monthFilter');
   monthSelect.innerHTML = '<option value="all">All Months</option>';
   if (s.by_month) {
-    const months = Object.keys(s.by_month).filter(m => m !== 'Unknown');
-    const monthOrder = {
-      January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
-      July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
-    };
-    months.sort((a, b) => {
-      const [ma, ya] = a.split(' ');
-      const [mb, yb] = b.split(' ');
-      if (ya !== yb) return Number(ya) - Number(yb);
-      return monthOrder[ma] - monthOrder[mb];
-    }).forEach(month => {
+    const months = sortMonths(Object.keys(s.by_month).filter(m => m !== 'Unknown'));
+    months.forEach(month => {
       const option = document.createElement('option');
       option.value = month;
       option.textContent = month;
@@ -616,32 +620,40 @@ async function showResults() {
     });
   }
   
-  drawChart(results.summary.by_category);
+  drawChart(results.summary.by_category, document.getElementById('groupBy').value, monthSelect.value);
   fillTable(results.transactions);
   setTrainEnabled(true);
 }
 
 function refreshChart() {
-  const g = document.getElementById('groupBy').value;
-  const m = document.getElementById('monthFilter').value;
+  const groupBy = document.getElementById('groupBy').value;
+  const monthSelect = document.getElementById('monthFilter');
+  const selectedMonth = monthSelect.value;
   hide('dayInfo');
 
-  let filteredTransactions = results.transactions;
-  if (m !== 'all') {
-    filteredTransactions = results.transactions.filter(t => t.month === m);
+  if (groupBy === 'compare_2_months') {
+    monthSelect.value = 'all';
+    monthSelect.disabled = true;
+  } else {
+    monthSelect.disabled = false;
   }
 
-  if (g === 'compare_2_months') {
-    drawChart(results.summary.by_category);
+  let filteredTransactions = results.transactions;
+  if (selectedMonth !== 'all') {
+    filteredTransactions = results.transactions.filter(t => t.month === selectedMonth);
+  }
+
+  if (groupBy === 'compare_2_months') {
+    drawChart(results.summary.by_category, groupBy, 'all');
     fillTable(results.transactions);
     return;
   }
 
   fillTable(filteredTransactions);
 
-  if (m !== 'all') {
+  if (selectedMonth !== 'all') {
     const chartData = {};
-    if (g === 'day_of_week') {
+    if (groupBy === 'day_of_week') {
       filteredTransactions.forEach(t => {
         chartData[t.day_of_week || 'Unknown'] = (chartData[t.day_of_week || 'Unknown'] || 0) + parseFloat(t.amount.replace(',', ''));
       });
@@ -650,22 +662,22 @@ function refreshChart() {
         chartData[t.category] = (chartData[t.category] || 0) + parseFloat(t.amount.replace(',', ''));
       });
     }
-    drawChart(chartData);
+    drawChart(chartData, groupBy, selectedMonth);
   } else {
-    drawChart(g === 'day_of_week' ? results.summary.by_day_of_week : results.summary.by_category);
+    drawChart(groupBy === 'day_of_week' ? results.summary.by_day_of_week : results.summary.by_category, groupBy, selectedMonth);
   }
 }
 
-function drawChart(data) {
+function drawChart(data, groupBy = document.getElementById('groupBy').value, selectedMonth = document.getElementById('monthFilter').value) {
   const canvas = document.getElementById('chart');
   const ctx = canvas.getContext('2d');
-  const groupBy = document.getElementById('groupBy').value;
-  const months = Object.keys(results.summary.by_month || {}).filter(m => m !== 'Unknown');
-  
+  const months = sortMonths(Object.keys(results.summary.by_month || {}).filter(m => m !== 'Unknown'));
+
   if (chartInstance) chartInstance.destroy();
   if (chartInstance2) chartInstance2.destroy();
+  if (chartInstance3) chartInstance3.destroy();
   if (canvas._clickHandler) canvas.removeEventListener('click', canvas._clickHandler);
-  
+
   if (groupBy === 'compare_2_months' && (months.length === 2 || months.length === 3)) {
     // Show multiple charts for comparison
     const chartConfigs = [];
@@ -745,7 +757,9 @@ function drawChart(data) {
       const els = chartInstance.getElementsAtEventForMode(ev, 'nearest', { intersect: true }, false);
       if (!els.length) return;
       const label = Object.keys(data)[els[0].index];
-      groupBy === 'day_of_week' ? showDayTransactions(label) : showCategoryTransactions(label);
+      groupBy === 'day_of_week'
+        ? showDayTransactions(label, selectedMonth)
+        : showCategoryTransactions(label, selectedMonth);
     };
     canvas.addEventListener('click', canvas._clickHandler);
   }
@@ -757,15 +771,23 @@ function showCategoryTransactionsForMonth(cat, month) {
   show('dayInfo'); fillTable(f);
 }
 
-function showDayTransactions(day) {
-  const f = results.transactions.filter(t => t.day_of_week === day);
-  document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${day}`;
+function showDayTransactions(day, month) {
+  const f = month && month !== 'all'
+    ? results.transactions.filter(t => t.day_of_week === day && t.month === month)
+    : results.transactions.filter(t => t.day_of_week === day);
+  document.getElementById('dayBreakdown').textContent = month && month !== 'all'
+    ? `Showing ${f.length} transactions for ${day} in ${month}`
+    : `Showing ${f.length} transactions for ${day}`;
   show('dayInfo'); fillTable(f);
 }
 
-function showCategoryTransactions(cat) {
-  const f = results.transactions.filter(t => t.category === cat);
-  document.getElementById('dayBreakdown').textContent = `Showing ${f.length} transactions for ${cat}`;
+function showCategoryTransactions(cat, month) {
+  const f = month && month !== 'all'
+    ? results.transactions.filter(t => t.category === cat && t.month === month)
+    : results.transactions.filter(t => t.category === cat);
+  document.getElementById('dayBreakdown').textContent = month && month !== 'all'
+    ? `Showing ${f.length} transactions for ${cat} in ${month}`
+    : `Showing ${f.length} transactions for ${cat}`;
   show('dayInfo'); fillTable(f);
 }
 
